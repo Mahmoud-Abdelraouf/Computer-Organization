@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/ALU_Task
+vALU_32bit
+!s110 1699178077
+!i10b 1
+!s100 B^oM6hBo4gkeh4O7X1JN?2
+IdDHKbG=TQ0flZ5aBX4[ZL3
+Z0 VDg1SIo80bB@j0V0VzS_@n1
+Z1 dD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor
+w1699177765
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v
+L0 33
+Z2 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z3 !s108 1699178077.000000
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v|
+!i113 1
+Z4 o-work work
+Z5 tCvgOpt 0
+n@a@l@u_32bit
+vALU_32bit_tb
+!s110 1699178078
+!i10b 1
+!s100 0Vd?l=P?H50OkI?_gG2_W1
+IKm7V>6Y?LYjl3VJI`VZ5E1
+R0
+R1
+w1699178063
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit_tb.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit_tb.v
+L0 27
+R2
+r1
+!s85 0
+31
+R3
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit_tb.v|
+!i113 1
+R4
+R5
+n@a@l@u_32bit_tb

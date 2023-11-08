@@ -1,0 +1,19 @@
+|Multiplier_4bit
+A[0] => Mult0.IN3
+A[1] => Mult0.IN2
+A[2] => Mult0.IN1
+A[3] => Mult0.IN0
+B[0] => Mult0.IN7
+B[1] => Mult0.IN6
+B[2] => Mult0.IN5
+B[3] => Mult0.IN4
+Result[0] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[1] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[2] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[3] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[4] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[5] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[6] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+Result[7] <= Mult0.DB_MAX_OUTPUT_PORT_TYPE
+
+

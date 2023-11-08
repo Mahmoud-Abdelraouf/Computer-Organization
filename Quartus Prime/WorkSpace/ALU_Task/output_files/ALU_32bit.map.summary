@@ -1,0 +1,17 @@
+Analysis & Synthesis Status : Successful - Sun Oct 15 23:03:32 2023
+Quartus Prime Version : 22.1std.2 Build 922 07/20/2023 SC Lite Edition
+Revision Name : ALU_32bit
+Top-level Entity Name : ALU_32bit
+Family : Cyclone V
+Logic utilization (in ALMs) : N/A
+Total registers : 0
+Total pins : 100
+Total virtual pins : 0
+Total block memory bits : 0
+Total DSP Blocks : 0
+Total HSSI RX PCSs : 0
+Total HSSI PMA RX Deserializers : 0
+Total HSSI TX PCSs : 0
+Total HSSI PMA TX Serializers : 0
+Total PLLs : 0
+Total DLLs : 0

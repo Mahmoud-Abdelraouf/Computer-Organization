@@ -1,0 +1,186 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vFullAdder
+Z0 !s110 1699091653
+!i10b 1
+!s100 PJElA[OUS5=e[F]eML8_]0
+I2dYD@O<P`mniL_DPRAfT[3
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder
+w1699084184
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder.v
+L0 8
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1699091653.000000
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+n@full@adder
+vFullAdder_16bit
+R0
+!i10b 1
+!s100 B2A@L8g_k3B6`AFg=DG8b2
+IAM0l0mFz7j^:R1ePBebic0
+R1
+R2
+w1699084130
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_16bit.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_16bit.v
+L0 8
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_16bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_16bit.v|
+!i113 1
+R5
+R6
+n@full@adder_16bit
+vFullAdder_32bit
+R0
+!i10b 1
+!s100 mLL<^b949_OimfA8M<]1A3
+IFY=Nz]3g2=AlQ>Hz4i<D30
+R1
+R2
+w1699084038
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_32bit.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_32bit.v
+L0 8
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_32bit.v|
+!i113 1
+R5
+R6
+n@full@adder_32bit
+vFullAdder_4bit
+R0
+!i10b 1
+!s100 5NSboYh^5_]PzT5G@DJQU3
+I2_=@A>`gRjciS`]09A5bf3
+R1
+R2
+w1699084158
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_4bit.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_4bit.v
+L0 8
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_4bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_4bit.v|
+!i113 1
+R5
+R6
+n@full@adder_4bit
+vFullAdder_Behaviour
+R0
+!i10b 1
+!s100 7GZeU>_0jfc?h@[a^oceh3
+Ijf3:3F;Q2`6hSo6zd[hTf0
+R1
+R2
+w1697964389
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_Behaviour.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_Behaviour.v
+L0 19
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_Behaviour.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/FullAdder_Behaviour.v|
+!i113 1
+R5
+R6
+n@full@adder_@behaviour
+vMux_8_1
+R0
+!i10b 1
+!s100 ONPon7jcK@:4]1e5SN4m[3
+IK=_6[]dOOkhF?9>hJ7OLj1
+R1
+R2
+w1697965965
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/Mux_8_1/Mux_8_1.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/Mux_8_1/Mux_8_1.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/Mux_8_1/Mux_8_1.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/Mux_8_1/Mux_8_1.v|
+!i113 1
+R5
+R6
+n@mux_8_1
+vTB_FullAdder
+R0
+!i10b 1
+!s100 eI0Jl1I><^72FJ5ILmW0l1
+IM:B7NmH9PeJUen4[ohAFb1
+R1
+R2
+w1699085622
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder.v
+L0 16
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder.v|
+!i113 1
+R5
+R6
+n@t@b_@full@adder
+vTB_FullAdder_32bit
+!s110 1699094786
+!i10b 1
+!s100 ?4Io65_zgAb0DUzN=8eV?0
+I=fh:@e?De=F5m?Ze_VJ<N1
+R1
+R2
+w1699094756
+8D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder_32bit.v
+FD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder_32bit.v
+L0 21
+R3
+r1
+!s85 0
+31
+!s108 1699094786.000000
+!s107 D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder_32bit.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/FullAdder/TB_FullAdder_32bit.v|
+!i113 1
+R5
+R6
+n@t@b_@full@adder_32bit

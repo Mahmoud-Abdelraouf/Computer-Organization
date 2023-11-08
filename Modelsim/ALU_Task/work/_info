@@ -1,0 +1,76 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dC:/intelFPGA/18.1
+vALU_32bit
+Z0 !s110 1697214499
+!i10b 1
+!s100 [gW:8aUFo2BeLLjW@h7X[2
+IkGIgT=FZDJ:ocb3mY0mV10
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/ALU_Task
+Z3 w1696782669
+Z4 8D:\Embedded_Systems_and_Computer_Programming\Hardware\Modelsim\ALU_Task\ALU_Task.v
+Z5 FD:\Embedded_Systems_and_Computer_Programming\Hardware\Modelsim\ALU_Task\ALU_Task.v
+L0 19
+Z6 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z7 !s108 1697214499.000000
+Z8 !s107 D:\Embedded_Systems_and_Computer_Programming\Hardware\Modelsim\ALU_Task\ALU_Task.v|
+Z9 !s90 -reportprogress|300|-work|work|-stats=none|D:\Embedded_Systems_and_Computer_Programming\Hardware\Modelsim\ALU_Task\ALU_Task.v|
+!i113 1
+Z10 o-work work
+Z11 tCvgOpt 0
+n@a@l@u_32bit
+vFullAdder
+R0
+!i10b 1
+!s100 lFX>]8]:>YmJjXj0AzLHK1
+Ie_oHzR1CQaA:_o@ORAC6D1
+R1
+R2
+R3
+R4
+R5
+L0 9
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@full@adder
+vHalfAdder
+R0
+!i10b 1
+!s100 f^iR`hE=>@[jH4VAOocIQ0
+IYZhggb]FTPbBdMBmkgn220
+R1
+R2
+R3
+R4
+R5
+L0 1
+R6
+r1
+!s85 0
+31
+R7
+R8
+R9
+!i113 1
+R10
+R11
+n@half@adder

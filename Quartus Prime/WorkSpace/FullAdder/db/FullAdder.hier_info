@@ -1,0 +1,22 @@
+|Mux_8_1
+inp[0] => Mux0.IN7
+inp[1] => Mux0.IN6
+inp[2] => Mux0.IN5
+inp[3] => Mux0.IN4
+inp[4] => Mux0.IN3
+inp[5] => Mux0.IN2
+inp[6] => Mux0.IN1
+inp[7] => Mux0.IN0
+SelLine[0] => Mux0.IN10
+SelLine[1] => Mux0.IN9
+SelLine[2] => Mux0.IN8
+out[0] <= Mux0.DB_MAX_OUTPUT_PORT_TYPE
+out[1] <= <GND>
+out[2] <= <GND>
+out[3] <= <GND>
+out[4] <= <GND>
+out[5] <= <GND>
+out[6] <= <GND>
+out[7] <= <GND>
+
+

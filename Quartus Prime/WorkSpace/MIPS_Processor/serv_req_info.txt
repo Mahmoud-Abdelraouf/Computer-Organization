@@ -1,0 +1,8 @@
+<internal_error>
+	<executable>quartus_fit.exe</executable>
+	<sub_system>MEM</sub_system>
+	<error>*** Fatal Error: Out of memory in module quartus_fit.exe (7280 megabytes used)</error>
+	<date>Wed Nov  8 08:33:53 2023</date>
+	<version>Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition</version>
+</internal_error>
+
