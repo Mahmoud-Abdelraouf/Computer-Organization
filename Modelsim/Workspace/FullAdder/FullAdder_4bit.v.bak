@@ -1,20 +1,31 @@
+/*
+    4-Bit Full Adder Module
+    -----------------------
+    This module performs addition of two 4-bit input numbers (A and B) along with a carry-in (Cin).
+    It calculates the 4-bit sum (Sum) and the carry-out (Cout) of the addition operation.
+*/
+
 module FullAdder_4bit (
-    input [3:0] A, input [3:0] B, input [3:0] Cin,
-    output [3:0] Sum, output Cout
+    input [3:0] A,         // 4-bit input A
+    input [3:0] B,         // 4-bit input B
+    input Cin,             // Carry-in input
+    output [3:0] Sum,      // 4-bit output Sum
+    output Cout            // Carry-out output
 );
-    integer i;
+    wire [3:0] CarryChain; // Create a chain of carry-out signals
 
-    reg [3:0] SumReg;
-    reg CoutReg;
+    // Instantiate four 1-bit Full Adders
+    FullAdder FA0 (.A(A[0]), .B(B[0]), .Cin(Cin), .Sum(Sum[0]), .Cout(CarryChain[0]));
+    FullAdder FA1 (.A(A[1]), .B(B[1]), .Cin(CarryChain[0]), .Sum(Sum[1]), .Cout(CarryChain[1]));
+    FullAdder FA2 (.A(A[2]), .B(B[2]), .Cin(CarryChain[1]), .Sum(Sum[2]), .Cout(CarryChain[2]));
+    FullAdder FA3 (.A(A[3]), .B(B[3]), .Cin(CarryChain[2]), .Sum(Sum[3]), .Cout(CarryChain[3]));
 
-    always @(*) begin
-        CoutReg = 1'b0; // Initialize CoutReg to 0
-        for (i = 0; i < 4; i = i + 1) begin
-            FullAdder F1( .A(A[i]), .B(B[i]), .Cin(Cin[i]), .Sum(SumReg[i]), .Cout(CoutReg));
-        end
-    end
+    assign Cout = CarryChain[3]; // The final carry-out is the last element of the chain
 
-    assign Sum = SumReg;
-    assign Cout = CoutReg;
+    reg [2:0] C;
+    wire [2:0] F = 3'b101;
+    wire [2:0] J = 3'b111;
+    assign C = (F == J);
+  
 
 endmodule // FullAdder_4bit

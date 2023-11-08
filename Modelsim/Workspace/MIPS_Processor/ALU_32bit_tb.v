@@ -70,27 +70,38 @@ module ALU_32bit_tb;
       $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
       $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
 
-    // Wait for a few simulation steps for the output to stabilize
-    #10;
+      // Wait for a few simulation steps for the output to stabilize
+      #10;
 
-    // Run 10 random test cases
-    for(i = 2; i < 50; i = i + 1) begin
-      // Generate random values for A, B, and OpCode
-      A = $random;
-      B = $random;
-      OpCode = $random;
+      i = 2;
+
+      A = -759211000;
+      B = 599999900;
+      OpCode = 4'b0001;
+
+      $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
+      $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
 
       // Wait for a few simulation steps for the output to stabilize
       #10;
 
-      // Display the results
-      $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
-      $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
-    end 
+      // Run 10 random test cases
+      for(i = 3; i < 50; i = i + 1) begin
+        // Generate random values for A, B, and OpCode
+        A = $random;
+        B = $random;
+        OpCode = $random;
 
-    $display("Simulation completed successfully!");
-    $stop;
+        // Wait for a few simulation steps for the output to stabilize
+        #10;
 
+        // Display the results
+        $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
+        $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
+      end 
+
+      $display("Simulation completed successfully!");
+      $stop;
   end
 
 endmodule

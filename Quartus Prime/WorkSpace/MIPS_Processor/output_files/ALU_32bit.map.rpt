@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU_32bit
-Wed Nov  8 08:46:52 2023
+Wed Nov  8 10:54:21 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -44,7 +44,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Wed Nov  8 08:46:52 2023          ;
+; Analysis & Synthesis Status     ; Successful - Wed Nov  8 10:54:21 2023          ;
 ; Quartus Prime Version           ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                   ; ALU_32bit                                      ;
 ; Top-level Entity Name           ; ALU_32bit                                      ;
@@ -167,13 +167,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                           ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                             ; Library ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------------+---------+
-; ALU_32bit.v                      ; yes             ; User Verilog HDL File  ; D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v ;         ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------------+---------+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                                                 ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                                                   ; Library ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------+---------+
+; ALU_32bit.v                      ; yes             ; User Verilog HDL File  ; D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v ;         ;
++----------------------------------+-----------------+------------------------+--------------------------------------------------------------------------------------------------------------------------------+---------+
 
 
 +---------------------------------------------------------------+
@@ -181,14 +181,14 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------+-----------------+
 ; Resource                                    ; Usage           ;
 +---------------------------------------------+-----------------+
-; Estimate of Logic utilization (ALMs needed) ; 336             ;
+; Estimate of Logic utilization (ALMs needed) ; 363             ;
 ;                                             ;                 ;
-; Combinational ALUT usage for logic          ; 502             ;
+; Combinational ALUT usage for logic          ; 544             ;
 ;     -- 7 input functions                    ; 1               ;
-;     -- 6 input functions                    ; 169             ;
-;     -- 5 input functions                    ; 154             ;
+;     -- 6 input functions                    ; 181             ;
+;     -- 5 input functions                    ; 167             ;
 ;     -- 4 input functions                    ; 82              ;
-;     -- <=3 input functions                  ; 96              ;
+;     -- <=3 input functions                  ; 113             ;
 ;                                             ;                 ;
 ; Dedicated logic registers                   ; 0               ;
 ;                                             ;                 ;
@@ -197,9 +197,9 @@ https://fpgasoftware.intel.com/eula.
 ; Total DSP Blocks                            ; 0               ;
 ;                                             ;                 ;
 ; Maximum fan-out node                        ; OpCode[0]~input ;
-; Maximum fan-out                             ; 74              ;
-; Total fan-out                               ; 2528            ;
-; Average fan-out                             ; 3.52            ;
+; Maximum fan-out                             ; 76              ;
+; Total fan-out                               ; 2702            ;
+; Average fan-out                             ; 3.56            ;
 +---------------------------------------------+-----------------+
 
 
@@ -208,7 +208,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 ; Compilation Hierarchy Node ; Combinational ALUTs ; Dedicated Logic Registers ; Block Memory Bits ; DSP Blocks ; Pins ; Virtual Pins ; Full Hierarchy Name ; Entity Name ; Library Name ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
-; |ALU_32bit                 ; 502 (502)           ; 0 (0)                     ; 0                 ; 0          ; 108  ; 0            ; |ALU_32bit          ; ALU_32bit   ; work         ;
+; |ALU_32bit                 ; 544 (544)           ; 0 (0)                     ; 0                 ; 0          ; 108  ; 0            ; |ALU_32bit          ; ALU_32bit   ; work         ;
 +----------------------------+---------------------+---------------------------+-------------------+------------+------+--------------+---------------------+-------------+--------------+
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
@@ -252,26 +252,24 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +-----------------------+-----------------------------+
 ; Type                  ; Count                       ;
 +-----------------------+-----------------------------+
-; arriav_lcell_comb     ; 503                         ;
-;     arith             ; 33                          ;
-;         0 data inputs ; 1                           ;
+; arriav_lcell_comb     ; 545                         ;
+;     arith             ; 32                          ;
 ;         2 data inputs ; 32                          ;
 ;     extend            ; 1                           ;
 ;         7 data inputs ; 1                           ;
-;     normal            ; 436                         ;
+;     normal            ; 480                         ;
 ;         1 data inputs ; 1                           ;
-;         2 data inputs ; 21                          ;
-;         3 data inputs ; 9                           ;
+;         2 data inputs ; 39                          ;
+;         3 data inputs ; 10                          ;
 ;         4 data inputs ; 82                          ;
-;         5 data inputs ; 154                         ;
-;         6 data inputs ; 169                         ;
-;     shared            ; 33                          ;
-;         0 data inputs ; 1                           ;
+;         5 data inputs ; 167                         ;
+;         6 data inputs ; 181                         ;
+;     shared            ; 32                          ;
 ;         2 data inputs ; 32                          ;
 ; boundary_port         ; 108                         ;
 ;                       ;                             ;
-; Max LUT depth         ; 7.70                        ;
-; Average LUT depth     ; 6.04                        ;
+; Max LUT depth         ; 7.80                        ;
+; Average LUT depth     ; 6.29                        ;
 +-----------------------+-----------------------------+
 
 
@@ -290,36 +288,37 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Wed Nov  8 08:46:43 2023
+    Info: Processing started: Wed Nov  8 10:54:12 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU_32bit -c ALU_32bit
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file alu_32bit.v
-    Info (12023): Found entity 1: ALU_32bit File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 33
+    Info (12023): Found entity 1: ALU_32bit File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 33
 Info (12127): Elaborating entity "ALU_32bit" for the top level hierarchy
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(57): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 57
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(66): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 66
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(74): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 74
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(82): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 82
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(90): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 90
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(98): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 98
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(106): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 106
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(114): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 114
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(123): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 123
-Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(132): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 132
-Warning (10240): Verilog HDL Always Construct warning at ALU_32bit.v(50): inferring latch(es) for variable "Temp", which holds its previous value in one or more paths through the always construct File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 50
-Warning (10240): Verilog HDL Always Construct warning at ALU_32bit.v(50): inferring latch(es) for variable "FA_Temp", which holds its previous value in one or more paths through the always construct File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/MIPS_Processor/ALU_32bit.v Line: 50
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(52): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 52
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(55): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 55
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(60): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 60
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(63): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 63
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(71): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 71
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(79): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 79
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(87): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 87
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(95): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 95
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(103): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 103
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(111): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 111
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(120): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 120
+Warning (10230): Verilog HDL assignment warning at ALU_32bit.v(129): truncated value with size 32 to match size of target (1) File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 129
+Warning (10240): Verilog HDL Always Construct warning at ALU_32bit.v(49): inferring latch(es) for variable "TempShift", which holds its previous value in one or more paths through the always construct File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Quartus Prime/Workspace/MIPS_Processor/ALU_32bit.v Line: 49
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
     Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
-Info (21057): Implemented 610 device resources after synthesis - the final resource count might be different
+Info (21057): Implemented 652 device resources after synthesis - the final resource count might be different
     Info (21058): Implemented 68 input pins
     Info (21059): Implemented 40 output pins
-    Info (21061): Implemented 502 logic cells
-Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 13 warnings
-    Info: Peak virtual memory: 4866 megabytes
-    Info: Processing ended: Wed Nov  8 08:46:52 2023
+    Info (21061): Implemented 544 logic cells
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 14 warnings
+    Info: Peak virtual memory: 4862 megabytes
+    Info: Processing ended: Wed Nov  8 10:54:21 2023
     Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:11
+    Info: Total CPU time (on all processors): 00:00:10
 
 

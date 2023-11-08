@@ -1,11 +1,11 @@
-Fitter Status : Successful - Wed Nov  8 08:50:02 2023
+Fitter Status : Successful - Wed Nov  8 10:57:53 2023
 Quartus Prime Version : 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 Revision Name : ALU_32bit
 Top-level Entity Name : ALU_32bit
 Family : Cyclone V
 Device : 5CGXBC9E7F35C8
 Timing Models : Final
-Logic utilization (in ALMs) : 347 / 113,560 ( < 1 % )
+Logic utilization (in ALMs) : 367 / 113,560 ( < 1 % )
 Total registers : 0
 Total pins : 108 / 616 ( 18 % )
 Total virtual pins : 0

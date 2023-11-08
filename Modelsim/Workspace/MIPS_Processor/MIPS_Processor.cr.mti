@@ -1,4 +1,18 @@
-D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v {1 {vlog -work work -stats=none D:/Embedded_Systems_and_Computer_Programming/Hardware/Modelsim/MIPS_Processor/ALU_32bit.v
+D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/MIPS_Processor/ALU_32bit_tb.v {1 {vlog -work work -stats=none D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/MIPS_Processor/ALU_32bit_tb.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module ALU_32bit_tb
+
+Top level modules:
+	ALU_32bit_tb
+
+} {} {}} D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/FullAdder/FullAdder_4bit.v {1 {vlog -work work -stats=none D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/FullAdder/FullAdder_4bit.v
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module FullAdder_4bit
+
+Top level modules:
+	FullAdder_4bit
+
+} {} {}} D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/MIPS_Processor/ALU_32bit.v {1 {vlog -work work -stats=none D:/Embedded_Systems_and_Computer_Programming/Hardware/Computer-Organization/Modelsim/Workspace/MIPS_Processor/ALU_32bit.v
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ALU_32bit
 

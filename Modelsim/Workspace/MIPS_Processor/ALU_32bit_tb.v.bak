@@ -46,29 +46,62 @@ module ALU_32bit_tb;
     .ALUControl(ALUControl)
   );
 
-  // Apply stimulus
-  initial begin
-    integer i;
-    // Seed for randomization
-    $random(seed);
+    integer i = 0;
 
-    // Run 10 random test cases
-    for(i = 0; i < 10; i = i + 1) begin
-      // Generate random values for A, B, and OpCode
-      A = $random;
-      B = $random;
-      OpCode = $random;
+    // Apply stimulus
+    initial begin
+
+      A = 32'b0;
+      B = 32'b0;
+      OpCode = 4'b0;
+      
+      $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
+      $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
 
       // Wait for a few simulation steps for the output to stabilize
       #10;
 
-      // Display the results
+      i = 1;
+
+      A = 32'hE56D2A62;
+      B = 32'h87ED2F62;
+      OpCode = 4'b0;
+
       $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
       $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
-    end
 
-    // End simulation
-    $finish;
+      // Wait for a few simulation steps for the output to stabilize
+      #10;
+
+      i = 2;
+
+      A = -7000000000;
+      B = 5000000000;
+      OpCode = 4'b0001;
+
+      $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
+      $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
+
+      // Wait for a few simulation steps for the output to stabilize
+      #10;
+
+      // Run 10 random test cases
+      for(i = 3; i < 50; i = i + 1) begin
+        // Generate random values for A, B, and OpCode
+        A = $random;
+        B = $random;
+        OpCode = $random;
+
+        // Wait for a few simulation steps for the output to stabilize
+        #10;
+
+        // Display the results
+        $display("Test Case %0d: A = %d, B = %d, OpCode = %b", i, A, B, OpCode);
+        $display("Result = %d, Cout = %b, ZeroFlag = %b, OverflowFlag = %b, ALUControl = %b", Result, Cout, ZeroFlag, OverflowFlag, ALUControl);
+      end 
+
+      $display("Simulation completed successfully!");
+      $stop;
   end
 
 endmodule

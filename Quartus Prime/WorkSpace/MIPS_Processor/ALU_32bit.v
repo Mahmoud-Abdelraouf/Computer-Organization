@@ -42,25 +42,22 @@ module ALU_32bit (
     output reg [3:0] ALUControl
 );
 
-  reg [31:0] Temp;
-  reg [32:0] FA_Temp;
+  reg [31:0] TempShift;
 
   // Implementation of the ALU logic
   always @(*) begin
       case (OpCode)
           4'b0000: begin // ADD operation
-            FA_Temp = A + B; 
-            Result = FA_Temp[31:0];
-            Cout = FA_Temp[32];
+            Result = A + B;
+            Cout = (Result < A) ? 1 : 0; // Check for overflow
             ZeroFlag = (Result == 0);
             OverflowFlag = ((A[31] == B[31]) && (Result[31] != A[31]));
             SLTFlag = (A < B) ? 1 : 0; 
             ALUControl = 4'b0000; // Indicate ADD operation
           end 
           4'b0001: begin // SUB operation
-            FA_Temp = A - B;
-            Result = FA_Temp[31:0];
-            Cout = FA_Temp[32]; 
+            Result = A - B;
+            Cout = (A < B) ? 0 : 1; // Check for borrow 
             ZeroFlag = (Result == 0);
             OverflowFlag = (A[31] != B[31]) && (Result[31] != A[31]);
             SLTFlag = (A < B) ? 1 : 0; 
@@ -115,20 +112,20 @@ module ALU_32bit (
             ALUControl = 4'b0111; // Indicate NOT operation for B 
           end
           4'b1000: begin // LSHIFT operation
-            Temp = A;
+            TempShift = A;
             Result = A << B;
             Cout = 1'b0;
             ZeroFlag = (Result == 0);
-            OverflowFlag = (A < Temp); // Overflow if the bit shifted out is not zero
+            OverflowFlag = (A < TempShift); // Overflow if the bit shifted out is not zero
             SLTFlag = (A < B) ? 1 : 0; 
             ALUControl = 4'b1000; // Indicate LSHIFT operation  
           end
           4'b1001: begin // RSHIFT operation
-            Temp = A;
+            TempShift = A;
             Result = A >> B;
             Cout = 1'b0;
             ZeroFlag = (Result == 0);
-            OverflowFlag = (A > Temp); 
+            OverflowFlag = (A > TempShift); 
             SLTFlag = (A < B) ? 1 : 0; 
             ALUControl = 4'b1001; // Indicate RSHIFT operation  
           end
