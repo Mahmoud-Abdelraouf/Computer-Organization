@@ -4,23 +4,15 @@ module InterruptRequestRegister (
   input [7:0] enable_pie,                // Enable signal for Peripheral Interrupt Enable
   input enable_gie,                      // Enable signal for General Interrupt Enable
   output reg interrupt,                  // Final interrupt signal
-  output reg [7:0] valid_interrupts,     // Latch to store indices of valid interrupts
-  output reg [7:0] imr                   // Interrupt Mask Register
+  output reg [7:0] valid_interrupts      // Latch to store indices of valid interrupts
 );
 
   reg [7:0] pif;                         // Peripheral Interrupt Flags
   reg [7:0] pie;                         // Peripheral Interrupt Enable
   reg gie;                               // General Interrupt Enable
-  reg [7:0] irr;                         // Interrupt Request Register
-  reg [7:0] isr;                         // In-Service Register
 
   // Latch to store the indices of valid interrupts
   reg [7:0] valid_interrupts_latch;
-
-  // Initialize IMR to zero
-  initial begin
-    imr = 8'b0;
-  end
 
   // Peripheral module to generate PIF signals for 8 peripherals
   genvar i;
@@ -51,27 +43,6 @@ module InterruptRequestRegister (
     .enable_gie(enable_gie),
     .gie(gie)
   );
-
-  // Priority Resolver
-  always @(*) begin
-    case(pif)
-      // Define priorities based on the peripheral interrupt flags
-      // Adjust priorities as per the system's priority scheme
-      // Example:
-      8'b00000001: irr <= 8'b00000001; // Highest priority is peripheral 0
-      8'b00000010: irr <= 8'b00000010; // Priority is peripheral 1
-      // Add similar cases for priorities of peripherals 2-7
-      
-      default: irr <= 8'b00000000; // No interrupts
-    endcase
-  end
-
-  // IMR Logic
-  always @(posedge clk) begin
-    if (enable_gie) begin
-      imr <= enable_pie & ~isr; // Update IMR based on enabled interrupts and servicing interrupts
-    end
-  end
 
   // Combined logic to generate interrupt when all conditions are met for enabled peripherals
   always @(posedge clk) begin
