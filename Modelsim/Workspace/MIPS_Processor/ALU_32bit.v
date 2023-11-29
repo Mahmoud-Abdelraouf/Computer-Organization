@@ -49,7 +49,7 @@ module ALU_32bit (
       case (OpCode)
           4'b0000: begin // ADD operation
             Result = A + B;
-            Cout = (Result < A) ? 1 : 0; // Check for overflow
+            Cout = (A > (A + B)) ? 1 : 0; // Improved overflow detection for addition
             ZeroFlag = (Result == 0);
             OverflowFlag = ((A[31] == B[31]) && (Result[31] != A[31]));
             SLTFlag = (A < B) ? 1 : 0; 
@@ -57,7 +57,7 @@ module ALU_32bit (
           end 
           4'b0001: begin // SUB operation
             Result = A - B;
-            Cout = (A < B) ? 0 : 1; // Check for borrow 
+            Cout = (A < B) ? 0 : 1; // Improved borrow detection for subtraction
             ZeroFlag = (Result == 0);
             OverflowFlag = (A[31] != B[31]) && (Result[31] != A[31]);
             SLTFlag = (A < B) ? 1 : 0; 
