@@ -1,6 +1,6 @@
 # Computer Architecture Course
 
-This repository contains resources and materials for the "Computer Organization" course. The course covers a range of topics related to computer architectures, including instruction sets, memory hierarchy, conventional architectures, parallel processors, I/O systems, and more.
+This repository contains resources and materials for the "Computer Architecture" course. The course covers a range of topics related to computer architectures, including instruction sets, memory hierarchy, conventional architectures, parallel processors, I/O systems, and more.
 
 ## Table of Contents
 
