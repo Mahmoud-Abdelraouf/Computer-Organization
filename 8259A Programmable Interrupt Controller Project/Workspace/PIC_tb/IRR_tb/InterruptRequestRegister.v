@@ -42,13 +42,15 @@ module InterruptRequestRegister (
     always @(*) begin
         if (readIRR) begin
             dataBuffer = interruptState;
+        end else begin
+            dataBuffer = 8'bZ;
         end
     end
 
     // Update risedBits when there's a change in interruptState or readIRR is asserted
     always @(*) begin
         // Update risedBits with interruptState
-        risedBits <= interruptState;
+        risedBits = interruptState;
     end
 
 endmodule

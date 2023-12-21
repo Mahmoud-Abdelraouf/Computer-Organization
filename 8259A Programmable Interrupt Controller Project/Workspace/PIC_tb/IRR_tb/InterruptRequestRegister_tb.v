@@ -43,22 +43,33 @@ module InterruptRequestRegister_tb;
         $dumpvars(0, InterruptRequestRegister_tb); // Dump variables for simulation
 
         // Test case 1: No interrupts, all masked
+        i = 0;
         IR0_to_IR7 = $urandom; // Generate random value for IR0_to_IR7
         bitToMask = $urandom; // Generate random value for bitToMask
         readPriority = $urandom_range(0, 1); // Random value for readPriority
         readIRR = $urandom_range(0, 1); // Random value for readIRR
         resetIRR = $urandom_range(0, 7); // Random value for resetIRR
-        #10;
+        #10;// Delay to observe the behavior
 
         // Test case 2: Simulate interrupts and mask conditions
+        i = 1;
         IR0_to_IR7 = $urandom; // Generate random value for IR0_to_IR7
         bitToMask = $urandom; // Generate random value for bitToMask
         readPriority = $urandom_range(0, 1); // Random value for readPriority
         readIRR = $urandom_range(0, 1); // Random value for readIRR
         resetIRR = $urandom_range(0, 7); // Random value for resetIRR
-        #10;
+        #10;// Delay to observe the behavior
 
-        for (i = 0; i < num_random_test_cases; i = i + 1) begin
+        // Test case 3: Testing the behavior when readPriority is set and resetIRR is applied
+        i = 2; // Set test case number
+        IR0_to_IR7 = 8'b01101010; // Simulate specific interrupt requests
+        bitToMask = 8'b10110100; // Mask certain interrupts
+        readPriority = 1'b1; // Activate read priority
+        readIRR = $urandom_range(0, 1); // Randomize readIRR
+        resetIRR = 6; // Apply reset to a specific interrupt
+        #10; // Delay to observe the behavior
+
+        for (i = 3; i < num_random_test_cases; i = i + 1) begin
             // Generate random values for inputs
             IR0_to_IR7 = $urandom; // Random value for IR0_to_IR7
             bitToMask = $urandom; // Random value for bitToMask
