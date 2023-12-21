@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ALU_32bit
-Sun Oct 15 23:03:32 2023
+Thu Dec 21 01:15:49 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -44,7 +44,7 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                     ;
 +---------------------------------+------------------------------------------------+
-; Analysis & Synthesis Status     ; Successful - Sun Oct 15 23:03:32 2023          ;
+; Analysis & Synthesis Status     ; Successful - Thu Dec 21 01:15:49 2023          ;
 ; Quartus Prime Version           ; 22.1std.2 Build 922 07/20/2023 SC Lite Edition ;
 ; Revision Name                   ; ALU_32bit                                      ;
 ; Top-level Entity Name           ; ALU_32bit                                      ;
@@ -167,13 +167,13 @@ https://fpgasoftware.intel.com/eula.
 +----------------------------+-------------+
 
 
-+--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
-; Analysis & Synthesis Source Files Read                                                                                                                                                     ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------+---------+
-; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                                       ; Library ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------+---------+
-; ALU_32bit.v                      ; yes             ; User Verilog HDL File  ; D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/ALU_Task/ALU_32bit.v ;         ;
-+----------------------------------+-----------------+------------------------+----------------------------------------------------------------------------------------------------+---------+
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                          ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type              ; File Name with Absolute Path                                                            ; Library ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
+; ALU_32bit.v                      ; yes             ; User Verilog HDL File  ; D:/Projects/Hardware/Computer-Organization/Quartus Prime/Workspace/ALU_Task/ALU_32bit.v ;         ;
++----------------------------------+-----------------+------------------------+-----------------------------------------------------------------------------------------+---------+
 
 
 +-------------------------------------------------------------------+
@@ -269,12 +269,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 Info: *******************************************************************
 Info: Running Quartus Prime Analysis & Synthesis
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Sun Oct 15 23:03:24 2023
+    Info: Processing started: Thu Dec 21 01:15:38 2023
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ALU_32bit -c ALU_32bit
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (20030): Parallel compilation is enabled and will use 16 of the 16 processors detected
 Info (12021): Found 1 design units, including 1 entities, in source file alu_32bit.v
-    Info (12023): Found entity 1: ALU_32bit File: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/ALU_Task/ALU_32bit.v Line: 1
+    Info (12023): Found entity 1: ALU_32bit File: D:/Projects/Hardware/Computer-Organization/Quartus Prime/Workspace/ALU_Task/ALU_32bit.v Line: 1
 Info (12127): Elaborating entity "ALU_32bit" for the top level hierarchy
 Info (286030): Timing-Driven Synthesis is running
 Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
@@ -284,9 +284,9 @@ Info (21057): Implemented 139 device resources after synthesis - the final resou
     Info (21059): Implemented 33 output pins
     Info (21061): Implemented 39 logic cells
 Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4863 megabytes
-    Info: Processing ended: Sun Oct 15 23:03:32 2023
-    Info: Elapsed time: 00:00:08
-    Info: Total CPU time (on all processors): 00:00:10
+    Info: Peak virtual memory: 4856 megabytes
+    Info: Processing ended: Thu Dec 21 01:15:49 2023
+    Info: Elapsed time: 00:00:11
+    Info: Total CPU time (on all processors): 00:00:11
 
 

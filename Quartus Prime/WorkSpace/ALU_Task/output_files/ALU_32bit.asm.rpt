@@ -1,5 +1,5 @@
 Assembler report for ALU_32bit
-Sun Oct 15 23:04:39 2023
+Thu Dec 21 01:17:02 2023
 Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
 
 
@@ -10,7 +10,7 @@ Quartus Prime Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
   2. Assembler Summary
   3. Assembler Settings
   4. Assembler Generated Files
-  5. Assembler Device Options: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/ALU_Task/output_files/ALU_32bit.sof
+  5. Assembler Device Options: D:/Projects/Hardware/Computer-Organization/Quartus Prime/Workspace/ALU_Task/output_files/ALU_32bit.sof
   6. Assembler Messages
 
 
@@ -38,7 +38,7 @@ https://fpgasoftware.intel.com/eula.
 +---------------------------------------------------------------+
 ; Assembler Summary                                             ;
 +-----------------------+---------------------------------------+
-; Assembler Status      ; Successful - Sun Oct 15 23:04:39 2023 ;
+; Assembler Status      ; Successful - Thu Dec 21 01:17:02 2023 ;
 ; Revision Name         ; ALU_32bit                             ;
 ; Top-level Entity Name ; ALU_32bit                             ;
 ; Family                ; Cyclone V                             ;
@@ -53,23 +53,23 @@ https://fpgasoftware.intel.com/eula.
 +--------+---------+---------------+
 
 
-+-------------------------------------------------------------------------------------------------------------------+
-; Assembler Generated Files                                                                                         ;
-+-------------------------------------------------------------------------------------------------------------------+
-; File Name                                                                                                         ;
-+-------------------------------------------------------------------------------------------------------------------+
-; D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/ALU_Task/output_files/ALU_32bit.sof ;
-+-------------------------------------------------------------------------------------------------------------------+
++--------------------------------------------------------------------------------------------------------+
+; Assembler Generated Files                                                                              ;
++--------------------------------------------------------------------------------------------------------+
+; File Name                                                                                              ;
++--------------------------------------------------------------------------------------------------------+
+; D:/Projects/Hardware/Computer-Organization/Quartus Prime/Workspace/ALU_Task/output_files/ALU_32bit.sof ;
++--------------------------------------------------------------------------------------------------------+
 
 
-+---------------------------------------------------------------------------------------------------------------------------------------------+
-; Assembler Device Options: D:/Embedded_Systems_and_Computer_Programming/Hardware/Quartus Prime/WorkSpace/ALU_Task/output_files/ALU_32bit.sof ;
-+----------------+----------------------------------------------------------------------------------------------------------------------------+
-; Option         ; Setting                                                                                                                    ;
-+----------------+----------------------------------------------------------------------------------------------------------------------------+
-; JTAG usercode  ; 0x00EC30E2                                                                                                                 ;
-; Checksum       ; 0x00EC30E2                                                                                                                 ;
-+----------------+----------------------------------------------------------------------------------------------------------------------------+
++----------------------------------------------------------------------------------------------------------------------------------+
+; Assembler Device Options: D:/Projects/Hardware/Computer-Organization/Quartus Prime/Workspace/ALU_Task/output_files/ALU_32bit.sof ;
++----------------+-----------------------------------------------------------------------------------------------------------------+
+; Option         ; Setting                                                                                                         ;
++----------------+-----------------------------------------------------------------------------------------------------------------+
+; JTAG usercode  ; 0x00EC30E2                                                                                                      ;
+; Checksum       ; 0x00EC30E2                                                                                                      ;
++----------------+-----------------------------------------------------------------------------------------------------------------+
 
 
 +--------------------+
@@ -78,14 +78,14 @@ https://fpgasoftware.intel.com/eula.
 Info: *******************************************************************
 Info: Running Quartus Prime Assembler
     Info: Version 22.1std.2 Build 922 07/20/2023 SC Lite Edition
-    Info: Processing started: Sun Oct 15 23:04:32 2023
+    Info: Processing started: Thu Dec 21 01:16:53 2023
 Info: Command: quartus_asm --read_settings_files=off --write_settings_files=off ALU_32bit -c ALU_32bit
 Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
 Info (115030): Assembler is generating device programming files
 Info: Quartus Prime Assembler was successful. 0 errors, 1 warning
-    Info: Peak virtual memory: 4883 megabytes
-    Info: Processing ended: Sun Oct 15 23:04:39 2023
-    Info: Elapsed time: 00:00:07
+    Info: Peak virtual memory: 4891 megabytes
+    Info: Processing ended: Thu Dec 21 01:17:02 2023
+    Info: Elapsed time: 00:00:09
     Info: Total CPU time (on all processors): 00:00:07
 
 
