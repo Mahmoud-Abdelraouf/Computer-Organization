@@ -43,26 +43,19 @@ module ReadWriteLogic(
     input CS,
     input  [7:0]Data,
 
-    output [7:0]ICW1,
-    output [7:0]ICW2,
-    output [7:0]ICW3,
-    output [7:0]ICW4,
-    output [7:0]OCW1,
-    output [7:0]OCW2,
-    output [7:0]OCW3,
-    output read_cmd_to_ctrl_logic;
+    output reg [7:0]ICW1,
+    output reg [7:0]ICW2,
+    output reg [7:0]ICW3,
+    output reg [7:0]ICW4,
+    output reg [7:0]OCW1,
+    output reg [7:0]OCW2,
+    output reg [7:0]OCW3,
+    output reg read_cmd_to_ctrl_logic
+    
 );
-localparam flag = 0;
-localparam counter = 1;
-reg [7:0]ICW1;
-reg [7:0]ICW2;
-reg [7:0]ICW3;
-reg [7:0]ICW4;
+reg flag = 0;
+reg counter = 1;
 
-reg [7:0]OCW1;
-reg [7:0]OCW2;
-reg [7:0]OCW3;
-reg read_cmd_to_ctrl_logic;
 /*
     ICW1 -> A0 -> 0 $ D0 -> 1
     ICW2 -> A0 -> 1
@@ -128,7 +121,7 @@ always @(negedge write) begin
     end
 end
 
-always @(negedge read) begin
+always @(negedge Read) begin
     if(CS == 0)
     begin
         read_cmd_to_ctrl_logic <= 1'b1; 
