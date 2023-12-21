@@ -3,7 +3,7 @@
  * @brief Testbench for the Interrupt Request Register (IRR) module
  */
 
-`timescale 1ns/1ps // Define timescale for simulation accuracy
+//`timescale 1ns/1ps // Define timescale for simulation accuracy
 
 /**
  * @brief Testbench for the Interrupt Request Register (IRR) module

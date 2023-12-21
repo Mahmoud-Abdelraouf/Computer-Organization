@@ -4,9 +4,9 @@
 * 
 * - This module is conneted to the OCW1 line to know which IR is masked.
 * - Connected to the control logic with readIMR signal, if it is active, the IMW 
-* valuse are printed to the dataBuffer so the cpu read it.
+*   valuse are printed to the dataBuffer so the cpu read it.
 * - IMR_reg is connected to the IRR module, if a bit is one, than the corresponding 
-* IR is masked and rejected.
+*   IR is masked and rejected.
 * - dataBuffer lines are connected to the Data Buffer module.
 */
 module InterruptMaskRegister(

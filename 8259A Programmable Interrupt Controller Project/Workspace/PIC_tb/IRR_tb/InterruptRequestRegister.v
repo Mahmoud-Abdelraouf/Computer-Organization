@@ -45,13 +45,10 @@ module InterruptRequestRegister (
         end
     end
 
-    // Logic to output valid interrupts when readIRR is asserted or when there's a change in interruptState
+    // Update risedBits when there's a change in interruptState or readIRR is asserted
     always @(*) begin
-        if (readIRR || (interruptState != risedBits)) begin
-            risedBits = interruptState;
-        end else begin
-            risedBits = 8'bZ; // Preserve previous risedBits if there are no changes or if readIRR is inactive
-        end
+        // Update risedBits with interruptState
+        risedBits <= interruptState;
     end
 
 endmodule
