@@ -17,6 +17,8 @@ module InterruptRequestRegister_tb;
     reg readPriority;          // Input: Read priority signal from control logic.
     reg readIRR;               // Input: Signal to output IRR values to data buffer.
     reg [2:0] resetIRR;        // Input: Signal from priority resolver to reset serviced interrupts.
+    reg [7:0] ICW1;            // Input: For Initialization Command Word 1
+
     
     // Outputs
     wire [7:0] risedBits;      // Output: Rised bits indicating valid interrupts.
@@ -30,6 +32,7 @@ module InterruptRequestRegister_tb;
         .readPriority(readPriority),
         .readIRR(readIRR),
         .resetIRR(resetIRR),
+        .ICW1(ICW1),
         .risedBits(risedBits),
         .dataBuffer(dataBuffer)
     );
@@ -49,6 +52,7 @@ module InterruptRequestRegister_tb;
         readPriority = $urandom_range(0, 1); // Random value for readPriority
         readIRR = $urandom_range(0, 1); // Random value for readIRR
         resetIRR = $urandom_range(0, 7); // Random value for resetIRR
+        ICW1 = $urandom; // Randomize ICW1
         #10;// Delay to observe the behavior
 
         // Test case 2: Simulate interrupts and mask conditions
@@ -58,6 +62,7 @@ module InterruptRequestRegister_tb;
         readPriority = $urandom_range(0, 1); // Random value for readPriority
         readIRR = $urandom_range(0, 1); // Random value for readIRR
         resetIRR = $urandom_range(0, 7); // Random value for resetIRR
+        ICW1 = $urandom; // Randomize ICW1
         #10;// Delay to observe the behavior
 
         // Test case 3: Testing the behavior when readPriority is set and resetIRR is applied
@@ -67,6 +72,7 @@ module InterruptRequestRegister_tb;
         readPriority = 1'b1; // Activate read priority
         readIRR = $urandom_range(0, 1); // Randomize readIRR
         resetIRR = 6; // Apply reset to a specific interrupt
+        ICW1 = 8'b00001000; // Set LTIM bit to 1 or 0 according to requirements
         #10; // Delay to observe the behavior
 
         for (i = 3; i < num_random_test_cases; i = i + 1) begin
@@ -76,7 +82,7 @@ module InterruptRequestRegister_tb;
             readPriority = $urandom_range(0, 1); // Random value for readPriority
             readIRR = $urandom_range(0, 1); // Random value for readIRR
             resetIRR = $urandom_range(0, 7); // Random value for resetIRR
-
+            ICW1 = $urandom; // Randomize ICW1
             #10; // Add delay for each test case
         end
 
