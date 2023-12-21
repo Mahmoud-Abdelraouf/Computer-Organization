@@ -25,6 +25,7 @@ module CascadeController(
     input control_signal,        // Input: Signal that comes from control logic.
     input [2:0] desired_slave,   // Input: Desired slave ID in case of MASTER mode.
     output reg flag              // Output: Flag indicating if it's the desired slave.
+    output reg SP_to_control     // Output: Send SP to control logic
 );
     localparam SLAVE = 1'b0;     // Local parameter representing the SLAVE mode.
     localparam MASTER = 1'b1;    // Local parameter representing the MASTER mode.
@@ -55,5 +56,8 @@ module CascadeController(
                 temp_cas = desired_slave; // Set CAS to the desired slave ID in MASTER mode
             end
         endcase
+    end
+    always @(SP) begin
+        SP_to_control<=SP;
     end
 endmodule

@@ -43,6 +43,7 @@ module ReadWriteLogic(
     input CS,
     input  [7:0]Data,
 
+    output reg write_flag,
     output reg [7:0]ICW1,
     output reg [7:0]ICW2,
     output reg [7:0]ICW3,
@@ -64,6 +65,8 @@ reg counter = 1;
     OSW3 -> A0 -> 0    D4 -> 0 $ D3 -> 1
 */
 always @(negedge write) begin
+
+    write_flag <= 1'b1;
     if(CS == 1'b0)
     begin
         if(flag == 0 && A0 == 0)
@@ -126,5 +129,6 @@ always @(negedge Read) begin
         read_cmd_to_ctrl_logic <= 1'b1; 
     end
 end
+
 
 endmodule
