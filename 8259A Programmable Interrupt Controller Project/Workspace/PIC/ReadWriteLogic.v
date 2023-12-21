@@ -51,7 +51,6 @@ module ReadWriteLogic(
     output reg [7:0]OCW2,
     output reg [7:0]OCW3,
     output reg read_cmd_to_ctrl_logic
-    
 );
 reg flag = 0;
 reg counter = 1;

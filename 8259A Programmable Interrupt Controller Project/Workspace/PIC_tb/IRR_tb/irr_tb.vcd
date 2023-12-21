@@ -1,0 +1,440 @@
+$date
+	Thu Dec 21 18:29:16 2023
+$end
+$version
+	ModelSim Version 10.5b
+$end
+$timescale
+	1ps
+$end
+
+$scope module InterruptRequestRegister_tb $end
+$var reg 8 ! IR0_to_IR7 [7:0] $end
+$var reg 8 " bitToMask [7:0] $end
+$var reg 1 # readPriority $end
+$var reg 1 $ readIRR $end
+$var reg 3 % resetIRR [2:0] $end
+$var reg 8 & ICW1 [7:0] $end
+$var wire 1 ' risedBits [7] $end
+$var wire 1 ( risedBits [6] $end
+$var wire 1 ) risedBits [5] $end
+$var wire 1 * risedBits [4] $end
+$var wire 1 + risedBits [3] $end
+$var wire 1 , risedBits [2] $end
+$var wire 1 - risedBits [1] $end
+$var wire 1 . risedBits [0] $end
+$var wire 1 / dataBuffer [7] $end
+$var wire 1 0 dataBuffer [6] $end
+$var wire 1 1 dataBuffer [5] $end
+$var wire 1 2 dataBuffer [4] $end
+$var wire 1 3 dataBuffer [3] $end
+$var wire 1 4 dataBuffer [2] $end
+$var wire 1 5 dataBuffer [1] $end
+$var wire 1 6 dataBuffer [0] $end
+$var integer 32 7 num_random_test_cases $end
+$var integer 32 8 i $end
+
+$scope module irr_inst $end
+$var wire 1 9 IR0_to_IR7 [7] $end
+$var wire 1 : IR0_to_IR7 [6] $end
+$var wire 1 ; IR0_to_IR7 [5] $end
+$var wire 1 < IR0_to_IR7 [4] $end
+$var wire 1 = IR0_to_IR7 [3] $end
+$var wire 1 > IR0_to_IR7 [2] $end
+$var wire 1 ? IR0_to_IR7 [1] $end
+$var wire 1 @ IR0_to_IR7 [0] $end
+$var wire 1 A bitToMask [7] $end
+$var wire 1 B bitToMask [6] $end
+$var wire 1 C bitToMask [5] $end
+$var wire 1 D bitToMask [4] $end
+$var wire 1 E bitToMask [3] $end
+$var wire 1 F bitToMask [2] $end
+$var wire 1 G bitToMask [1] $end
+$var wire 1 H bitToMask [0] $end
+$var wire 1 I readPriority $end
+$var wire 1 J readIRR $end
+$var wire 1 K resetIRR [2] $end
+$var wire 1 L resetIRR [1] $end
+$var wire 1 M resetIRR [0] $end
+$var wire 1 N ICW1 [7] $end
+$var wire 1 O ICW1 [6] $end
+$var wire 1 P ICW1 [5] $end
+$var wire 1 Q ICW1 [4] $end
+$var wire 1 R ICW1 [3] $end
+$var wire 1 S ICW1 [2] $end
+$var wire 1 T ICW1 [1] $end
+$var wire 1 U ICW1 [0] $end
+$var reg 8 V risedBits [7:0] $end
+$var reg 8 W dataBuffer [7:0] $end
+$var reg 8 X interruptState [7:0] $end
+$var reg 1 Y levelTriggered $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b10111000 !
+b100110 "
+0#
+0$
+b110 %
+b1000110 &
+b10011000 V
+bz W
+b10011000 X
+0Y
+b1010 7
+b0 8
+0.
+0-
+0,
+1+
+1*
+0)
+0(
+1'
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+0U
+1T
+1S
+0R
+0Q
+0P
+1O
+0N
+0M
+1L
+1K
+0J
+0I
+0H
+1G
+1F
+0E
+0D
+1C
+0B
+0A
+0@
+0?
+0>
+1=
+1<
+1;
+0:
+19
+$end
+#10
+b1 8
+b1110010 !
+b101110 "
+1#
+b10 %
+b10110100 &
+1I
+0T
+1Q
+1P
+0O
+1N
+0K
+1E
+1?
+0=
+1:
+09
+b0 V
+b1010000 X
+0+
+0*
+0'
+b1010000 V
+1*
+1(
+#20
+b10 8
+b1101010 !
+b10110100 "
+1$
+b110 %
+b1000 &
+1J
+0S
+1R
+0Q
+0P
+0N
+1K
+0G
+0E
+1D
+1A
+1=
+0<
+b1001010 X
+b1010 X
+1Y
+b1010 V
+b1010 W
+06
+15
+04
+13
+02
+01
+00
+0/
+1-
+1+
+0*
+0(
+#30
+b11 8
+b1010110 !
+b110101 "
+0#
+0$
+b101 %
+b11011011 &
+0I
+0J
+1U
+1T
+1Q
+1O
+1N
+1M
+0L
+1H
+0A
+1>
+0=
+1<
+0;
+bz W
+b1000010 X
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+b1000010 V
+0+
+1(
+#40
+b100 8
+b101 !
+b11100011 "
+1$
+b100101 &
+1J
+0T
+1S
+0R
+0Q
+1P
+0O
+0N
+1G
+0F
+0D
+1B
+1A
+1@
+0?
+0<
+0:
+b100 X
+0Y
+b100 V
+b100 W
+06
+05
+14
+03
+02
+01
+00
+0/
+0-
+1,
+0(
+#50
+b101 8
+b11101001 !
+b1011101 "
+0$
+b11 %
+b1010110 &
+0J
+0U
+1T
+1Q
+0P
+1O
+1L
+0K
+0G
+1F
+1E
+1D
+0C
+0A
+0>
+1=
+1;
+1:
+19
+b10100000 X
+b10100000 V
+bz W
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+0,
+1)
+1'
+#60
+b110 8
+b11001001 !
+b10111001 "
+b110 %
+b11010100 &
+0T
+1N
+0M
+1K
+0F
+1C
+0B
+1A
+0;
+b1000000 X
+b1000000 V
+0)
+1(
+0'
+#70
+b111 8
+b10001110 !
+b11000000 "
+1#
+1$
+b111 %
+b1011000 &
+1I
+1J
+0S
+1R
+0N
+1M
+0H
+0E
+0D
+0C
+1B
+0@
+1?
+1>
+0:
+1Y
+b1000000 W
+b1110 X
+06
+05
+04
+03
+02
+01
+10
+0/
+b1110 V
+b1110 W
+15
+14
+13
+00
+1-
+1,
+1+
+0(
+#80
+b1000 8
+b1010001 !
+b110010 "
+0$
+b11 %
+b1011010 &
+0J
+1T
+0K
+1G
+1D
+1C
+0B
+0A
+1@
+0?
+0>
+0=
+1<
+1:
+09
+b1000001 X
+b1000001 V
+bz W
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+1.
+0-
+0,
+0+
+1(
+#90
+b1001 8
+b11100110 !
+b11110110 "
+b111 %
+b11101111 &
+1U
+1S
+0Q
+1P
+1N
+1K
+1F
+1B
+1A
+0@
+1?
+1>
+0<
+1;
+19
+b0 X
+b0 V
+0.
+0(
+#100
+b1010 8
