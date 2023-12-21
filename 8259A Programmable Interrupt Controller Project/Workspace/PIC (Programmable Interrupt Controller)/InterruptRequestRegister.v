@@ -18,9 +18,6 @@ module InterruptRequestRegister (
     output reg [7:0] dataBuffer        // Output: Buffer for interrupts reset by resetIRR.
 );
 
-    // Internal register to hold the previous state of interrupts
-    reg [7:0] prevInterruptState;
-
     // Internal register to hold the current state of interrupts
     reg [7:0] interruptState;
 
