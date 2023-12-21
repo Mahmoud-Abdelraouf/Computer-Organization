@@ -7,28 +7,39 @@
  * @brief Cascade Controller Module
  * This module manages the cascading functionality for interrupt handling within a microcontroller.
  * It interfaces with slave devices based on priority pins and manages the transmission of interrupt vectors.
+ *
+ * @details
+ * The cascade_controller module operates in two modes: SLAVE and MASTER.
+ * In SLAVE mode, the module receives an 8-bit configuration signal (ICW3) and extracts the first 3 bits to compute a unique slave ID. 
+ * In MASTER mode, it controls the cascade control lines (CAS) based on the desired slave ID received from control logic.
+ *
+ * The module monitors a control signal to trigger actions on the rising edge.
+ * In SLAVE mode, it compares the computed slave ID with the current value of CAS and sets a flag accordingly. 
+ * In MASTER mode, it updates the CAS lines to the desired slave.
+ *
  */
 module cascade_controller(
     inout [2:0] CAS,             // Input/Output: Cascade control lines.
     input SP,                    // Input: Selects between MASTER and SLAVE modes.
     input [7:0] ICW3,            // Input: ICW3 signal, used for configuration.
     input control_signal,        // Input: Signal that comes from control logic.
-    input [2:0] desired_slave;   // Input: Desired slave ID in case of MASTER mode.
+    input [2:0] desired_slave,   // Input: Desired slave ID in case of MASTER mode.
     output reg flag              // Output: Flag indicating if it's the desired slave.
 );
     localparam SLAVE = 1'b0;     // Local parameter representing the SLAVE mode.
     localparam MASTER = 1'b1;    // Local parameter representing the MASTER mode.
     
-    reg [2:0] ID;                // Reg to hold ID of the slave
-    
+    reg [2:0] ID;                // reg to hold ID of the slave
+    reg [2:0] temp_cas;          // reg to save the value of cas in always block
+    assign CAS=temp_cas;         // assign value of cas in master mode 
     always @(*) begin
         if (SP == SLAVE) begin
-            ID = ICW3 | 3'b111; // Compute ID for SLAVE mode
+            ID = ICW3[2:0]; // Compute ID for SLAVE mode
         end
     end
 
-    always @(posedge control_signal ) begin
-        case (SP):
+    always @(posedge control_signal) begin
+        case (SP)
             SLAVE: begin
                 if (ID == CAS) begin
                     flag <= 1'b1; // Set flag to 1 if it's the desired slave
@@ -38,7 +49,7 @@ module cascade_controller(
                 end
             end
             MASTER: begin
-                CAS <= desired_slave; // Set CAS to the desired slave ID in MASTER mode
+                temp_cas = desired_slave; // Set CAS to the desired slave ID in MASTER mode
             end
         endcase
     end
