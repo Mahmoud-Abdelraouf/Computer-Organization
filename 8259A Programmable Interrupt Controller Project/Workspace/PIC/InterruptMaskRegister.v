@@ -16,7 +16,6 @@ module InterruptMaskRegister(
   output reg [7:0] dataBuffer // Internal data bus that is connected to the data buffer.
 );
 //compinational circuit.
-cdscs
 assign IMR_reg = OCW1;
 
 /*
