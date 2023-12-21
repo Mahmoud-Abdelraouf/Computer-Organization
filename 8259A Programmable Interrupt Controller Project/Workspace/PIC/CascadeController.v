@@ -18,7 +18,7 @@
  * In MASTER mode, it updates the CAS lines to the desired slave.
  *
  */
-module cascade_controller(
+module CascadeController(
     inout [2:0] CAS,             // Input/Output: Cascade control lines.
     input SP,                    // Input: Selects between MASTER and SLAVE modes.
     input [7:0] ICW3,            // Input: ICW3 signal, used for configuration.
