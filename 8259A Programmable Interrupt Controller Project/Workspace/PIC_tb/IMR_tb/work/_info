@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\Programming\ModelSim
+vInterruptMaskRegister
+Z1 !s100 Z011>0Y1P?]TDPcE2eW1]1
+Z2 IBfB`JWbeB59YG@NBdHaB30
+Z3 VZF;J>ihea1DATgg3]GW`]0
+Z4 dD:\Engineering\Senior 1\Fall\Computer Architecture\Project\Repo\Computer-Organization-and-Architecture\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\IMR_tb
+Z5 w1703281983
+Z6 8D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister.v
+Z7 FD:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister.v
+L0 12
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -reportprogress|300|-work|work|D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister.v|
+Z10 o-work work -O0
+Z11 n@interrupt@mask@register
+!i10b 1
+!s85 0
+Z12 !s108 1703282241.819000
+Z13 !s107 D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister.v|
+!s101 -O0
+vInterruptMaskRegister_tb
+!i10b 1
+!s100 46<6d0@VSQ?4OLOLdP`K]1
+IehVZjDIoDB1==f3dQGC:Y0
+Z14 VAb<]C7[_>nD?ORfOJXgUh3
+R4
+w1703282242
+Z15 8D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister_tb.v
+Z16 FD:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister_tb.v
+L0 2
+R8
+r1
+!s85 0
+31
+!s108 1703282242.660000
+!s107 D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister_tb.v|
+Z17 !s90 -reportprogress|300|-work|work|D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IMR_tb/InterruptMaskRegister_tb.v|
+!s101 -O0
+R10
+Z18 n@interrupt@mask@register_tb
