@@ -19,20 +19,22 @@
  *
  */
 module CascadeController(
-    inout [2:0] CAS,             // Input/Output: Cascade control lines.
-    input SP,                    // Input: Selects between MASTER and SLAVE modes.
-    input [7:0] ICW3,            // Input: ICW3 signal, used for configuration.
-    input control_signal,        // Input: Signal that comes from control logic.
-    input [2:0] desired_slave,   // Input: Desired slave ID in case of MASTER mode.
-    output reg flag              // Output: Flag indicating if it's the desired slave.
-    output reg SP_to_control     // Output: Send SP to control logic
-);
-    localparam SLAVE = 1'b0;     // Local parameter representing the SLAVE mode.
-    localparam MASTER = 1'b1;    // Local parameter representing the MASTER mode.
-    
-    reg [2:0] ID;                // reg to hold ID of the slave
-    reg [2:0] temp_cas;          // reg to save the value of cas in always block
-    assign CAS = temp_cas;       // assign value of cascade lines in master mode 
+    inout [2:0] CAS,                        // Input/Output: Cascade control lines.
+    input SP,                               // Input: Selects between MASTER and SLAVE modes.
+    input [7:0] ICW3,                       // Input: ICW3 signal, used for configuration.
+    input control_signal,                   // Input: Signal that comes from control logic.
+    input [2:0] desired_slave,              // Input: Desired slave ID in case of MASTER mode.
+
+    output reg control_signal_ack=1'b0,     // Output: Acknowledge to control signal flag
+    output reg flag                         // Output: Flag indicating if it's the desired slave.
+    output reg SP_to_control                // Output: Send SP to control logic
+);         
+    localparam SLAVE = 1'b0;                // Local parameter representing the SLAVE mode.
+    localparam MASTER = 1'b1;               // Local parameter representing the MASTER mode.
+            
+    reg [2:0] ID;                           // reg to hold ID of the slave
+    reg [2:0] temp_cas;                     // reg to save the value of cas in always block
+    assign CAS = temp_cas;                  // assign value of cascade lines in master mode 
     // get ID of the slave from ICW3 
     always @(*) begin
         if (SP == SLAVE) begin
@@ -40,8 +42,7 @@ module CascadeController(
         end
     end
     // configurations of the cascade controller when receiving control signal based on mode (slave or master)
-    always @(*) begin
-        if (control_signal) begin
+    always @(posedge control_signal) begin
             case (SP)
             // in case of slave mode : check if the cascade lines equals the slave ID
             SLAVE: begin
@@ -58,7 +59,7 @@ module CascadeController(
                 temp_cas = desired_slave; // Set CAS to the desired slave ID in MASTER mode
             end
         endcase
-        end
+        control_signal_ack=~control_signal_ack;
     end
 
     always @(SP) begin
