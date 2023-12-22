@@ -30,14 +30,36 @@ r1
 Z3 o-work work
 Z4 tCvgOpt 0
 n@i@m@r
+vInServiceRegister
+Z5 !s110 1703264798
+!i10b 1
+!s100 6c]FH@AmN:kT1zk`R64o71
+IaWdS@c2b>SRzeB4zW<]W21
+R0
+R1
+w1703264775
+8D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC/InServiceRegister.v
+FD:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC/InServiceRegister.v
+L0 1
+R2
+r1
+!s85 0
+31
+Z6 !s108 1703264798.000000
+!s107 D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC/InServiceRegister.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC/InServiceRegister.v|
+!i113 1
+R3
+R4
+n@in@service@register
 vInterruptRequestRegister
-Z5 !s110 1703176144
+R5
 !i10b 1
 !s100 C^F>3TF4gHJf@R`ZGRn4[0
 Iel1kVHiTc1if7QhV@<QWe3
 R0
 R1
-w1703176107
+w1703182176
 8D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IRR_tb/InterruptRequestRegister.v
 FD:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IRR_tb/InterruptRequestRegister.v
 L0 11
@@ -45,7 +67,7 @@ R2
 r1
 !s85 0
 31
-Z6 !s108 1703176144.000000
+R6
 !s107 D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IRR_tb/InterruptRequestRegister.v|
 !s90 -reportprogress|300|-work|work|-stats=none|D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IRR_tb/InterruptRequestRegister.v|
 !i113 1

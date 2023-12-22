@@ -14,12 +14,16 @@ module InterruptRequestRegister (
     input readPriority,                // Input: Read priority signal from control logic.
     input readIRR,                     // Input: Signal to output IRR values to data buffer.
     input [2:0] resetIRR,              // Input: Signal from priority resolver to reset serviced interrupts.
-    output reg [7:0] risedBits,        // Output: Rised bits indicating valid interrupts.
+    input [7:0] ICW1,                  // Input: Initialization Command Word 1 with LTIM bit.
+    output reg [7:0] risedBits = 8'b0, // Output: Rised bits indicating valid interrupts.
     output reg [7:0] dataBuffer        // Output: Buffer for interrupts reset by resetIRR.
 );
 
     // Internal register to hold the current state of interrupts
     reg [7:0] interruptState;
+
+    // Determine operating mode based on ICW1's LTIM bit
+    reg levelTriggered;
 
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     always @(*) begin
@@ -42,16 +46,27 @@ module InterruptRequestRegister (
     always @(*) begin
         if (readIRR) begin
             dataBuffer = interruptState;
+        end else begin
+            dataBuffer = 8'bZ;
         end
     end
 
-    // Logic to output valid interrupts when readIRR is asserted or when there's a change in interruptState
+    // Update risedBits based on level/edge triggered interrupt mode
     always @(*) begin
-        if (readIRR || (interruptState != risedBits)) begin
+        // Assuming LTIM bit is at position 3 in ICW1
+        levelTriggered = ICW1[3]; // LTIM bit determines the mode
+
+        // If LTIM = 1, then operate in level interrupt mode.
+        // If LTIM = 0, then operate in edge interrupt mode.
+        if (levelTriggered == 1) begin
+            // Level-triggered mode: The interrupt is considered asserted as long as the signal remains in that state.
             risedBits = interruptState;
         end else begin
-            risedBits = 8'bZ; // Preserve previous risedBits if there are no changes or if readIRR is inactive
+            // Edge-triggered mode: The interrupt is signaled at the moment of the transition (rising or falling edge) of the signal.
+            // Detect the rising edge to signal the interrupt
+            risedBits = interruptState & ~risedBits;
         end
     end
 
 endmodule
+
