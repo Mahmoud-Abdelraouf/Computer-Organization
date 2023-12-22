@@ -2,11 +2,11 @@ module PriorityResolver(
   input wire freezing,
   input wire [7:0] IRR_reg, //connected to ISR to get its reg values.
   input wire [7:0] ISR_reg, //connected to ISR to get its reg values.
-  input wire [2:0] resetedISR_index, //the number of ISR that've been reset.
+  input wire [2:0] resetedISR_index, //the number of ISR that'd've been reset.
   input wire [7:0] OCW2, //connected to the OCW2 reg to know the mode.
   input wire INT_requestAck, //the ack to reset the INT_request.
   output reg [2:0] serviced_interrupt_index, //connected to ISR (index to set) or to IRR (index to reset) the corresponding bit.
-  output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotaion modes.
+  output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotation modes.
   output reg INT_request = 0 //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
 );
   
@@ -54,12 +54,12 @@ module PriorityResolver(
       ROTATE_ON_NON_SPECIFIC_EOI: currentMode <= AUTO_ROTATION_MODE;
       ROTATE_ON_AUTO_EOI_set:     currentMode <= AUTO_ROTATION_MODE;
       ROTATE_ON_AUTO_EOI_clear:   currentMode <= AUTO_ROTATION_MODE;
-    endcase
+   endcase
    end
    
   
   /*
-   * If any changes happeend in the IRR reg, if the priority was in freezing,
+   * If any changes happened in the IRR reg, if the priority was in freezing,
    * then ignore the changes in IRR and use the prev value of interrupt_indexes
    * Otherwise save the new IRR in the interrupt_indexes and start resolving.
    */
@@ -69,7 +69,7 @@ module PriorityResolver(
       interrupt_indexes = interrupt_indexes; //Store valid interrupts and freeze it.
     end else begin
       interrupt_indexes = IRR_reg; //Get the new values from the IRR.
-      //Start resolviong priority.
+      //Start resolving priority.
       //We treat the change of the value as a pulse.
       resolveFlag <= ~resolveFlag;
     end 
@@ -86,7 +86,7 @@ module PriorityResolver(
      end  
        
        AUTO_ROTATION_MODE: begin
-         zeroLevelPriorityBit <= zeroLevelPriorityBit; //Priority is same as before, until EOI occured
+         zeroLevelPriorityBit <= zeroLevelPriorityBit; //Priority is same as before, until EOI occurred
          //change will happen at: always @(ISR_reg) part.
        end
     endcase
@@ -132,7 +132,7 @@ module PriorityResolver(
   
   /*
    * When serviced_interrupt_index changes, we need to check whether it
-   * has a higher priority than the currenct bits in ISR_regor not.
+   * has a higher priority than the current bits in ISR_register not.
    * 
    * If true then we will fire an INT flag to the control logic,
    * Else do nothing.
@@ -155,7 +155,7 @@ module PriorityResolver(
    end
   
   /*
-   * Reset the INT_request after recieving the INT_requestAck.
+   * Reset the INT_request after receiving the INT_requestAck.
    * Do that for any change in the INT_requestAck.
    *
    */

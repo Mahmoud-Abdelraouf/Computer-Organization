@@ -6,7 +6,7 @@ module PriorityResolver(
   input wire [7:0] OCW2, //connected to the OCW2 reg to know the mode.
   input wire INT_requestAck, //the ack to reset the INT_request.
   output reg [2:0] serviced_interrupt_index, //connected to ISR (index to set) or to IRR (index to reset) the corresponding bit.
-  output reg [2:0] zeroLevelPriorityBit = 0, //Which bit have the highest bit priority, changes in rotation modes.
+  output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotation modes.
   output reg INT_request = 0 //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
 );
   
