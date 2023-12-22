@@ -42,7 +42,7 @@ module InterruptRequestRegister (
             end
         end
     end */
-    //update start
+    //update start "By eslam"
     always @(IR0_to_IR7, bitToMask) begin
         // Combine interrupt requests with mask bits to find valid interrupts
         // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
@@ -59,7 +59,7 @@ module InterruptRequestRegister (
         end
         readPriorityAck <= ~readPriorityAck;
     end
-    //end update start
+    //end update start "By eslam"
 
 
     // Storing interrupts in dataBuffer when readIRR is asserted
