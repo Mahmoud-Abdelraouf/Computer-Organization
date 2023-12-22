@@ -16,8 +16,7 @@ module InterruptRequestRegister (
     input [2:0] resetIRR,              // Input: Signal from priority resolver to reset serviced interrupts.
     input [7:0] ICW1,                  // Input: Initialization Command Word 1 with LTIM bit.
     output reg [7:0] risedBits = 8'b0, // Output: Rised bits indicating valid interrupts.
-    output reg [7:0] dataBuffer,       // Output: Buffer for interrupts reset by resetIRR.
-    output reg irrReadPriorityACK = 1'b0  // Output:
+    output reg [7:0] dataBuffer        // Output: Buffer for interrupts reset by resetIRR.
 );
 
     // Internal register to hold the current state of interrupts
@@ -26,7 +25,7 @@ module InterruptRequestRegister (
     // Determine operating mode based on ICW1's LTIM bit
     reg levelTriggered;
 
-    // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
+/*     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     always @(*) begin
         // Combine interrupt requests with mask bits to find valid interrupts
         // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
@@ -44,7 +43,26 @@ module InterruptRequestRegister (
             irrReadPriorityACK = ~ irrReadPriorityACK;
 
         end
+    end */
+    //update start "By eslam"
+    always @(IR0_to_IR7, bitToMask) begin
+        // Combine interrupt requests with mask bits to find valid interrupts
+        // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
+        interruptState = IR0_to_IR7 & ~bitToMask;
     end
+
+    always @(posedge readPriority) begin
+        // Resetting interrupts based on readPriority and resetIRR signals
+        // Reset corresponding interrupts in IRR based on priority resolution and resetIRR value
+        if (resetIRR != 0) begin
+            interruptState = interruptState & ~(1 << resetIRR);
+        end else begin
+            interruptState[0] = 0; // Reset IR0 when resetIRR is '0'
+        end
+        readPriorityAck <= ~readPriorityAck;
+    end
+    //end update start "By eslam"
+
 
     // Storing interrupts in dataBuffer when readIRR is asserted
     always @(*) begin
