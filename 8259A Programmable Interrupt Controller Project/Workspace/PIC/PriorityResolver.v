@@ -6,7 +6,7 @@ module PriorityResolver(
   input wire [7:0] OCW2, //connected to the OCW2 reg to know the mode.
   output reg [2:0] serviced_interrupt_index, //connected to ISR (index to set) or to IRR (index to reset) the corresponding bit.
   output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotaion modes.
-  output reg INT_request //connected to the control logic to fire a new interrupt
+  output reg INT_request //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
 );
   
   reg [7:0] interrupt_indexes; //Register to store valid interrupt indexes.
@@ -69,15 +69,15 @@ module PriorityResolver(
     end else begin
       interrupt_indexes = IRR_reg; //Get the new values from the IRR.
       //Start resolviong priority.
-      resolveFlag = 1;
-      #5 resolveFlag = 0;
+      //We treat the change of the value as a pulse.
+      resolveFlag <= ~resolveFlag;
     end 
   end
   
   /*
    * Resolving block according to the mode.
    */
-   always @(posedge resolveFlag) begin
+   always @(resolveFlag) begin
      //Do the resolving according to the mode.
      case (currentMode)
        FULLY_NESTED_MODE: begin
@@ -99,19 +99,31 @@ module PriorityResolver(
      * this part is found at: always @(serviced_interrupt_index) part.
      */
     for(i = 0; i < 8; i = i + 1) begin
-      if(IRR_reg[zeroLevelPriorityBit + i]) begin
+      //As IRR_reg is only have position from 0 to 7, so we need 3 bits.
+      //The mask ( & 3'b111) is used to get the least 3 bits after addition.
+      if(IRR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
         // Assign the active numbered IRR bit with highest priority.
         serviced_interrupt_index <= resetedISR_index + i;
-        i = 8; // Exit the loop once the interrupt is found.
+        // Exit the loop once the interrupt is found.
+        break; 
       end
     end
    end
   
   /*
-   * In any change in ISR_reg, we need to change zeroLevelPriorityBit to the new value
+   * In any negedge change in ISR_reg, we need to change zeroLevelPriorityBit to the new value
    * for the automatic rotation mode.
    */
-   always @(ISR_reg) begin
+   always @(
+            negedge ISR_reg[0],
+            negedge ISR_reg[1],
+            negedge ISR_reg[2],
+            negedge ISR_reg[3],
+            negedge ISR_reg[4],
+            negedge ISR_reg[5],
+            negedge ISR_reg[6],
+            negedge ISR_reg[7]
+            ) begin
      if(currentMode == AUTO_ROTATION_MODE) begin
        zeroLevelPriorityBit <= resetedISR_index + 1;
      end
@@ -125,18 +137,20 @@ module PriorityResolver(
    * Else do nothing.
    */
    always @(serviced_interrupt_index) begin
-     // loop for ISR bits starting from the highest priority.
-     // compare the highest with the serviced_interrupt_index value
+     // Loop for ISR bits starting from the highest priority.
+     // -If we reached a value of 1 first in the ISR_reg, break the loop, this means no INT is fired.
+     // -If we reached that(zeroLevelPriorityBit + i) & 3'b111] equals serviced_interrupt_index 1st, INT is fired and break the loop.
      for(i = 0; i < 8; i = i + 1) begin
-       if(ISR_reg[zeroLevelPriorityBit + i]) begin
-         //If the new INt is higher in priority, fire a new INt flag.
-         if((zeroLevelPriorityBit + i) < serviced_interrupt_index) begin
-           INT_request = 1;
-           #5 INT_request = 0;
-         end
+       //As ISR_reg is only have position from 0 to 7, so we need 3 bits.
+       //The mask ( & 3'b111) is used to get the least 3 bits after addition.
+       if(ISR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
+         break;
        end
-       i = 8; // Exit the loop once the interrupt is found.
-     end
+       if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
+         INT_request <= ~INT_request;
+         break;
+       end
+     end 
    end
   
 endmodule
