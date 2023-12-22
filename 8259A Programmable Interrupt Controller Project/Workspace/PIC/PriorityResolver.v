@@ -104,7 +104,8 @@ module PriorityResolver(
       if(IRR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
         // Assign the active numbered IRR bit with highest priority.
         serviced_interrupt_index <= resetedISR_index + i;
-        break; // Exit the loop once the interrupt is found.
+        // Exit the loop once the interrupt is found.
+        break; 
       end
     end
    end
@@ -113,7 +114,16 @@ module PriorityResolver(
    * In any negedge change in ISR_reg, we need to change zeroLevelPriorityBit to the new value
    * for the automatic rotation mode.
    */
-   always @(negedge |(~ISR_reg)) begin
+   always @(
+            negedge ISR_reg[0],
+            negedge ISR_reg[1],
+            negedge ISR_reg[2],
+            negedge ISR_reg[3],
+            negedge ISR_reg[4],
+            negedge ISR_reg[5],
+            negedge ISR_reg[6],
+            negedge ISR_reg[7]
+            ) begin
      if(currentMode == AUTO_ROTATION_MODE) begin
        zeroLevelPriorityBit <= resetedISR_index + 1;
      end
@@ -127,19 +137,20 @@ module PriorityResolver(
    * Else do nothing.
    */
    always @(serviced_interrupt_index) begin
-     // loop for ISR bits starting from the highest priority.
-     // compare the highest with the serviced_interrupt_index value
+     // Loop for ISR bits starting from the highest priority.
+     // -If we reached a value of 1 first in the ISR_reg, break the loop, this means no INT is fired.
+     // -If we reached that(zeroLevelPriorityBit + i) & 3'b111] equals serviced_interrupt_index 1st, INT is fired and break the loop.
      for(i = 0; i < 8; i = i + 1) begin
        //As ISR_reg is only have position from 0 to 7, so we need 3 bits.
        //The mask ( & 3'b111) is used to get the least 3 bits after addition.
        if(ISR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
-         //If the new INt is higher in priority, fire a new INt flag.
-         if(((zeroLevelPriorityBit + i) & 3'b111)< serviced_interrupt_index) begin
-           INT_request <= ~INT_request; //Change the INT value, treated as a pulse.
-           break; // Exit the loop once the interrupt is found.
-         end
+         break;
        end
-     end
+       if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
+         INT_request <= ~INT_request;
+         break;
+       end
+     end 
    end
   
 endmodule
