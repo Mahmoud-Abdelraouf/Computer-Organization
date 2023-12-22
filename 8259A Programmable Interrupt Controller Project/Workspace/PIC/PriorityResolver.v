@@ -4,9 +4,10 @@ module PriorityResolver(
   input wire [7:0] ISR_reg, //connected to ISR to get its reg values.
   input wire [2:0] resetedISR_index, //the number of ISR that've been reset.
   input wire [7:0] OCW2, //connected to the OCW2 reg to know the mode.
+  input wire INT_requestAck, //the ack to reset the INT_request.
   output reg [2:0] serviced_interrupt_index, //connected to ISR (index to set) or to IRR (index to reset) the corresponding bit.
   output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotaion modes.
-  output reg INT_request //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
+  output reg INT_request = 0 //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
 );
   
   reg [7:0] interrupt_indexes; //Register to store valid interrupt indexes.
@@ -147,10 +148,19 @@ module PriorityResolver(
          break;
        end
        if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
-         INT_request <= ~INT_request;
+         INT_request = 1;      
          break;
        end
      end 
    end
   
+  /*
+   * Reset the INT_request after recieving the INT_requestAck.
+   * Do that for any change in the INT_requestAck.
+   *
+   */
+  always @(INT_requestAck) begin
+         INT_request = 0;
+  end
+
 endmodule
