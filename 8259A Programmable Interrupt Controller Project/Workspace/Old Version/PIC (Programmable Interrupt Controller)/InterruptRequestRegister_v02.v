@@ -27,22 +27,21 @@ module InterruptRequestRegister (
     reg levelTriggered;
 
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
-    always @(IR0_to_IR7, bitToMask) begin
+    always @(*) begin
         // Combine interrupt requests with mask bits to find valid interrupts
         // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
         interruptState = IR0_to_IR7 & ~bitToMask;
-    end
 
-    always @(posedge readPriority) begin
         // Resetting interrupts based on readPriority and resetIRR signals
-        // Reset corresponding interrupts in IRR based on priority resolution and resetIRR value
-        if (resetIRR != 0) begin
-            interruptState = interruptState & ~(1 << resetIRR);
-        end else begin
-            interruptState[0] = 0; // Reset IR0 when resetIRR is '0'
+        if (readPriority) begin
+            // Reset corresponding interrupts in IRR based on priority resolution and resetIRR value
+            if (resetIRR != 0) begin
+                interruptState = interruptState & ~(1 << resetIRR);
+            end else begin
+                interruptState[0] = 0; // Reset IR0 when resetIRR is '0'
+            end
         end
-        readPriorityAck <= ~readPriorityAck;
-    end
+    end 
 
     // Storing interrupts in dataBuffer when readIRR is asserted
     always @(*) begin
