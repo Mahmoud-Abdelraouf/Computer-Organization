@@ -16,7 +16,8 @@ module InterruptRequestRegister (
     input [2:0] resetIRR,              // Input: Signal from priority resolver to reset serviced interrupts.
     input [7:0] ICW1,                  // Input: Initialization Command Word 1 with LTIM bit.
     output reg [7:0] risedBits = 8'b0, // Output: Rised bits indicating valid interrupts.
-    output reg [7:0] dataBuffer        // Output: Buffer for interrupts reset by resetIRR.
+    output reg [7:0] dataBuffer,       // Output: Buffer for interrupts reset by resetIRR.
+    output reg irrReadPriorityACK = 1'b0  // Output:
 );
 
     // Internal register to hold the current state of interrupts
@@ -39,6 +40,9 @@ module InterruptRequestRegister (
             end else begin
                 interruptState[0] = 0; // Reset IR0 when resetIRR is '0'
             end
+
+            irrReadPriorityACK = ~ irrReadPriorityACK;
+
         end
     end
 

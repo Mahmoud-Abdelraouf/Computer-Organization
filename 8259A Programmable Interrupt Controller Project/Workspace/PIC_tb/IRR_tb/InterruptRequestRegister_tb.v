@@ -23,6 +23,7 @@ module InterruptRequestRegister_tb;
     // Outputs
     wire [7:0] risedBits;      // Output: Rised bits indicating valid interrupts.
     wire [7:0] dataBuffer;     // Output: Buffer for interrupts reset by resetIRR.
+    wire irrReadPriorityACK;   // Output:
     
 
     // Instantiate the InterruptRequestRegister module
@@ -34,7 +35,8 @@ module InterruptRequestRegister_tb;
         .resetIRR(resetIRR),
         .ICW1(ICW1),
         .risedBits(risedBits),
-        .dataBuffer(dataBuffer)
+        .dataBuffer(dataBuffer),
+        .irrReadPriorityACK(irrReadPriorityACK)
     );
 
     integer num_random_test_cases = 10;
@@ -70,7 +72,7 @@ module InterruptRequestRegister_tb;
         IR0_to_IR7 = 8'b01101010; // Simulate specific interrupt requests
         bitToMask = 8'b10110100; // Mask certain interrupts
         readPriority = 1'b1; // Activate read priority
-        readIRR = $urandom_range(0, 1); // Randomize readIRR
+        readIRR = 1'b1; // Randomize readIRR
         resetIRR = 6; // Apply reset to a specific interrupt
         ICW1 = 8'b00001000; // Set LTIM bit to 1 or 0 according to requirements
         #10; // Delay to observe the behavior
@@ -88,6 +90,7 @@ module InterruptRequestRegister_tb;
 
         $finish; // End simulation
     end
+
 
 endmodule
 
