@@ -26,23 +26,7 @@ module InterruptRequestRegister (
     // Determine operating mode based on ICW1's LTIM bit
     reg levelTriggered;
 
-/*     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
-    always @(*) begin
-        // Combine interrupt requests with mask bits to find valid interrupts
-        // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
-        interruptState = IR0_to_IR7 & ~bitToMask;
-
-        // Resetting interrupts based on readPriority and resetIRR signals
-        if (readPriority) begin
-            // Reset corresponding interrupts in IRR based on priority resolution and resetIRR value
-            if (resetIRR != 0) begin
-                interruptState = interruptState & ~(1 << resetIRR);
-            end else begin
-                interruptState[0] = 0; // Reset IR0 when resetIRR is '0'
-            end
-        end
-    end */
-    //update start "By eslam"
+    // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     always @(IR0_to_IR7, bitToMask) begin
         // Combine interrupt requests with mask bits to find valid interrupts
         // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
@@ -59,8 +43,6 @@ module InterruptRequestRegister (
         end
         readPriorityAck <= ~readPriorityAck;
     end
-    //end update start "By eslam"
-
 
     // Storing interrupts in dataBuffer when readIRR is asserted
     always @(*) begin
