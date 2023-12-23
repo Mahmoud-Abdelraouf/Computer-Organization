@@ -1,5 +1,5 @@
-`timescale 1ns/1ps;
-module ReadWriteLogic_TB;
+`timescale 1ns/1ps
+module ReadWriteLogic_tb;
     reg Read;
     reg write;
     reg A0;
@@ -17,7 +17,7 @@ module ReadWriteLogic_TB;
     wire [7:0]OCW3;
     wire read_cmd_to_ctrl_logic;
 
-    ReadWriteLogic(.Read(Read),.write(write),.A0(A0),.CS(CS),.dataBuffer(dataBuffer),.write_flag_ACK(write_flag_ACK),
+    ReadWriteLogic RW(.Read(Read),.write(write),.A0(A0),.CS(CS),.dataBuffer(dataBuffer),.write_flag_ACK(write_flag_ACK),
     .write_flag(write_flag),.ICW1(ICW1),.ICW2(ICW2),.ICW3(ICW3),.ICW4(ICW4),.OCW1(OCW1),.OCW2(OCW2),.OCW3(OCW3),
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic));
 
