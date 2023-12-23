@@ -11,6 +11,7 @@ module InServiceRegister_tb;
   wire [2:0] INTIndex;
   wire [7:0] dataBuffer, isrRegValue;
   wire [2:0] resetedIndex;
+  wire sendVectorAck;
 
   // Instantiate the module
   InServiceRegister dut (
@@ -26,7 +27,8 @@ module InServiceRegister_tb;
     .INTIndex(INTIndex),
     .dataBuffer(dataBuffer),
     .isrRegValue(isrRegValue),
-    .resetedIndex(resetedIndex)
+    .resetedIndex(resetedIndex),
+    .sendVectorAck(sendVectorAck)
   );
 
   // Clock
@@ -55,6 +57,8 @@ module InServiceRegister_tb;
     #10 sendVector = 1'b1;
     #10 secondACK = 1'b1;
     #10 changeInOCW2 = 1'b1;
+
+    
 
     // Simulate some clock cycles
     #100 $finish;

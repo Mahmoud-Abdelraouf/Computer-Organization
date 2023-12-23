@@ -13,7 +13,9 @@ module InServiceRegister (
   output reg [2:0] INTIndex,              // Output: Signals indicating which interrupts to service (IR0-IR7)
   output reg [7:0] dataBuffer,            // Output: Value of isrReg to the dataBuffer
   output reg [7:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
-  output reg [2:0] resetedIndex           // Output: Signal indicating end of interrupt mode
+  output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
+
+  output reg sendVectorAck = 1'b0,        // Output:
 );
 
   reg [7:0] isrReg;                       // Register to store interrupts to be serviced
@@ -38,6 +40,7 @@ module InServiceRegister (
       vectorAddress = {ICW2[7:3], toSet};
       // Output vector address to dataBuffer
       dataBuffer = vectorAddress;
+      sendVectorAck = ~ sendVectorAck;
     end
   end
   
