@@ -1,3 +1,4 @@
+
 /*
    ReadWriteLogic Module
 
@@ -41,9 +42,11 @@ module ReadWriteLogic(
     input write,
     input A0,
     input CS,
-    input  [7:0]Data,
+    input [7:0]dataBuffer,
+    input write_flag_ACK,
+    input OCW3_change_ACK,
 
-    output reg write_flag,
+    output reg write_flag, // done
     output reg [7:0]ICW1,
     output reg [7:0]ICW2,
     output reg [7:0]ICW3,
@@ -51,14 +54,19 @@ module ReadWriteLogic(
     output reg [7:0]OCW1,
     output reg [7:0]OCW2,
     output reg [7:0]OCW3,
-    output reg read_cmd_to_ctrl_logic
+    output reg read_cmd_to_ctrl_logic,
+    output reg read_cmd_imr_to_ctrl_logic,
+    output reg OCW3_change
+    
 );
 reg flag = 0;
-reg counter = 1;
+reg [2:0]counter = 1;
+reg temp=0;
 
 /*
     ICW1 -> A0 -> 0 $ D0 -> 1
     ICW2 -> A0 -> 1
+	ICW3 -> ICW1[1] = 0
 
     OSW1 -> A0 -> 1
     OSW2 -> A0 -> 0    D4 -> 0 $ D3 -> 0
@@ -69,27 +77,34 @@ always @(negedge write) begin
     write_flag <= 1'b1;
     if(CS == 1'b0)
     begin
-        if(flag == 0 && A0 == 0)
+        if(flag == 0 && A0 == 0 && counter == 1&&temp==0)
         begin
-            ICW1 <= Data;
+            ICW1 = dataBuffer;
             counter= counter +1;
+			flag=0;
+			temp=1;
         end
-        if(flag == 0 && A0 == 1 && counter == 2)
+        if(flag == 0 && A0 == 1 && counter == 2&&temp==0)
         begin
-            ICW2 <= Data;
+            ICW2 = dataBuffer;
             counter = counter + 1;
-            if(ICW1[1] == 0 || ICW1[0] == 1)
-            begin
-                flag = 0;
-            end
-            else
+            if(ICW1[1] == 1 && ICW1[0] == 0)
             begin
                 flag = 1;
             end
+            else
+            begin
+                flag = 0;
+            end
+			if((ICW1[1] == 1) && (ICW1[0] == 1))
+			begin
+				counter = 4;
+			end
+			temp=1;
         end
-        if(ICW1[1] == 0 && counter == 3&&flag == 0)
+        if((counter == 3)&&(flag == 0)&&temp==0)
         begin
-            ICW3 <= Data;
+            ICW3 = dataBuffer;
             counter = counter + 1;
             if(ICW1[0] == 1)
             begin
@@ -99,36 +114,69 @@ always @(negedge write) begin
             begin
                 flag = 1;
             end
-        end
-        if(ICW1[0] == 1 && counter == 4&&flag == 0)
-        begin
-            ICW4 <= Data;
-            counter = counter + 1;
-            flag = 1;
-        end
-        if(A0 == 1 && flag == 1)
-        begin
-            OCW1 <= Data;
+			temp=1;
         end
         
-        if(A0 == 0 && Data[4] == 0 && Data[3] == 0 && flag == 1)
+        if((ICW1[0] == 1) &&( counter == 4)&&(flag == 0)&&(A0 == 1)&&temp==0)
         begin
-            OCW2 <= Data;
+            ICW4 = dataBuffer;
+            counter = counter + 1;
+            flag = 1;
+			temp=1;
+        end
+        if((A0 == 1) && (flag == 1)&&temp==0)
+        begin
+            OCW1 = dataBuffer;
+			temp=1;
+        end
+        
+        if(A0 == 0 && dataBuffer[4] == 0 && dataBuffer[3] == 0 && flag == 1&&temp==0)
+        begin
+            OCW2 = dataBuffer;
+			temp=1;
         end
 
-        if(A0 == 0 && Data[4] == 0 && Data[3] == 1 && flag == 1)
+        if(A0 == 0 && dataBuffer[4] == 0 && dataBuffer[3] == 1 && flag == 1&&temp==0)
         begin
-            OCW3 <= Data;
+            OCW3 = dataBuffer;
         end
+		temp = 0;
     end
 end
-
-always @(negedge Read) begin
+// RD -> 0 && A0 -> 1 // read imr
+always @(negedge Read)
+begin
     if(CS == 0)
     begin
-        read_cmd_to_ctrl_logic <= 1'b1; 
+        if(A0 == 1'b0)
+        begin
+            read_cmd_to_ctrl_logic <= 1'b1;
+            read_cmd_imr_to_ctrl_logic <= 1'b0;
+        end
+        else
+        begin
+            read_cmd_to_ctrl_logic <= 1'b0;
+            read_cmd_imr_to_ctrl_logic <= 1'b1;
+        end
+    end
+end
+always @(posedge Read)
+begin
+    if(CS == 0)
+    begin
+        read_cmd_to_ctrl_logic <= 1'b0;
+        read_cmd_imr_to_ctrl_logic <= 1'b0;
     end
 end
 
-
+always@(write_flag_ACK)
+begin
+    write_flag <= 1'b0;
+end
+always @(OCW3) begin
+    OCW3_change <=1'b1;
+end
+always@(OCW3_change_ACK)begin
+    OCW3_change <= 1'b0;
+end
 endmodule
