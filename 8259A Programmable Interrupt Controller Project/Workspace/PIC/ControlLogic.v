@@ -5,10 +5,14 @@ module ControlLogic(
     input read_cmd_to_ctrl_logic,           // Input: Sent from read/write logic to read status of ISR or IRR or priority
     input [7:0] OCW3,                       // Input: Will be used to know which register to read its status 
     input write_flag,                       // Input: to indicate that there are writing operation 
-    input [2:0] interrupt_index,
-    input SP,
-    input [7:0]ICW3,
+    input [2:0] interrupt_index,            // Input: ID of interrupt to be handled(come from ISR)
+    input SP,                               // Input: to determined which the pic is master or slave
+    input [7:0]ICW3,                        // Input: initial word no. 3 for cascading mode
+    input read_priority_ACK,                // Input: periority ack to deactive the flag read_priority
+    input read_cmd_imr_to_ctrl_logic,       // Input: Read command to control logic to active IMR to read its state
 
+
+    output reg read_imr,                    // Input: to active reading state from imr Register
     output reg read_IRR,                    // Output: Signal to read IRR status ( will be sent to IRR)
     output reg read_priority,               // Output: Is set after the first INTA pulse (will be sent to IRR and ISR)
     output reg freezing,                    // Output: Is set between to INTA pulse.
@@ -16,8 +20,9 @@ module ControlLogic(
     output reg pulse_ACK,                   // Output: Acknowledge will be sent to ISR
     output reg INT,                         // Output: Interrupt request will be sent to CPU
     output reg cascade_signal,              // Output: Signal will be sent to cascade controller to start working
-    output reg desired_slave                // Output: Slave ID that will be sent to cascade controller in case of master
-    output reg send_vector_isr 
+    output reg desired_slave,               // Output: Slave ID that will be sent to cascade controller in case of master
+    output reg send_vector_isr,             // Output: flag to allow ISR to send its Vector
+    output reg INT_request_ACK=1'b0, 
 );
    // Configurations for read_ISR and read_IRR flags
     localparam read_from_ISR =2'b11;        // Local parameter representing read from ISR mode
@@ -39,7 +44,30 @@ module ControlLogic(
                 read_IRR<=1'b1; // set read from IRR flag to send IRR register
                 read_ISR<=1'b0; // reser read from ISR flag
             end
+            default: begin
+                read_IRR<=1'b0; // set read from IRR flag to send IRR register
+                read_ISR<=1'b0; // reser read from ISR flag
+            end
         endcase 
+    end
+    
+    // deactive flags to stop reading the IRR and ISR Registers
+    always @(negedge read_cmd_to_ctrl_logic) begin
+        read_ISR<=1'b0;
+        read_IRR<=1'b0;
+    end
+
+    // block to handle reading from imr register 
+    always @(read_cmd_imr_to_ctrl_logic)
+    begin
+        if(read_cmd_imr_to_ctrl_logic) // read operation active 
+        begin
+            read_imr <= 1'b1;
+        end
+        else // deactive read operation
+        begin
+            read_imr <= 1'b0;
+        end
     end
 
     // Configurations for freezing and read_priority flags
@@ -69,7 +97,14 @@ module ControlLogic(
         begin
             INT <= 1'b1;
         end
+        INT_request_ACK = ~INT_request_ACK;
     end
+    always @(negedge INT_request) begin
+        INT <= 1'b0;
+    end
+    
+
+/////////////////////////////////////////
     localparam Slave = 1'b0;
     localparam Master = 1'b1;
     always@(*)
@@ -84,6 +119,14 @@ module ControlLogic(
                 // 110 -> isr / *****************
             endcase
         end
+    end
+
+    ///////////////////////////////////////////////
+
+    // Ack of read_priority flag to deactivate it 
+    always@(read_priority_ACK)
+    begin
+        read_priority = 1'b0; 
     end
 
 
