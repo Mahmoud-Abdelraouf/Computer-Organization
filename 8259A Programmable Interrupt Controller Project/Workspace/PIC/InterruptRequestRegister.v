@@ -27,10 +27,31 @@ module InterruptRequestRegister (
     reg levelTriggered;
 
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
+    always @(
+        posedge IR0_to_IR7[0], 
+        posedge IR0_to_IR7[1], 
+        posedge IR0_to_IR7[2], 
+        posedge IR0_to_IR7[3], 
+        posedge IR0_to_IR7[4], 
+        posedge IR0_to_IR7[5], 
+        posedge IR0_to_IR7[6], 
+        posedge IR0_to_IR7[7],  
+        bitToMask
+    ) begin
+        if (levelTrig) begin
+            // Combine interrupt requests with mask bits to find valid interrupts
+            // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
+            interruptState = IR0_to_IR7 & ~bitToMask;
+        end
+    end
+
+    // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     always @(IR0_to_IR7, bitToMask) begin
         // Combine interrupt requests with mask bits to find valid interrupts
         // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
-        interruptState = IR0_to_IR7 & ~bitToMask;
+        if () begin
+            interruptState = IR0_to_IR7 & ~bitToMask;
+        end 
     end
 
     always @(posedge readPriority) begin
@@ -50,23 +71,6 @@ module InterruptRequestRegister (
             dataBuffer = interruptState;
         end else begin
             dataBuffer = 8'bZ;
-        end
-    end
-
-    // Update risedBits based on level/edge triggered interrupt mode
-    always @(*) begin
-        // Assuming LTIM bit is at position 3 in ICW1
-        levelTriggered = ICW1[3]; // LTIM bit determines the mode
-
-        // If LTIM = 1, then operate in level interrupt mode.
-        // If LTIM = 0, then operate in edge interrupt mode.
-        if (levelTriggered == 1) begin
-            // Level-triggered mode: The interrupt is considered asserted as long as the signal remains in that state.
-            risedBits = interruptState;
-        end else begin
-            // Edge-triggered mode: The interrupt is signaled at the moment of the transition (rising or falling edge) of the signal.
-            // Detect the rising edge to signal the interrupt
-            risedBits = interruptState & ~risedBits;
         end
     end
 
