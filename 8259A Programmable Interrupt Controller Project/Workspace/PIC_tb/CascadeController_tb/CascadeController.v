@@ -25,7 +25,8 @@ module CascadeController(
     input control_signal,                   // Input: Signal that comes from control logic (In case of master).
     input [2:0] desired_slave,              // Input: Desired slave ID in case of MASTER mode.
     input flag_ACK,                         // Input: Acknowledge flag indicating a successful flag update.
-
+    input EOI,                              // Input: End of interrupt flag from control logic to put 3'bzzz on cascade lines (In case of Master)
+    
     output reg control_signal_ack=1'b0,     // Output: Acknowledge to control signal flag.
     output reg flag                         // Output: Flag indicating if it's the desired slave.
 );         
@@ -34,7 +35,7 @@ module CascadeController(
             
     reg [2:0] ID;                           // reg to hold ID of the slave
     reg [2:0] temp_cas;                     // reg to save the value of cas in always block
-    assign CAS= SP ? temp_cas : 3'bzzz;                // assign value of cascade lines in master mode 
+    assign CAS= SP ? temp_cas : 3'bzzz;     // assign value of cascade lines in master mode 
     // get ID of the slave from ICW3 
     always @(*) begin
         if (SP == SLAVE) begin
@@ -63,5 +64,11 @@ module CascadeController(
     // Reset flag in case of acknowledge came from contorl logic
     always @(flag_ACK) begin
         flag=1'b0;
+    end
+    // Set cascade lines to 3'bzzz when end of interrupt flag comes , to make cascading line ready for coming interrupt
+    always @(posedge EOI) begin
+        if(SP==MASTER)begin
+            temp_cas=3'bzzz;
+        end
     end
 endmodule
