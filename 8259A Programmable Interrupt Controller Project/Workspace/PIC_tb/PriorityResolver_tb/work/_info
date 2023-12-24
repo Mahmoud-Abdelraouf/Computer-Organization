@@ -1,0 +1,45 @@
+m255
+K3
+13
+cModel Technology
+Z0 dD:\Programming\ModelSim
+vPriorityResolver
+Z1 I^baaU8C4JC[1]VjkzDSG`0
+Z2 VNcX=mF3hoQF6=@Q8Q4Y;=0
+Z3 dD:\Engineering\Senior 1\Fall\Computer Architecture\Project\Repo\Computer-Organization-and-Architecture\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\PriorityResolver_tb
+Z4 w1703453218
+Z5 8D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v
+Z6 FD:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v
+L0 1
+Z7 OV;L;10.1d;51
+r1
+31
+Z8 o-work work -O0
+Z9 n@priority@resolver
+Z10 !s100 WZQi3>A5L]i[^^D6JICO=2
+Z11 !s108 1703453961.776000
+Z12 !s107 D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v|
+Z13 !s90 -reportprogress|300|-work|work|D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v|
+!i10b 1
+!s85 0
+!s101 -O0
+vPriorityResolver_tbFixedPriorities
+!i10b 1
+Z14 !s100 KYn^S36zXDAOk[FV1LGoF2
+Z15 IlAz=7dk6N6Xnc<NS:cEe@3
+Z16 Vl6IEmcCjAP]KD4T>@G>5C1
+R3
+Z17 w1703453963
+Z18 8D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v
+Z19 FD:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v
+L0 10
+R7
+r1
+!s85 0
+31
+!s108 1703454160.312000
+!s107 D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v|
+!s90 -reportprogress|300|-work|work|-O0|D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v|
+!s101 -O0
+R8
+Z20 n@priority@resolver_tb@fixed@priorities

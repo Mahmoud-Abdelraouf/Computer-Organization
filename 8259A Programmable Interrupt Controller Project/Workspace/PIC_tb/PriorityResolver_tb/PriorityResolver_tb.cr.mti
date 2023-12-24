@@ -1,15 +1,15 @@
-{D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v} {1 {vlog -work PriorityResolver_tb {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v}
+{D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v} {1 {vlog -work work {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver.v}
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
 -- Compiling module PriorityResolver
 
 Top level modules:
 	PriorityResolver
 
-} {} {}} {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tb.v} {1 {vlog -work PriorityResolver_tb {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tb.v}
+} {} {}} {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v} {1 {vlog -work work {D:/Engineering/Senior 1/Fall/Computer Architecture/Project/Repo/Computer-Organization-and-Architecture/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/PriorityResolver_tb/PriorityResolver_tbFixedPriorities.v}
 Model Technology ModelSim ALTERA vlog 10.1d Compiler 2012.11 Nov  2 2012
--- Compiling module PriorityResolver_tb
+-- Compiling module PriorityResolver_tbFixedPriorities
 
 Top level modules:
-	PriorityResolver_tb
+	PriorityResolver_tbFixedPriorities
 
 } {} {}}

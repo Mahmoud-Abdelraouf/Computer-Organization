@@ -7,7 +7,7 @@
  * @brief Testbench for the Priority Resolver module.
  * @details Simulates various scenarios to verify the functionality of the Priority Resolver module.
  */
-module PriorityResolver_tb();
+module PriorityResolver_tbFixedPriorities();
     // Inputs
     reg freezing;
     reg [7:0] IRR_reg;
@@ -38,6 +38,8 @@ module PriorityResolver_tb();
     
     integer testCaseNo;
     integer i;
+    integer j;
+    integer k;
     // Stimulus
     initial begin
       /*
@@ -116,13 +118,57 @@ module PriorityResolver_tb();
         resetedISR_index = 3'b0;
         ISR_reg = 8'b0;
         INT_requestAck = 1'b0;
-        freezing = 1'b0;
+        k = 0;
         for(i = 0; i < 256; i = i + 1) begin
         OCW2 = ($urandom & 8'b00011111) | ($urandom_range(0, 1) ? 8'b00100000 : 8'b01100000);
-        freezing = $urandom_range(0, 1);
+        if (k == 0) begin
+          freezing = 0;
+          k = 1;
+        end else begin
+          freezing = $urandom_range(0, 1);
+        end
         #1 IRR_reg = i;
         #9;
         end
+        //reset values
+        ISR_reg = 8'bx;
+        IRR_reg = 8'bx;
+        resetedISR_index = 1'bx;
+        INT_requestAck = 1'bx;
+        OCW2 = 1'bx;
+        freezing = 1'bx;
+
+        #20 testCaseNo = 3;
+        //->Test case 3: 
+        // -Inputs: ISR changes (test variable), IRR changes (test variable), resetedISR_index is any value random value, 
+        // OCW2 indicates for FULLY_NESTED_MODE, INT_requestAck is zero at the beginning.
+        // The freezing signal is zero.
+        // -Expected Outputs: (important) serviced_interrupt_index is the index of higher bit in IRR,
+        // (important) zeroLevelPriorityBit is zero always, INT_request is impulse always when needed, we will respond with ack for each INT_request.
+        // -The test flow: check all the values of IRR_reg according to ISR values to give all the expected outputs.
+        resetedISR_index = 3'b0;
+        INT_requestAck = 1'b0;
+        freezing = 1'b0;
+        ISR_reg = 8'b0;
+        IRR_reg = 8'b0;
+        OCW2 = ($urandom & 8'b00011111) | ($urandom_range(0, 1) ? 8'b00100000 : 8'b01100000);
+        #10
+        for(i = 0; i < 256; i = i + 1) begin
+            for(j = 0; j < 256; j = j + 1) begin
+            ISR_reg = i;
+            IRR_reg = j;
+            for(k = 0; k < 8; k = k + 1) begin
+              if(ISR_reg[k] == 1) begin
+                resetedISR_index = k;
+                k = 8;
+              end
+            end
+            #10;
+            end
+        
+        end
+
+    $stop;
     end
 
     /*
