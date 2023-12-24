@@ -6,14 +6,14 @@ module PriorityResolver(
   input wire [7:0] OCW2, //connected to the OCW2 reg to know the mode.
   input wire INT_requestAck, //the ack to reset the INT_request.
   output reg [2:0] serviced_interrupt_index, //connected to ISR (index to set) or to IRR (index to reset) the corresponding bit.
-  output reg [2:0] zeroLevelPriorityBit, //Which bit have the highest bit priority, changes in rotation modes.
-  output reg INT_request = 0 //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
+  output reg [2:0] zeroLevelPriorityBit = 3'b000, //Which bit have the highest bit priority, changes in rotation modes.
+  output reg INT_request = 1'b0 //connected to the control logic to fire a new interrupt, Control logic will consider it's change only.
 );
   
   reg [7:0] interrupt_indexes; //Register to store valid interrupt indexes.
   reg [1:0] currentMode; //Register to store the current mode active according to OCW2.
   wire [2:0] modesFromOCW2; //wire that holds the values of (D7,D6,D5) of OCW2. 
-  reg resolveFlag; //Flag to start resolving the current priority.
+  reg resolveFlag = 1'b0; //Flag to start resolving the current priority.
   integer i; //counter for loops
   /*
    * Assign wires
@@ -82,7 +82,7 @@ module PriorityResolver(
      //Do the resolving according to the mode.
      case (currentMode)
        FULLY_NESTED_MODE: begin
-         zeroLevelPriorityBit <= 3'b0; //Bit zero have the level zero
+         zeroLevelPriorityBit <= 3'b000; //Bit zero have the level zero
      end  
        
        AUTO_ROTATION_MODE: begin
@@ -106,7 +106,8 @@ module PriorityResolver(
         // Assign the active numbered IRR bit with highest priority.
         serviced_interrupt_index <= resetedISR_index + i;
         // Exit the loop once the interrupt is found.
-        break; 
+        i = 8;
+        //break; 
       end
     end
    end
@@ -145,11 +146,13 @@ module PriorityResolver(
        //As ISR_reg is only have position from 0 to 7, so we need 3 bits.
        //The mask ( & 3'b111) is used to get the least 3 bits after addition.
        if(ISR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
-         break;
+         i = 8;
+         //break;
        end
        if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
          INT_request = 1;      
-         break;
+         i = 8;
+         //break;
        end
      end 
    end

@@ -40,34 +40,71 @@ module PriorityResolver_tb();
     integer i;
     // Stimulus
     initial begin
-        #10 testCaseNo = 0;
       /*
        * Fixed priorities tests.
        * OCW2 will have the value of 001xxxxx or 011xxxxx.
        * Zero priority level index must be 0 all the time.
        * Check All the expected outputs to be as expected.
        */
-        //->Test case 1: 
-        // -Inputs: ISR empty, IRR empty, resetedISR is x, 
-        // OCW2 indicates for FULLY_NESTED_MODE, INT_requestAck is zero.
+        #20 testCaseNo = 0;
+        //->Test case 0: 
+        // -Inputs: ISR empty, IRR empty, resetedISR_index is x, 
+        // OCW2 indicates for FULLY_NESTED_MODE (Test variable), INT_requestAck is zero.
         // -Expected Outputs: serviced_interrupt_index is x,
-        // zeroLevelPriorityBit is zero, INT_request is zero.
+        // (important) zeroLevelPriorityBit is zero always, INT_request is zero.
         // -The test flow: check all the values of OCW2 to give all the expected outputs.
         ISR_reg = 8'b0;
         IRR_reg = 8'b0;
         resetedISR_index = 1'bx;
-        INT_requestAck = 0;
+        INT_requestAck = 1'b0;
         //OCW2 is 001xxxxx
         for(i = 0; i < 32; i = i + 1) begin
-           OCW2 = {3'b001, (i &5'b11111)};
+           //Test variable
+           OCW2 = {3'b001, i[4:0]};
            #10;
         end
         //OCW2 is 011xxxxx
         for(i = 0; i < 32; i = i + 1) begin
-           OCW2 = {3'b011, i[5:0] };
+           //Test variable
+           OCW2 = {3'b011, i[4:0]};
            #10;
         end
+        //reset values
+        ISR_reg = 8'bx;
+        IRR_reg = 8'bx;
+        resetedISR_index = 1'bx;
+        INT_requestAck = 1'bx;
+        OCW2 = 1'bx;
 
+        #20 testCaseNo = 1;
+        //->Test case 1: 
+        // -Inputs: ISR empty, I,RR empty, resetedISR_index is the test variable, 
+        // OCW2 indicates for FULLY_NESTED_MODE, INT_requestAck is zero.
+        // -Expected Outputs: serviced_interrupt_index is x,
+        // (important) zeroLevelPriorityBit is zero always, INT_request is zero.
+        // -The test flow: check all the values of resetedISR to give all the expected outputs.
+        OCW2 = ($urandom & 8'b00011111) | ($urandom_range(0, 1) ? 8'b00100000 : 8'b01100000);
+        resetedISR_index = 3'b0;
+        ISR_reg = 8'b0;
+        //changing in IRR so the code changes the zeroLevelPriorityBit.
+        IRR_reg = 8'b1;
+        #5 IRR_reg = 8'b0;
+        INT_requestAck = 1'b0;
+        for(i = 0; i < 8; i = i + 1) begin
+            //random OCW2 but for FULLY_NESTED_MODE (upper 3 bits must stay 001 or 011)
+            OCW2 = ($urandom & 8'b00011111) | ($urandom_range(0, 1) ? 8'b00100000 : 8'b01100000);
+            //Test variable
+            resetedISR_index = i;
+            #10;
+        end
+        //reset values
+        ISR_reg = 8'bx;
+        IRR_reg = 8'bx;
+        resetedISR_index = 1'bx;
+        INT_requestAck = 1'bx;
+        OCW2 = 1'bx;
+
+        #20 testCaseNo = 1;
     end
 
     /*
