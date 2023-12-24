@@ -1,6 +1,6 @@
 /**
- * @file PriorityResolver_tb.v .
- * @brief Testbench for the Priority Resolver module.
+ * @file PriorityResolver_tbFixedPriorities.v .
+ * @brief Testbench for the Priority Resolver module with fixed priorities mode.
  */
 
  /**
@@ -57,7 +57,7 @@ module PriorityResolver_tbFixedPriorities();
         // -The test flow: check all the values of OCW2 to give all the expected outputs.
         ISR_reg = 8'b0;
         IRR_reg = 8'b0;
-        resetedISR_index = 1'bx;
+        resetedISR_index = 3'bx;
         INT_requestAck = 1'b0;
         freezing = 1'b0;
         //OCW2 is 001xxxxx

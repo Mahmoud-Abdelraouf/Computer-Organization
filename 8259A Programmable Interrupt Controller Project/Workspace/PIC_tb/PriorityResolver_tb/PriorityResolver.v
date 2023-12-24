@@ -55,6 +55,7 @@ module PriorityResolver(
       ROTATE_ON_AUTO_EOI_set:     currentMode <= AUTO_ROTATION_MODE;
       ROTATE_ON_AUTO_EOI_clear:   currentMode <= AUTO_ROTATION_MODE;
    endcase
+   resolveFlag <= ~resolveFlag;
    end
    
   
@@ -86,7 +87,7 @@ module PriorityResolver(
      end  
        
        AUTO_ROTATION_MODE: begin
-         zeroLevelPriorityBit <= zeroLevelPriorityBit; //Priority is same as before, until EOI occurred
+         zeroLevelPriorityBit <= resetedISR_index + 1; //Priority is same as before, until EOI occurred
          //change will happen at: always @(ISR_reg) part.
        end
     endcase
@@ -127,7 +128,10 @@ module PriorityResolver(
             negedge ISR_reg[7]
             ) begin
      if(currentMode == AUTO_ROTATION_MODE) begin
-       zeroLevelPriorityBit <= resetedISR_index + 1;
+      zeroLevelPriorityBit <= resetedISR_index + 1;
+      //Start resolving priority.
+      //We treat the change of the value as a pulse.
+      resolveFlag <= ~resolveFlag;
      end
    end
   

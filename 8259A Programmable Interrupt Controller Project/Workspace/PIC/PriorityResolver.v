@@ -55,6 +55,7 @@ module PriorityResolver(
       ROTATE_ON_AUTO_EOI_set:     currentMode <= AUTO_ROTATION_MODE;
       ROTATE_ON_AUTO_EOI_clear:   currentMode <= AUTO_ROTATION_MODE;
    endcase
+   resolveFlag <= ~resolveFlag;
    end
    
   
@@ -63,7 +64,7 @@ module PriorityResolver(
    * then ignore the changes in IRR and use the prev value of interrupt_indexes
    * Otherwise save the new IRR in the interrupt_indexes and start resolving.
    */
-  always @(IRR_reg) begin
+  always @(IRR_reg, resetedISR_index) begin
     //save the values of IRR or not according to freezing flag.
     if(freezing) begin
       interrupt_indexes = interrupt_indexes; //Store valid interrupts and freeze it.
@@ -86,7 +87,7 @@ module PriorityResolver(
      end  
        
        AUTO_ROTATION_MODE: begin
-         zeroLevelPriorityBit <= zeroLevelPriorityBit; //Priority is same as before, until EOI occurred
+         zeroLevelPriorityBit <= resetedISR_index + 1; //Priority is same as before, until EOI occurred
          //change will happen at: always @(ISR_reg) part.
        end
     endcase
@@ -104,7 +105,7 @@ module PriorityResolver(
       //The mask ( & 3'b111) is used to get the least 3 bits after addition.
       if(IRR_reg[(zeroLevelPriorityBit + i) & 3'b111]) begin
         // Assign the active numbered IRR bit with highest priority.
-        serviced_interrupt_index <= resetedISR_index + i;
+        serviced_interrupt_index <=  zeroLevelPriorityBit + i;
         // Exit the loop once the interrupt is found.
         i = 8;
         //break; 
@@ -127,7 +128,10 @@ module PriorityResolver(
             negedge ISR_reg[7]
             ) begin
      if(currentMode == AUTO_ROTATION_MODE) begin
-       zeroLevelPriorityBit <= resetedISR_index + 1;
+      zeroLevelPriorityBit <= resetedISR_index + 1;
+      //Start resolving priority.
+      //We treat the change of the value as a pulse.
+      resolveFlag <= ~resolveFlag;
      end
    end
   
@@ -149,7 +153,7 @@ module PriorityResolver(
          i = 8;
          //break;
        end
-       if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
+       else if(serviced_interrupt_index == ((zeroLevelPriorityBit + i) & 3'b111)) begin
          INT_request = 1;      
          i = 8;
          //break;
