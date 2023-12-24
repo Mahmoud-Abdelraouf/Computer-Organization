@@ -1,0 +1,54 @@
+m255
+K4
+z2
+13
+!s112 1.1
+!i10d 8192
+!i10e 25
+!i10f 100
+cModel Technology
+dD:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/IRR_tb
+vInServiceRegister
+Z0 !s110 1703415678
+!i10b 1
+!s100 _knE:P=PEHSJ_9M[>`3am2
+I>dS6lEVLTT7l7fQkYXNfm0
+Z1 VDg1SIo80bB@j0V0VzS_@n1
+Z2 dD:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/ISR_tb
+w1703415675
+8D:\Projects\Hardware\Computer-Organization\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\ISR_tb\InServiceRegister.v
+FD:\Projects\Hardware\Computer-Organization\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\ISR_tb\InServiceRegister.v
+L0 1
+Z3 OV;L;10.5b;63
+r1
+!s85 0
+31
+Z4 !s108 1703415678.000000
+!s107 D:\Projects\Hardware\Computer-Organization\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\ISR_tb\InServiceRegister.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:\Projects\Hardware\Computer-Organization\8259A Programmable Interrupt Controller Project\Workspace\PIC_tb\ISR_tb\InServiceRegister.v|
+!i113 1
+Z5 o-work work
+Z6 tCvgOpt 0
+n@in@service@register
+vInServiceRegister_tb
+R0
+!i10b 1
+!s100 EJ^]3^2Xid4Y0RZeF`SPN1
+IzlI4lIgXcj>:[;R`29Aba0
+R1
+R2
+w1703412358
+8D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/ISR_tb/InServiceRegister_tb.v
+FD:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/ISR_tb/InServiceRegister_tb.v
+L0 1
+R3
+r1
+!s85 0
+31
+R4
+!s107 D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/ISR_tb/InServiceRegister_tb.v|
+!s90 -reportprogress|300|-work|work|-stats=none|D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/PIC_tb/ISR_tb/InServiceRegister_tb.v|
+!i113 1
+R5
+R6
+n@in@service@register_tb

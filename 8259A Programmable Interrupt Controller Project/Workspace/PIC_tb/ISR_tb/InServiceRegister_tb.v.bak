@@ -35,41 +35,37 @@ module InServiceRegister_tb;
     integer num_random_test_cases = 10;
     integer i;
 
+    i = 0;
+    toSet = 3'b011;
+    readPriority = 1'b1;
+    readIsr = 1'b1;
+    sendVector = 1'b0;
+    secondACK = 1'b1;
+    changeInOCW2 = 1'b0;
+    zeroLevelIndex = 3'b000;
+    ICW2 = 8'b011101101;
+    ICW4 = 8'b011101110;
+    OCW2 = 8'b11011001;
+
+    i = 1;
+    toSet = 3'b011;
+    readPriority = 1'b1;
+    readIsr = 1'b1;
+    sendVector = 1'b0;
+    secondACK = 1'b1;
+    changeInOCW2 = 1'b0;
+    zeroLevelIndex = 3'b100;
+    ICW2 = 8'b011101101;
+    ICW4 = 8'b011101110;
+    OCW2 = 8'b11011001;
+
     // Stimulus
     initial begin
-        // Set initial values for specific test cases
-        i = 0;
-        toSet = 3'b11; // Adjusted to remove redundant leading zeros
-        readPriority = 1'b1;
-        readIsr = 1'b1;
-        sendVector = 1'b0;
-        secondACK = 1'b1;
-        changeInOCW2 = 1'b0;
-        zeroLevelIndex = 3'b0; // Adjusted to remove redundant leading zeros
-        ICW2 = 8'b11101101; // Adjusted to remove redundant leading zeros
-        ICW4 = 8'b11101110; // Adjusted to remove redundant leading zeros
-        OCW2 = 8'b11101001; // Adjusted to remove redundant leading zeros
-        #10; // Add a delay to observe the behavior of the module
-
-        i = 1;
-        toSet = 3'b11; // Adjusted to remove redundant leading zeros
-        readPriority = 1'b1;
-        readIsr = 1'b1;
-        sendVector = 1'b0;
-        secondACK = 1'b1;
-        changeInOCW2 = 1'b0;
-        zeroLevelIndex = 3'b100; // Adjusted to remove redundant leading zeros
-        ICW2 = 8'b11101101; // Adjusted to remove redundant leading zeros
-        ICW4 = 8'b11101110; // Adjusted to remove redundant leading zeros
-        OCW2 = 8'b11101001; // Adjusted to remove redundant leading zeros
-        #10; // Add a delay to observe the behavior of the module
-
-        // Randomize input values for remaining test cases
+        // Randomize input values for several test cases
         for (i = 2; i < num_random_test_cases; i = i + 1) begin
-            // Adjust the numeric literals to remove redundant leading zeros
-            toSet = $urandom_range(0, 7); // Random value for toSet
+            toSet = $urandom; // Random value for toSet
             readPriority = $urandom_range(0, 1);
-            zeroLevelIndex = $urandom_range(0, 7); // Random value for zeroLevelIndex
+            zeroLevelIndex = $urandom; // Random value for zeroLevelIndex
             ICW2 = $urandom; // Random value for ICW2
             ICW4 = $urandom; // Random value for ICW4
             secondACK = $urandom_range(0, 1); // Random value for secondACK
