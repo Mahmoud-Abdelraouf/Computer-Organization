@@ -1,3 +1,6 @@
+/* 
+ctrl logic file 
+*/
 module ControlLogic(
     input INTA,                             // Input: Interrupt acknowledge from CPU
     input INT_request,                      // Input: Interrupt request from priority resolver
