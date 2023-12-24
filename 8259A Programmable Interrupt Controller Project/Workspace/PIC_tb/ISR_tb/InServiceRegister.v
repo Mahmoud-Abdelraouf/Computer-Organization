@@ -20,9 +20,9 @@ module InServiceRegister (
 
   reg [7:0] isrReg = 8'h00;               // Register to store interrupts to be serviced
   reg [7:0] vectorAddress;                // Register to store calculated vector address
-  reg [7:0] circularIndex_1 = 0;          // Register for circular iteration
-  reg [7:0] circularIndex_2 = 0;          // Register for circular iteration
-  reg foundResetIndex = 1'b0;             // Flag to indicate if the reset index is found
+  reg [3:0] circularIndex_1 = 0;          // Register for circular iteration
+  reg [3:0] circularIndex_2 = 0;          // Register for circular iteration
+
   
   // Logic to handle storing interrupts to be serviced
   always @(*) begin
@@ -74,7 +74,6 @@ module InServiceRegister (
           if (isrRegValue[circularIndex_1 % 8]) begin // Wrap around the circular index
             isrReg[circularIndex_1 % 8] = 1'b0; // Reset corresponding line in isrReg
             resetedIndex = circularIndex_1 % 8; // Store the resetedIndex
-            //foundResetIndex = 1'b1; // Set flag to indicate the reset index is found
             // Exit the loop by making the loop index exceed the loop range
             circularIndex_1 = zeroLevelIndex + 8;
           end
@@ -96,7 +95,7 @@ module InServiceRegister (
           if (isrRegValue[circularIndex_2 % 8]) begin // Wrap around the circular index
             isrReg[circularIndex_2 % 8] = 1'b0; // Reset corresponding line in isrReg
             resetedIndex = circularIndex_2 % 8; // Store the resetedIndex
-            circularIndex_2 = 1000;
+            circularIndex_2 = zeroLevelIndex + 8;
           end
         end
       end

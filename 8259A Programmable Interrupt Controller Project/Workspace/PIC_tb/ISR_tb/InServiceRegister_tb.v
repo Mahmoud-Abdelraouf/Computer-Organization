@@ -37,35 +37,59 @@ module InServiceRegister_tb;
 
     // Stimulus
     initial begin
-        // Set initial values for specific test cases
+        /**
+          * Set initial values for specific test cases: this test case to check the Automatic EOI in with the zeroLevelIndex
+          * at the first level (IR0) and the reseted bit at index 3 in the isrReg
+          */ 
         i = 0;
-        toSet = 3'b11; // Adjusted to remove redundant leading zeros
+        toSet = 3'b11; 
         readPriority = 1'b1;
         readIsr = 1'b1;
         sendVector = 1'b0;
         secondACK = 1'b1;
         changeInOCW2 = 1'b0;
-        zeroLevelIndex = 3'b0; // Adjusted to remove redundant leading zeros
-        ICW2 = 8'b11101101; // Adjusted to remove redundant leading zeros
-        ICW4 = 8'b11101110; // Adjusted to remove redundant leading zeros
-        OCW2 = 8'b11101001; // Adjusted to remove redundant leading zeros
+        zeroLevelIndex = 3'b0; 
+        ICW2 = 8'b11101101; 
+        ICW4 = 8'b11101110; 
+        OCW2 = 8'b11101001; 
+        #10; // Add a delay to observe the behavior of the module
+        
+        /**
+          * Set initial values for specific test cases: this test case to check the Automatic EOI in with the zeroLevelIndex
+          * after the reseted bit index in the isrReg to check for the circular iteration is work or not.
+          */ 
+        i = 1;
+        toSet = 3'b11; 
+        readPriority = 1'b1;
+        readIsr = 1'b1;
+        sendVector = 1'b0;
+        secondACK = 1'b1;
+        changeInOCW2 = 1'b0;
+        zeroLevelIndex = 3'b100; 
+        ICW2 = 8'b11101101; 
+        ICW4 = 8'b11101110; 
+        OCW2 = 8'b11101001; 
         #10; // Add a delay to observe the behavior of the module
 
-        i = 1;
-        toSet = 3'b11; // Adjusted to remove redundant leading zeros
+        /**
+         * to test if the isrReg is 0 and the control logic ask to send the vector of the serviced IR, in this case
+         * we should send the vector of the IR7
+         */
+        i = 2;
+        toSet = 3'b11; 
         readPriority = 1'b1;
-        readIsr = 1'b1;
-        sendVector = 1'b0;
+        readIsr = 1'b0;
+        sendVector = 1'b1;
         secondACK = 1'b1;
-        changeInOCW2 = 1'b0;
-        zeroLevelIndex = 3'b100; // Adjusted to remove redundant leading zeros
-        ICW2 = 8'b11101101; // Adjusted to remove redundant leading zeros
-        ICW4 = 8'b11101110; // Adjusted to remove redundant leading zeros
-        OCW2 = 8'b11101001; // Adjusted to remove redundant leading zeros
+        changeInOCW2 = 1'b1;
+        zeroLevelIndex = 3'b111; 
+        ICW2 = 8'b11101101; 
+        ICW4 = 8'b11101110; 
+        OCW2 = 8'b11101001; 
         #10; // Add a delay to observe the behavior of the module
 
         // Randomize input values for remaining test cases
-        for (i = 2; i < num_random_test_cases; i = i + 1) begin
+        for (i = 3; i < num_random_test_cases; i = i + 1) begin
             // Adjust the numeric literals to remove redundant leading zeros
             toSet = $urandom_range(0, 7); // Random value for toSet
             readPriority = $urandom_range(0, 1);

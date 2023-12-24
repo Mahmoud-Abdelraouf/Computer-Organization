@@ -11,17 +11,16 @@ module InServiceRegister (
   input wire [7:0] OCW2,                  // Input: Operation Command Word 2
   
   output reg [2:0] INTIndex,              // Output: Signals indicating which interrupts to service (IR0-IR7)
-  output reg [7:0] dataBuffer,            // Output: Value of isrReg to the dataBuffer
-  output reg [7:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
-  output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
+  output reg [3:0] dataBuffer,            // Output: Value of isrReg to the dataBuffer
+  output reg [3:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
 
   output reg sendVectorAck = 1'b0         // Output: Signal to acknowledge sendVector
 );
 
   reg [7:0] isrReg = 8'h00;               // Register to store interrupts to be serviced
   reg [7:0] vectorAddress;                // Register to store calculated vector address
-  reg [2:0] circularIndex_1 = 0;          // Register for circular iteration
-  reg [2:0] circularIndex_2 = 0;          // Register for circular iteration
+  reg [7:0] circularIndex_1 = 0;          // Register for circular iteration
+  reg [7:0] circularIndex_2 = 0;          // Register for circular iteration
   reg foundResetIndex = 1'b0;             // Flag to indicate if the reset index is found
   
   // Logic to handle storing interrupts to be serviced
@@ -68,13 +67,12 @@ module InServiceRegister (
   // Logic to determine resetedIndex based on EOI
   always @(*) begin
     if (secondACK && (|isrRegValue)) begin
-      if (ICW2[0] && ICW4[1] && !foundResetIndex) begin // Checking IC4 in ICW1 and AEOI in ICW4
+      if (ICW2[0] && ICW4[1]) begin // Checking IC4 in ICW1 and AEOI in ICW4
         // Automatic EOI logic
         for (circularIndex_1 = zeroLevelIndex; circularIndex_1 < (zeroLevelIndex + 8); circularIndex_1 = circularIndex_1 + 1) begin
           if (isrRegValue[circularIndex_1 % 8]) begin // Wrap around the circular index
             isrReg[circularIndex_1 % 8] = 1'b0; // Reset corresponding line in isrReg
             resetedIndex = circularIndex_1 % 8; // Store the resetedIndex
-            foundResetIndex = 1'b1; // Set flag to indicate the reset index is found
             // Exit the loop by making the loop index exceed the loop range
             circularIndex_1 = zeroLevelIndex + 8;
           end
@@ -96,7 +94,8 @@ module InServiceRegister (
           if (isrRegValue[circularIndex_2 % 8]) begin // Wrap around the circular index
             isrReg[circularIndex_2 % 8] = 1'b0; // Reset corresponding line in isrReg
             resetedIndex = circularIndex_2 % 8; // Store the resetedIndex
-            circularIndex_2 = 1000;
+            // Exit the loop by making the loop index exceed the loop range
+            circularIndex_2 = zeroLevelIndex + 8;
           end
         end
       end
