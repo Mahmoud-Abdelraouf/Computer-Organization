@@ -1,42 +1,42 @@
 module ControlLogic(
-    input INTA,                             // Input: Interrupt acknowledge from CPU
-    input INT_request,                      // Input: Interrupt request from priority resolver
+    input INTA,                             // Input: Interrupt acknowledge from CPU.
+    input INT_request,                      // Input: Interrupt request from priority resolver.
+
+    input read_priority_ACK,                // Input: Acknowledge to deactivate the read_priority flag.
+
+    input [2:0] interrupt_index,            // Input: ID of the interrupt to be handled (comes from ISR).
+    input send_vector_ISR_ACK,              // Input: Acknowledge to deactivate the send_vector_ISR flag.
+
+    input read_cmd_to_ctrl_logic,           // Input: Sent from read/write logic to read status of ISR or IRR.
+    input [7:0] OCW3,                       // Input: Will be used to know which register to read its status. 
+    input write_flag,                       // Input: to indicate that there are writing operation. 
+    input [7:0]ICW3,                        // Input: Used in cascade mode.
+    input read_cmd_imr_to_ctrl_logic,       // Input: Read command to control logic to active IMR to read its state.
+    input [7:0] ICW1,                       // Input: Used to determine if operating in cascade mode or single mode.
+    input cascade_flag,                     // Input: In case of slave, it will be sent from cascade controller in case that it's the desired slave.
+    input SP,                               // Input: to determined the pic is master or slave.
+    input cascade_signal_ACK,               // Input: Acknowledge for cascade_signal from cascade controller to reset the signal.
+    input EOI,                              // Input: End of Interrupt signal.
+
+    output reg INT,                         // Output: Interrupt request will be sent to CPU.
+
+    output reg read_IRR,                    // Output: Signal to read IRR status (sent to IRR).
+    output reg read_priority,               // Output: Set after the first INTA pulse (sent to IRR and ISR).
     
-    input read_priority_ACK,                // Input: periority ack to deactive the flag read_priority
+    output reg freezing,                    // Output: Set between two INTA pulse.
+    output reg INT_request_ACK=1'b0,        // Output: Acknowledge for INT_request flag.
 
-    input [2:0] interrupt_index,            // Input: ID of interrupt to be handled(come from ISR)
-    input send_vector_ISR_ACK,              // Input: acknowledge to deactivate send vector flag
+    output reg read_IMR,                    // Input: Signal to read IMR status (sent to IMR).
 
-    input read_cmd_to_ctrl_logic,           // Input: Sent from read/write logic to read status of ISR or IRR or priority
-    input [7:0] OCW3,                       // Input: Will be used to know which register to read its status 
-    input write_flag,                       // Input: to indicate that there are writing operation 
-    input [7:0]ICW3,                        // Input: initial word no. 3 for cascading mode
-    input read_cmd_imr_to_ctrl_logic,       // Input: Read command to control logic to active IMR to read its state
-    input [7:0] ICW1,
-    input cascade_flag,                     // Input: In case of slave, it will be sent from cascade in case of desired slave
-    input SP,                               // Input: to determined the pic is master or slave
-    input cascade_signal_ACK,
-    input EOI,
-
-    output reg INT,                         // Output: Interrupt request will be sent to CPU
-
-    output reg read_IRR,                    // Output: Signal to read IRR status ( will be sent to IRR)
-    output reg read_priority,               // Output: Is set after the first INTA pulse (will be sent to IRR and ISR)
+    output reg send_vector_ISR,             // Output: Flag to allow ISR to send its Vector.
+    output reg read_ISR,                    // Output: Signal to read ISR status ( will be sent to ISR).
+    output reg pulse_ACK,                   // Output: Acknowledge will be sent to ISR.
+    output reg second_ACK=0,                // Output: Determine that second INTA came (sent to ISR).
     
-    output reg freezing,                    // Output: Is set between to INTA pulse.
-    output reg INT_request_ACK=1'b0,
-
-    output reg read_IMR,                    // Input: to active reading state from imr Register
-
-    output reg send_vector_ISR,             // Output: flag to allow ISR to send its Vector
-    output reg read_ISR,                    // Output: Signal to read ISR status ( will be sent to ISR)
-    output reg pulse_ACK,                   // Output: Acknowledge will be sent to ISR
-    output reg second_ACK=0,                // to determine that second INTA came ( used for ISR )
-    
-    output reg EOI_to_cascade,
-    output reg cascade_signal,              // Output: Signal will be sent to cascade controller to start working
-    output reg desired_slave,                // Output: Slave ID that will be sent to cascade controller in case of master
-    output reg cascade_flag_ACK=1'b0
+    output reg EOI_to_cascade,              // Output: Signal to cascade controller to reset cascade lines(in case of cascading mode and master).
+    output reg cascade_signal,              // Output: Signal to cascade controller to start working (Master mode).
+    output reg desired_slave,               // Output: Slave ID that will be sent to cascade controller (Master mode).
+    output reg cascade_flag_ACK=1'b0        // Output: Acknowledge for cascade flag (slave mode).
 );
    // Configurations for read_ISR and read_IRR flags
     localparam read_from_ISR =2'b11;        // Local parameter representing read from ISR mode
