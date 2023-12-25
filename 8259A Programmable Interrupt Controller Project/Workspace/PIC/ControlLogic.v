@@ -26,7 +26,7 @@ module ControlLogic(
     output reg freezing,                    // Output: Set between two INTA pulse.
     output reg INT_request_ACK=1'b0,        // Output: Acknowledge for INT_request flag.
 
-    output reg read_IMR,                    // Input: Signal to read IMR status (sent to IMR).
+    output reg read_IMR,                    // Output: Signal to read IMR status (sent to IMR).
 
     output reg send_vector_ISR,             // Output: Flag to allow ISR to send its Vector.
     output reg read_ISR,                    // Output: Signal to read ISR status ( will be sent to ISR).
@@ -35,7 +35,7 @@ module ControlLogic(
     
     output reg EOI_to_cascade,              // Output: Signal to cascade controller to reset cascade lines(in case of cascading mode and master).
     output reg cascade_signal,              // Output: Signal to cascade controller to start working (Master mode).
-    output reg desired_slave,               // Output: Slave ID that will be sent to cascade controller (Master mode).
+    output reg desired_slave[2:0],          // Output: Slave ID that will be sent to cascade controller (Master mode).
     output reg cascade_flag_ACK=1'b0        // Output: Acknowledge for cascade flag (slave mode).
 );
    // Configurations for read_ISR and read_IRR flags
