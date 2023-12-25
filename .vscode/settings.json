@@ -59,6 +59,7 @@
   "cSpell.words": [
     "endcase",
     "endmodule",
+    "inout",
     "localparam",
     "negedge",
     "Testbench",
