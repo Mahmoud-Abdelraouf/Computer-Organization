@@ -1,0 +1,448 @@
+$date
+	Tue Dec 26 01:08:48 2023
+$end
+$version
+	ModelSim Version 10.5b
+$end
+$timescale
+	1ps
+$end
+
+$scope module InterruptRequestRegister_tb $end
+$var reg 8 ! IR0_to_IR7 [7:0] $end
+$var reg 8 " bitToMask [7:0] $end
+$var reg 1 # readPriority $end
+$var reg 1 $ readIRR $end
+$var reg 3 % resetIRR [2:0] $end
+$var reg 8 & ICW1 [7:0] $end
+$var wire 1 ' risedBits [7] $end
+$var wire 1 ( risedBits [6] $end
+$var wire 1 ) risedBits [5] $end
+$var wire 1 * risedBits [4] $end
+$var wire 1 + risedBits [3] $end
+$var wire 1 , risedBits [2] $end
+$var wire 1 - risedBits [1] $end
+$var wire 1 . risedBits [0] $end
+$var wire 1 / dataBuffer [7] $end
+$var wire 1 0 dataBuffer [6] $end
+$var wire 1 1 dataBuffer [5] $end
+$var wire 1 2 dataBuffer [4] $end
+$var wire 1 3 dataBuffer [3] $end
+$var wire 1 4 dataBuffer [2] $end
+$var wire 1 5 dataBuffer [1] $end
+$var wire 1 6 dataBuffer [0] $end
+$var wire 1 7 readPriorityAck $end
+$var integer 32 8 num_random_test_cases $end
+$var integer 32 9 i $end
+
+$scope module irr_inst $end
+$var wire 1 : IR0_to_IR7 [7] $end
+$var wire 1 ; IR0_to_IR7 [6] $end
+$var wire 1 < IR0_to_IR7 [5] $end
+$var wire 1 = IR0_to_IR7 [4] $end
+$var wire 1 > IR0_to_IR7 [3] $end
+$var wire 1 ? IR0_to_IR7 [2] $end
+$var wire 1 @ IR0_to_IR7 [1] $end
+$var wire 1 A IR0_to_IR7 [0] $end
+$var wire 1 B bitToMask [7] $end
+$var wire 1 C bitToMask [6] $end
+$var wire 1 D bitToMask [5] $end
+$var wire 1 E bitToMask [4] $end
+$var wire 1 F bitToMask [3] $end
+$var wire 1 G bitToMask [2] $end
+$var wire 1 H bitToMask [1] $end
+$var wire 1 I bitToMask [0] $end
+$var wire 1 J readPriority $end
+$var wire 1 K readIRR $end
+$var wire 1 L resetIRR [2] $end
+$var wire 1 M resetIRR [1] $end
+$var wire 1 N resetIRR [0] $end
+$var wire 1 O ICW1 [7] $end
+$var wire 1 P ICW1 [6] $end
+$var wire 1 Q ICW1 [5] $end
+$var wire 1 R ICW1 [4] $end
+$var wire 1 S ICW1 [3] $end
+$var wire 1 T ICW1 [2] $end
+$var wire 1 U ICW1 [1] $end
+$var wire 1 V ICW1 [0] $end
+$var reg 8 W risedBits [7:0] $end
+$var reg 8 X dataBuffer [7:0] $end
+$var reg 1 Y readPriorityAck $end
+$var reg 8 Z interruptState [7:0] $end
+$var reg 1 [ levelTriggered $end
+$upscope $end
+$upscope $end
+$enddefinitions $end
+#0
+$dumpvars
+b10111000 !
+b100110 "
+0#
+0$
+b110 %
+b1000110 &
+b10011000 W
+bz X
+0Y
+b10011000 Z
+0[
+b1010 8
+b0 9
+0.
+0-
+0,
+1+
+1*
+0)
+0(
+1'
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+07
+0V
+1U
+1T
+0S
+0R
+0Q
+1P
+0O
+0N
+1M
+1L
+0K
+0J
+0I
+1H
+1G
+0F
+0E
+1D
+0C
+0B
+0A
+0@
+0?
+1>
+1=
+1<
+0;
+1:
+$end
+#10
+b1 9
+b1110010 !
+b101110 "
+1#
+b10 %
+b10110100 &
+0U
+1R
+1Q
+0P
+1O
+0L
+1F
+1@
+0>
+1;
+0:
+1J
+b1010000 Z
+b1010000 W
+0+
+1(
+0'
+1Y
+17
+#20
+b10 9
+b1101010 !
+b10110100 "
+1$
+b110 %
+b1000 &
+0T
+1S
+0R
+0Q
+0O
+1L
+0H
+0F
+1E
+1B
+1>
+0=
+1K
+b1010000 X
+1[
+b1001010 Z
+06
+05
+04
+03
+12
+01
+10
+0/
+b1001010 X
+b1001010 W
+1-
+1+
+0*
+15
+13
+02
+#35
+b11 9
+b1010110 !
+b110101 "
+0#
+0$
+b101 %
+b11011011 &
+1V
+1U
+1R
+1P
+1O
+1N
+0M
+1I
+0B
+1?
+0>
+1=
+0<
+0J
+0K
+bz X
+b1000010 Z
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+b1000010 W
+0+
+#45
+b100 9
+b101 !
+b11100011 "
+1$
+b100101 &
+0U
+1T
+0S
+0R
+1Q
+0P
+0O
+1H
+0G
+0E
+1C
+1B
+1A
+0@
+0=
+0;
+1K
+b1000010 X
+0[
+b100 Z
+06
+15
+04
+03
+02
+01
+10
+0/
+b100 X
+b100 W
+0-
+1,
+0(
+05
+14
+00
+#55
+b101 9
+b11101001 !
+b1011101 "
+0$
+b11 %
+b1010110 &
+0V
+1U
+1R
+0Q
+1P
+1M
+0L
+0H
+1G
+1F
+1E
+0D
+0B
+0?
+1>
+1<
+1;
+1:
+0K
+bz X
+b10100000 Z
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+b10100000 W
+0,
+1)
+1'
+#65
+b110 9
+b11001001 !
+b10111001 "
+b110 %
+b11010100 &
+0U
+1O
+0N
+1L
+0G
+1D
+0C
+1B
+0<
+b1000000 Z
+b1000000 W
+0)
+1(
+0'
+#75
+b111 9
+b10001110 !
+b11000000 "
+1#
+1$
+b111 %
+b1011000 &
+0T
+1S
+0O
+1N
+0I
+0F
+0E
+0D
+1C
+0A
+1@
+1?
+0;
+1J
+1K
+b1000000 X
+1[
+b1110 Z
+06
+05
+04
+03
+02
+01
+10
+0/
+b1110 X
+b1110 W
+1-
+1,
+1+
+0(
+15
+14
+13
+00
+0Y
+07
+#85
+b1000 9
+b1010001 !
+b110010 "
+0$
+b11 %
+b1011010 &
+1U
+0L
+1H
+1E
+1D
+0C
+0B
+1A
+0@
+0?
+0>
+1=
+1;
+0:
+0K
+bz X
+b1000001 Z
+z6
+z5
+z4
+z3
+z2
+z1
+z0
+z/
+b1000001 W
+1.
+0-
+0,
+0+
+1(
+#95
+b1001 9
+b11100110 !
+b11110110 "
+b111 %
+b11101111 &
+1V
+1T
+0R
+1Q
+1O
+1L
+1G
+1C
+1B
+0A
+1@
+1?
+0=
+1<
+1:
+b0 Z
+b0 W
+0.
+0(

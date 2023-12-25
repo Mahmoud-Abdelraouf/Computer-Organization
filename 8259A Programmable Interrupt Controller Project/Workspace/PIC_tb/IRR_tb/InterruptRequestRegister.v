@@ -17,7 +17,6 @@ module InterruptRequestRegister (
     // Determine operating mode based on ICW1's LTIM bit
     reg levelTriggered;
     
-
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     // For edge-triggered interrupts
     always @(posedge IR0_to_IR7, bitToMask) begin

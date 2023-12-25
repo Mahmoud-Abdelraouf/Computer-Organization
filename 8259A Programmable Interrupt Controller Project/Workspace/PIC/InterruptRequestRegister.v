@@ -15,11 +15,12 @@ module InterruptRequestRegister (
     reg [7:0] interruptState;
 
     // Determine operating mode based on ICW1's LTIM bit
-    reg levelTriggered = ICW1[3];
-
+    reg levelTriggered;
+    
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     // For edge-triggered interrupts
     always @(posedge IR0_to_IR7, bitToMask) begin
+	levelTriggered = ICW1[3];
         if (!levelTriggered) begin
             // Combine interrupt requests with mask bits to find valid interrupts
             // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
@@ -29,6 +30,7 @@ module InterruptRequestRegister (
 
     // For level-triggered interrupts
     always @(IR0_to_IR7, bitToMask) begin
+	levelTriggered = ICW1[3];
         if (levelTriggered) begin
             // Combine interrupt requests with mask bits to find valid interrupts
             // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
