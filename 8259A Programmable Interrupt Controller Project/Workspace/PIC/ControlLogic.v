@@ -1,6 +1,3 @@
-/* 
-ctrl logic file 
-*/
 module ControlLogic(
     input INTA,                             // Input: Interrupt acknowledge from CPU
     input INT_request,                      // Input: Interrupt request from priority resolver
@@ -17,8 +14,9 @@ module ControlLogic(
     input read_cmd_imr_to_ctrl_logic,       // Input: Read command to control logic to active IMR to read its state
     input [7:0] ICW1,
     input cascade_flag,                     // Input: In case of slave, it will be sent from cascade in case of desired slave
-    input SP,                               // Input: to determined which the pic is master or slave
+    input SP,                               // Input: to determined the pic is master or slave
     input cascade_signal_ACK,
+    input EOI,
 
     output reg INT,                         // Output: Interrupt request will be sent to CPU
 
@@ -35,8 +33,10 @@ module ControlLogic(
     output reg pulse_ACK,                   // Output: Acknowledge will be sent to ISR
     output reg second_ACK=0,                // to determine that second INTA came ( used for ISR )
     
+    output reg EOI_to_cascade,
     output reg cascade_signal,              // Output: Signal will be sent to cascade controller to start working
-    output reg desired_slave               // Output: Slave ID that will be sent to cascade controller in case of master
+    output reg desired_slave,                // Output: Slave ID that will be sent to cascade controller in case of master
+    output reg cascade_flag_ACK=1'b0
 );
    // Configurations for read_ISR and read_IRR flags
     localparam read_from_ISR =2'b11;        // Local parameter representing read from ISR mode
@@ -118,9 +118,13 @@ module ControlLogic(
     always @(negedge INT_request) begin
         INT <= 1'b0;
     end
-    
+    always @(posedge EOI)begin
+        EOI_to_cascade=EOI;
+        INT=0;
+    end
 
-/////////////////////////////////////////    
+    localparam MASTER=1'b1;
+    localparam SLAVE=1'b0;
     always@(posedge second_ACK)
     begin
         if(ICW1[1])begin
@@ -131,7 +135,8 @@ module ControlLogic(
             read_IMR=0;
         end
         else begin
-            if(ICW3[interrupt_index])begin
+            if(SP==MASTER)begin
+                if(ICW3[interrupt_index])begin
                 send_vector_ISR=0;
                 cascade_signal=1;
                 desired_slave=interrupt_index;
@@ -143,20 +148,32 @@ module ControlLogic(
                 read_IRR=0;
                 read_IMR=0;
             end
-        end
+            end
+            else if(SP==SLAVE)begin
+                if(cascade_flag) begin
+                    send_vector_ISR=1;
+                    read_ISR=0;
+                    read_IRR=0;
+                    read_IMR=0;
+                    cascade_flag_ACK=~cascade_flag_ACK;
+                end
+                else begin
+                    send_vector_ISR=0;
+                end
+            end       
+            end
+    end
+    always @(cascade_signal_ACK)begin
+        cascade_signal=1'b0;
     end
     always @(send_vector_ISR_ACK)begin
-        send_vector_ISR=0;
+        send_vector_ISR=1'b0;
     end
-    ///////////////////////////////////////////////
 
     // Ack of read_priority flag to deactivate it 
     always@(read_priority_ACK)
     begin
         read_priority = 1'b0; 
-    end
-    always @(cascade_signal_ACK)begin
-        cascade_signal=1'b0;
     end
 
 endmodule
