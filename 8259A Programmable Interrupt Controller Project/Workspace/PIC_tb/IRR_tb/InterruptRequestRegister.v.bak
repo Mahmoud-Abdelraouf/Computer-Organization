@@ -15,7 +15,8 @@ module InterruptRequestRegister (
     reg [7:0] interruptState;
 
     // Determine operating mode based on ICW1's LTIM bit
-    reg levelTriggered = ICW1[3];
+    reg levelTriggered;
+    levelTriggered = ICW1[3];
 
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     // For edge-triggered interrupts

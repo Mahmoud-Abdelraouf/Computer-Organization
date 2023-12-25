@@ -1,14 +1,3 @@
-/**
- * @file irr_tb.v
- * @brief Testbench for the Interrupt Request Register (IRR) module
- */
-
-//`timescale 1ns/1ps // Define timescale for simulation accuracy
-
-/**
- * @brief Testbench for the Interrupt Request Register (IRR) module
- * @details Simulates various scenarios to verify the functionality of the InterruptRequestRegister module.
- */
 module InterruptRequestRegister_tb;
 
     // Inputs
@@ -23,6 +12,7 @@ module InterruptRequestRegister_tb;
     // Outputs
     wire [7:0] risedBits;      // Output: Rised bits indicating valid interrupts.
     wire [7:0] dataBuffer;     // Output: Buffer for interrupts reset by resetIRR.
+    wire readPriorityAck;       // Output: Acknowledge signal for readPriority
     
 
     // Instantiate the InterruptRequestRegister module
@@ -34,7 +24,8 @@ module InterruptRequestRegister_tb;
         .resetIRR(resetIRR),
         .ICW1(ICW1),
         .risedBits(risedBits),
-        .dataBuffer(dataBuffer)
+        .dataBuffer(dataBuffer),
+        .readPriorityAck(readPriorityAck)
     );
 
     integer num_random_test_cases = 10;
