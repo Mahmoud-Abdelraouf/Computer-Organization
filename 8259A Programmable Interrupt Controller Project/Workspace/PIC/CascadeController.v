@@ -28,7 +28,8 @@ module CascadeController(
     input EOI,                              // Input: End of interrupt flag from control logic to put 3'bzzz on cascade lines (In case of Master)
     
     output reg control_signal_ack=1'b0,     // Output: Acknowledge to control signal flag.
-    output reg flag                         // Output: Flag indicating if it's the desired slave.
+    output reg flag,                         // Output: Flag indicating if it's the desired slave.
+    output reg SP_to_control                // Output: send SP signal to control logic to know the state of pic (master or slave)
 );         
     localparam SLAVE = 1'b0;                // Local parameter representing the SLAVE mode.
     localparam MASTER = 1'b1;               // Local parameter representing the MASTER mode.
@@ -70,5 +71,8 @@ module CascadeController(
         if(SP==MASTER)begin
             temp_cas=3'bzzz;
         end
+    end
+    always@(SP)begin
+        SP_to_control=SP;
     end
 endmodule
