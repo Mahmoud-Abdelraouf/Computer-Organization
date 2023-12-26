@@ -1,0 +1,109 @@
+{
+	"partitions" : [
+		{
+			"name" : "Top",
+			"pins" : [
+				{
+					"name" : "IMR_reg[0]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[1]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[2]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[3]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[4]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[5]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[6]",
+					"strict" : false
+				},
+				{
+					"name" : "IMR_reg[7]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[0]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[1]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[2]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[3]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[4]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[5]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[6]",
+					"strict" : false
+				},
+				{
+					"name" : "dataBuffer[7]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[0]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[1]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[2]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[3]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[4]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[5]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[6]",
+					"strict" : false
+				},
+				{
+					"name" : "OCW1[7]",
+					"strict" : false
+				},
+				{
+					"name" : "readIMR",
+					"strict" : false
+				}
+			]
+		}
+	]
+}

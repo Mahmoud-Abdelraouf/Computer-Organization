@@ -1,0 +1,33 @@
+
+module InterruptMaskRegister_tb();
+  
+  // Inputs
+  reg [7:0] OCW1;
+  reg readIMR;
+  
+  // Outputs
+  wire [7:0] IMR_reg;
+  wire [7:0] dataBuffer;
+  
+  // Instantiate the InterruptMaskRegister module
+  InterruptMaskRegister IMR_inst(
+    .OCW1(OCW1),
+    .readIMR(readIMR),
+    .IMR_reg(IMR_reg),
+    .dataBuffer(dataBuffer)
+  );
+  
+  integer num_random_test_cases = 256;
+  integer i;
+
+  // Stimulus
+  initial begin
+    #10;
+    for(i = 0; i < 256; i = i + 1) begin
+      OCW1 = i;
+      readIMR = $urandom_range(0, 1);
+      #10;
+    end
+  end
+  
+endmodule

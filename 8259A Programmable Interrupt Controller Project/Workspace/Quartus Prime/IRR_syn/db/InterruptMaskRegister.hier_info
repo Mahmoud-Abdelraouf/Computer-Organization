@@ -1,0 +1,43 @@
+|InterruptMaskRegister
+OCW1[0] => dataBuffer[0].DATAIN
+OCW1[0] => IMR_reg[0].DATAIN
+OCW1[1] => dataBuffer[1].DATAIN
+OCW1[1] => IMR_reg[1].DATAIN
+OCW1[2] => dataBuffer[2].DATAIN
+OCW1[2] => IMR_reg[2].DATAIN
+OCW1[3] => dataBuffer[3].DATAIN
+OCW1[3] => IMR_reg[3].DATAIN
+OCW1[4] => dataBuffer[4].DATAIN
+OCW1[4] => IMR_reg[4].DATAIN
+OCW1[5] => dataBuffer[5].DATAIN
+OCW1[5] => IMR_reg[5].DATAIN
+OCW1[6] => dataBuffer[6].DATAIN
+OCW1[6] => IMR_reg[6].DATAIN
+OCW1[7] => dataBuffer[7].DATAIN
+OCW1[7] => IMR_reg[7].DATAIN
+readIMR => dataBuffer[0].OE
+readIMR => dataBuffer[1].OE
+readIMR => dataBuffer[2].OE
+readIMR => dataBuffer[3].OE
+readIMR => dataBuffer[4].OE
+readIMR => dataBuffer[5].OE
+readIMR => dataBuffer[6].OE
+readIMR => dataBuffer[7].OE
+IMR_reg[0] <= OCW1[0].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[1] <= OCW1[1].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[2] <= OCW1[2].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[3] <= OCW1[3].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[4] <= OCW1[4].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[5] <= OCW1[5].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[6] <= OCW1[6].DB_MAX_OUTPUT_PORT_TYPE
+IMR_reg[7] <= OCW1[7].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[0] <= dataBuffer[0].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[1] <= dataBuffer[1].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[2] <= dataBuffer[2].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[3] <= dataBuffer[3].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[4] <= dataBuffer[4].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[5] <= dataBuffer[5].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[6] <= dataBuffer[6].DB_MAX_OUTPUT_PORT_TYPE
+dataBuffer[7] <= dataBuffer[7].DB_MAX_OUTPUT_PORT_TYPE
+
+
