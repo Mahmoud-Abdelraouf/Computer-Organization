@@ -41,8 +41,7 @@ module PIC_TopModule
   ); 
   
   // Making an instanec of readWrirelLogic
-  ReadWriteLogic readWriteLogic(
-    .Read(RD),
+  ReadWriteLogic readWriteLogic(.Read(RD),
     .write(WR),
     .A0(A0),
     .CS(CS),
@@ -55,9 +54,9 @@ module PIC_TopModule
     .OCW1(OCW1),
     .OCW2(OCW2),
     .OCW3(OCW3),
-    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),
+    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // to control logic
     .OCW3_change(OCW3_change),
-    .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic),
+    .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), // to control logic
     .read_flag(rd));
     
     
@@ -144,7 +143,7 @@ CascadeController master (
     .read_priority_ACK(read_priority_ACK),  /// to IRR  
     .interrupt_index(interrupt_index),
     .send_vector_ISR_ACK(send_vector_ISR_ACK),
-    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),
+    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // from read write
     .OCW3(OCW3),  // done from read write logic 
     .write_flag(write_flag),
     .ICW3(ICW3),  // done from read write logic 
