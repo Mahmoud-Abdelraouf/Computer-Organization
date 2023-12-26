@@ -35,7 +35,7 @@ module ControlLogic(
     
     output reg EOI_to_cascade,              // Output: Signal to cascade controller to reset cascade lines(in case of cascading mode and master).
     output reg cascade_signal,              // Output: Signal to cascade controller to start working (Master mode).
-    output reg desired_slave[2:0],          // Output: Slave ID that will be sent to cascade controller (Master mode).
+    output reg [2:0] desired_slave,          // Output: Slave ID that will be sent to cascade controller (Master mode).
     output reg cascade_flag_ACK=1'b0        // Output: Acknowledge for cascade flag (slave mode).
 );
    // Configurations for read_ISR and read_IRR flags
