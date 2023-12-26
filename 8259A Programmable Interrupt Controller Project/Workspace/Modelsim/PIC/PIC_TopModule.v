@@ -41,7 +41,8 @@ module PIC_TopModule
   ); 
   
   // Making an instanec of readWrirelLogic
-  ReadWriteLogic readWriteLogic(.Read(RD),
+  ReadWriteLogic readWriteLogic(
+    .Read(RD),
     .write(WR),
     .A0(A0),
     .CS(CS),
