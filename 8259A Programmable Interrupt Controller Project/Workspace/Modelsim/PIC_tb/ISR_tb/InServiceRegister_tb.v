@@ -1,18 +1,22 @@
 module InServiceRegister_tb;
 
     // Inputs
-    reg [2:0] toSet;
-    reg readPriority, readIsr, sendVector;
-    reg [2:0] zeroLevelIndex;
-    reg [7:0] ICW2, ICW4, OCW2;
-    reg secondACK, changeInOCW2;
+    reg [2:0] toSet;                    // Signals indicating which interrupts to service (IR0-IR7)
+    reg readPriority;                   // Signal to read values from toSet
+    reg readIsr;                        // Signal to output value of isrReg to IsrRegValue
+    reg sendVector;                     // Signal to output vectorTable value to dataBuffer
+    reg [2:0] zeroLevelIndex;           // Signals indicating IRx with highest priority
+    reg [7:0] ICW2, ICW4, OCW2;         // Initialization Command Words and Operation Command Word
+    reg secondACK;                      // Second acknowledge signal
+    reg changeInOCW2;                   // Signal indicating change in OCW2
 
     // Outputs
-    wire [2:0] INTIndex;
-    wire [7:0] dataBuffer, isrRegValue;
-    wire [2:0] resetedIndex;
-    wire sendVectorAck;
-    wire readPriorityAck;
+    wire [2:0] INTIndex;                // Signals indicating which interrupts to service (IR0-IR7)
+    wire [7:0] dataBuffer, isrRegValue; // Value of isrReg to dataBuffer and PriorityResolver
+    wire [2:0] resetedIndex;            // Signal indicating end of interrupt mode
+    wire sendVectorAck;                 // Signal to acknowledge sendVector
+    wire readPriorityAck;               // Signal to acknowledge readPriority
+
 
     // Instantiate the module
     InServiceRegister isr_inst (
@@ -31,7 +35,7 @@ module InServiceRegister_tb;
         .isrRegValue(isrRegValue),
         .resetedIndex(resetedIndex),
         .sendVectorAck(sendVectorAck),
-        .readPriorityAck(readPriorityAck),
+        .readPriorityAck(readPriorityAck)
     );
 
     integer num_random_test_cases = 10;
