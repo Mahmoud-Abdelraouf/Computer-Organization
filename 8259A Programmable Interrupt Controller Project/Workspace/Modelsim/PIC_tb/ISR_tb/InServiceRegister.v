@@ -15,7 +15,9 @@ module InServiceRegister (
   output reg [7:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
   output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
 
-  output reg sendVectorAck = 1'b0         // Output: Signal to acknowledge sendVector
+  output reg sendVectorAck = 1'b0,        // Output: Signal to acknowledge sendVector
+  output reg readPriorityAck = 1'b0,      // Output: Signal to acknowledge sendVector
+  output reg EOI = 1'b0                   // Output: End of Interrupt signal
 );
 
   reg [7:0] isrReg = 8'h00;               // Register to store interrupts to be serviced
@@ -27,12 +29,16 @@ module InServiceRegister (
   // Logic to handle storing interrupts to be serviced
   always @(*) begin
     if (readPriority) begin
+      // Logic to reset EOI when readPriority is set
+      EOI = 1'b0; // Reset EOI when readPriority is set
       // If readPriority is set, read the value on the toSet lines and update isrReg
       if (toSet) begin
         isrReg[toSet] = 1'b1; // Set corresponding bit in isrReg based on toSet value
       end else begin
         isrReg[0] = 1'b1; // Set line 0 in the isrReg
       end
+      // Toggle the readPriorityAck signal
+      readPriorityAck = ~ readPriorityAck;
     end
   end
   
@@ -78,6 +84,8 @@ module InServiceRegister (
             circularIndex_1 = zeroLevelIndex + 8;
           end
         end
+        // Set EOI signal to indicate completion of EOI sequence
+        EOI = 1'b1;
       end
     end
   end
@@ -98,6 +106,8 @@ module InServiceRegister (
             circularIndex_2 = zeroLevelIndex + 8;
           end
         end
+        // Set EOI signal to indicate completion of EOI sequence
+        EOI = 1'b1;
       end
     end
   end

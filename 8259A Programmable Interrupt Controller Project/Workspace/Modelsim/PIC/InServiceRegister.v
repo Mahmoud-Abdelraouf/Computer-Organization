@@ -16,6 +16,7 @@ module InServiceRegister (
   output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
 
   output reg sendVectorAck = 1'b0,        // Output: Signal to acknowledge sendVector
+  output reg readPriorityAck = 1'b0,      // Output: Signal to acknowledge sendVector
   output reg EOI = 1'b0                   // Output: End of Interrupt signal
 );
 
@@ -36,6 +37,8 @@ module InServiceRegister (
       end else begin
         isrReg[0] = 1'b1; // Set line 0 in the isrReg
       end
+      // Toggle the readPriorityAck signal
+      readPriorityAck = ~ readPriorityAck;
     end
   end
   
