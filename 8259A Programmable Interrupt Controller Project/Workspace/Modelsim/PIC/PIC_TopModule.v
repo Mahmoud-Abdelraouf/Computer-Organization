@@ -44,13 +44,13 @@ module PIC_TopModule
   
   wire [7:0] internalDATABus;  // connecting data to all blocks
   
-  wire [7:0] ICW1,					// Output : Initialization Command Word 1 (8 bits).				
-  wire [7:0] ICW2,					// Output : Initialization Command Word 2 (8 bits).
-  wire [7:0] ICW3,					// Output : Initialization Command Word 3 (8 bits).
-  wire [7:0] ICW4,					// Output : Initialization Command Word 4 (8 bits).
-  wire [7:0] OCW1,					// Output : Operation Command Word 1 (8 bits).
-  wire [7:0] OCW2,					// Output : Operation Command Word 2 (8 bits).
-  wire [7:0] OCW3,					// Output : Operation Command Word 3 (8 bits). 
+  wire [7:0] ICW1;					// Output : Initialization Command Word 1 (8 bits).				
+  wire [7:0] ICW2;					// Output : Initialization Command Word 2 (8 bits).
+  wire [7:0] ICW3;					// Output : Initialization Command Word 3 (8 bits).
+  wire [7:0] ICW4;					// Output : Initialization Command Word 4 (8 bits).
+  wire [7:0] OCW1;					// Output : Operation Command Word 1 (8 bits).
+  wire [7:0] OCW2;					// Output : Operation Command Word 2 (8 bits).
+  wire [7:0] OCW3;					// Output : Operation Command Word 3 (8 bits). 
   
   
   wire rd;  // from Read flag logic to data bus buffer
@@ -64,7 +64,6 @@ module PIC_TopModule
     .rd(rd),
     .wr(wr)
   ); 
-
   
   // Making an instanec of readWrirelLogic
   ReadWriteLogic readWriteLogic(.Read(RD),
@@ -85,8 +84,7 @@ module PIC_TopModule
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), // to control logic
     .read_flag(rd)
     );
-
-  
+    
   // Instantiation of the CascadeController module for master
   CascadeController master (
     .CAS(CAS), //done
@@ -101,7 +99,6 @@ module PIC_TopModule
     .EOI(EOI_to_cascade) // from control logic
   );
 
-  
   // Instantiate Interrupt Mask Register 
   InterruptMaskRegister IMR_inst(
     .OCW1(OCW1),    // OCW1 commands to know which bits are masked, connected to the R/D logic.
@@ -109,8 +106,6 @@ module PIC_TopModule
     .IMR_reg(IMR_reg),  // done  // IMR (status) register, connected to IRR.
     .dataBuffer(internalDATABus)  // Internal data bus that is connected to the data buffer.
   );
-
-
   
   // Instantiate the InterruptRequestRegister module
   InterruptRequestRegister irr_inst (
@@ -124,9 +119,7 @@ module PIC_TopModule
     .dataBuffer(internalDATABus), // done
     .readPriorityAck(read_priority_ACK) // done  // come from control logic
   );
-
-
-  
+    
   // Instantiate the InterruptRequestRegister module
   PriorityResolver pr_inst(
     .freezing(freezing),   ////done comes from read write logic
@@ -134,15 +127,13 @@ module PIC_TopModule
     .ISR_reg(isrRegValue),  // from isr 
     .OCW2(OCW2),  ////done comes from read write logic
     .resetedISR_index(resetedIndex), // from isr
-    .INT_requestAck, /// TODO: .(INT_request_ACK) Ya Abdelraof
+    .INT_requestAck(INT_requestAck), /// TODO: .(INT_request_ACK) Ya Abdelraof
     .serviced_interrupt_index(serviced_interrupt_index), // goes to irr and isr
     .zeroLevelPriorityBit(zeroLevelPriorityBit), // to isr
     .INT_request(INT_request) // to control logic
   );
-
-
   
-  // Instantiate the module
+   // Instantiate the module
   InServiceRegister isr_inst (
     .toSet(serviced_interrupt_index), // from priority resolver and goes to irr as well
     .readPriority(readPriority),
@@ -160,9 +151,7 @@ module PIC_TopModule
     .resetedIndex(resetedIndex),  // done 
     .sendVectorAck(sendVectorAck)
     );
-
-
-  
+      
   // Instantiate the ControlLogic module
   ControlLogic control_logic_inst (
     .INTA(INTA),  // from cpu
@@ -176,7 +165,7 @@ module PIC_TopModule
     .ICW3(ICW3),  // done from read write logic 
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic),
     .ICW1(ICW1),  // done from read write logic   
-    .cascade_flag(cascade_flag),  from cascade controller
+    .cascade_flag(cascade_flag),  // from cascade controller
     .SP(SP_to_control),  // from cascade controller
     .cascade_signal_ACK(control_signal_ack), // to cascasde controller
     .EOI(EOI),
@@ -195,6 +184,5 @@ module PIC_TopModule
     .desired_slave(desired_slave),// to cascade controller
     .cascade_flag_ACK(cascade_flag_ACK)// to cascade controller
   );
-
-  
+    
 endmodule
