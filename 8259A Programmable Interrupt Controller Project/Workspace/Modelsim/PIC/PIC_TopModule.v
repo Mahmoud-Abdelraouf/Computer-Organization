@@ -66,23 +66,24 @@ module PIC_TopModule
   ); 
   
   // Making an instanec of readWrirelLogic
-  ReadWriteLogic readWriteLogic(.Read(RD),
-    .write(WR),
-    .A0(A0),
-    .CS(CS),
-    .dataBuffer(internalDATABus),
-    .write_flag(wr),
-    .ICW1(ICW1),
-    .ICW2(ICW2),
-    .ICW3(ICW3),
-    .ICW4(ICW4),
-    .OCW1(OCW1),
-    .OCW2(OCW2),
-    .OCW3(OCW3),
+  ReadWriteLogic readWriteLogic(
+    .Read(RD),  // from cpu
+    .write(WR), // from cpu
+    .A0(A0), // from cpu
+    .CS(CS), // from cpu
+    .dataBuffer(internalDATABus), // from data bus
+    .write_flag(wr), // to data bus buffer
+    .ICW1(ICW1), // to the ocw icw 24 bit bus 
+    .ICW2(ICW2), // to the ocw icw 24 bit bus 
+    .ICW3(ICW3), // to the ocw icw 24 bit bus 
+    .ICW4(ICW4), // to the ocw icw 24 bit bus 
+    .OCW1(OCW1), // to the ocw icw 24 bit bus 
+    .OCW2(OCW2), // to the ocw icw 24 bit bus 
+    .OCW3(OCW3), // to the ocw icw 24 bit bus 
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // to control logic
-    .OCW3_change(OCW3_change),
+    .OCW3_change(OCW3_change), // to isr
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), // to control logic
-    .read_flag(rd)
+    .read_flag(rd) // to data bus buffer
     );
     
   // Instantiation of the CascadeController module for master
@@ -136,20 +137,21 @@ module PIC_TopModule
    // Instantiate the module
   InServiceRegister isr_inst (
     .toSet(serviced_interrupt_index), // from priority resolver and goes to irr as well
-    .readPriority(readPriority),
-    .readIsr(readIsr),
-    .sendVector(sendVector),
+    .readPriority(read_priority), // from control and goes to irr aswell
+    .readIsr(read_ISR), // from control
+    .sendVector(send_vector_ISR),  // from control
     .zeroLevelIndex(zeroLevelPriorityBit),  //from priority resolver
     .ICW2(ICW2), // done from read write logic
     .ICW4(ICW4),  // done from read write logic
-    .secondACK(secondACK),
-    .changeInOCW2(changeInOCW2),
+    .secondACK(second_ACK), //from control
+    .changeInOCW2(OCW3_change), //from read write logic //TODO: PLEASE CHECK OCW AND OCW3
     .OCW2(OCW2),  // done from read write logic
-    .INTIndex(INTIndex),
+    .INTIndex(INTIndex), // TO CONTROL LOGIC
     .dataBuffer(internalDATABus), //Done
     .isrRegValue(isrRegValue),  //done
     .resetedIndex(resetedIndex),  // done 
-    .sendVectorAck(sendVectorAck)
+    .sendVectorAck(sendVectorAck), // to control logic
+    .EOI(EOI) // done to conctol logic
     );
       
   // Instantiate the ControlLogic module
@@ -157,28 +159,28 @@ module PIC_TopModule
     .INTA(INTA),  // from cpu
     .INT_request(INT_request),   // from priority
     .read_priority_ACK(read_priority_ACK),  /// to IRR  
-    .interrupt_index(interrupt_index),
-    .send_vector_ISR_ACK(send_vector_ISR_ACK),
+    .interrupt_index(INTIndex), // FROM ISR
+    .send_vector_ISR_ACK(sendVectorAck), // from ISR
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // from read write
     .OCW3(OCW3),  // done from read write logic 
-    .write_flag(write_flag),
+    .write_flag(write_flag), //TODO: CHECK IF CANCELED
     .ICW3(ICW3),  // done from read write logic 
-    .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic),
+    .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), //from read write logic
     .ICW1(ICW1),  // done from read write logic   
     .cascade_flag(cascade_flag),  // from cascade controller
     .SP(SP_to_control),  // from cascade controller
     .cascade_signal_ACK(control_signal_ack), // to cascasde controller
-    .EOI(EOI),
+    .EOI(EOI), // come from isr
     .INT(INT),// to cpu
     .read_IRR(read_IRR),  //to irr
-    .read_priority(read_priority),  //to irr
+    .read_priority(read_priority),  //to irr  AND ISR
     .freezing(freezing), // to priority
     .INT_request_ACK(INT_request_ACK), // to priority
     .read_IMR(read_IMR), // to imr
-    .send_vector_ISR(send_vector_ISR),
-    .read_ISR(read_ISR),
-    .pulse_ACK(pulse_ACK),
-    .second_ACK(second_ACK),
+    .send_vector_ISR(send_vector_ISR), // to isr
+    .read_ISR(read_ISR), // to isr
+    .pulse_ACK(pulse_ACK), // TODO: CHECK USAGE
+    .second_ACK(second_ACK),//to isr
     .EOI_to_cascade(EOI_to_cascade), // to cascade controller
     .cascade_signal(cascade_signal), // to cascade controller
     .desired_slave(desired_slave),// to cascade controller
