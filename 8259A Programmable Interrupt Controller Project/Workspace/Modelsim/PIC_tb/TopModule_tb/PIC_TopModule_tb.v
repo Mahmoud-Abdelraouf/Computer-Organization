@@ -6,8 +6,8 @@ reg RD;
 reg WR; 
 reg A0; 
 reg CS; 
-reg [3:0] CAS; 
-reg SP_EN;
+wire [3:0] CAS; 
+reg SP;
 reg [7:0] IR0_to_IR7;
 
 // Outputs
@@ -25,7 +25,7 @@ PIC_TopModule topModuleInstance(
     .A0(A0),
     .CS(CS),
     .CAS(CAS),
-    .SP_EN(SP_EN),
+    .SP(SP),
     .IR0_to_IR7(IR0_to_IR7)
 );
 
@@ -38,21 +38,18 @@ initial begin
     WR = 1;
     A0 = 0;
     CS = 1;
-    CAS = 0;
-    SP_EN = 0;
+    SP = 0;
     IR0_to_IR7 = 8'b00000000;
-    #10
+    #10000
 
     // Apply Stimulus
 
 
    // Exhaustive simulation
-
+  for (m = 0;m <= 10; m = m + 1) begin
     
-    for(i = 0; i < 16; i = i + 1)  begin
-        CAS = i;
-    end
-
+  end
+   
 
     // Loop through all possible combinations
     
@@ -60,7 +57,6 @@ initial begin
       for (j = 0; j <= 1; j = j + 1) // RD
         for (k = 0; k <= 1; k = k + 1) // WR
           for (l = 0; l <= 1; l = l + 1) // A0
-            for (m = 0; m <= 1; m = m + 1) // CS
               for (n = 0; n <= 1; n = n + 1) // SP_EN
                 for (o = 0; o <= 15; o = o + 1) // CAS
                   for (p = 0; p <= 255; p = p + 1) begin // IR0_to_IR7
@@ -68,9 +64,7 @@ initial begin
                     RD = j;
                     WR = k;
                     A0 = l;
-                    CS = m;
-                    SP_EN = n;
-                    CAS = o;
+                    SP = n;
                     IR0_to_IR7 = p;
 
                     // Add a delay for observation
