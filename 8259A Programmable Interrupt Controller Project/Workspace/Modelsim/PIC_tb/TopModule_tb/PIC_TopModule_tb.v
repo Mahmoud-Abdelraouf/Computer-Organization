@@ -15,7 +15,6 @@ wire INT;
 wire [7:0] sys_DataLine;
 reg [7:0] sys;
 
-integer i, j, k, l, m, n, o, p;
 
 PIC_TopModule topModuleInstance(
     .INTA(INTA),
