@@ -46,11 +46,8 @@ initial begin
 
 
    // Exhaustive simulation
-  for (m = 0;m <= 10; m = m + 1) begin
-    
-  end
-   
 
+  
     // Loop through all possible combinations
     
     for (i = 0; i <= 1; i = i + 1) // INTA
