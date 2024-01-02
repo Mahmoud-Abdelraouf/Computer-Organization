@@ -8,7 +8,7 @@ module InterruptRequestRegister (
 
     output reg [7:0] risedBits = 8'b0, // Output: Rised bits indicating valid interrupts.
     output reg [7:0] dataBuffer,       // Output: Buffer for interrupts reset by resetIRR.
-    output reg readPriorityAck = 1'b0 // Output: Acknowledge signal for readPriority.
+    output reg readPriorityAck = 1'b0  // Output: Acknowledge signal for readPriority.
 );
 
     // Internal register to hold the current state of interrupts
