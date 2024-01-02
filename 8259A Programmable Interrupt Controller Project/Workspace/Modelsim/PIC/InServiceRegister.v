@@ -18,6 +18,7 @@ module InServiceRegister (
   output reg sendVectorAck = 1'b0,        // Output: Signal to acknowledge sendVector
   output reg readPriorityAck = 1'b0,      // Output: Signal to acknowledge readPriority
   output reg EOI = 1'b0                   // Output: End of Interrupt signal
+  output reg changeInOCW2Ack = 1'b0,      // Output:  Signal to acknowledge changeInOCW2
 );
 
   reg [7:0] isrReg = 8'h00;               // Register to store interrupts to be serviced
@@ -109,6 +110,7 @@ module InServiceRegister (
         // Set EOI signal to indicate completion of EOI sequence
         EOI = 1'b1;
       end
+      changeInOCW2Ack = ~ changeInOCW2Ack;
     end
   end
   
