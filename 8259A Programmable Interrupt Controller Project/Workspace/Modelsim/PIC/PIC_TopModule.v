@@ -35,7 +35,7 @@ module PIC_TopModule
   input wire WR, // Read / Write Logic
   input wire A0, // input to Read / Write Logic
   input wire CS, // 8 bit data input to read / write logic
-  input wire [3:0] CAS, // cascade controller
+  inout wire [3:0] CAS, // cascade controller
   input wire SP_EN,  // enable and decide cascade mode
   input wire [7:0] IR0_to_IR7
   );
