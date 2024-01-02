@@ -19,6 +19,13 @@ Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  
 Top level modules:
 	CascadeController
 
+} {} {}} {D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/Modelsim/PIC_tb/TopModule_tb/PIC_TopModule_tb.v} {1 {vlog -work work -stats=none {D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/Modelsim/PIC_tb/TopModule_tb/PIC_TopModule_tb.v}
+Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
+-- Compiling module PIC_TopModule_tb
+
+Top level modules:
+	PIC_TopModule_tb
+
 } {} {}} {D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/Modelsim/PIC_tb/TopModule_tb/ReadWriteLogic.v} {1 {vlog -work work -stats=none {D:/Projects/Hardware/Computer-Organization/8259A Programmable Interrupt Controller Project/Workspace/Modelsim/PIC_tb/TopModule_tb/ReadWriteLogic.v}
 Model Technology ModelSim - Intel FPGA Edition vlog 10.5b Compiler 2016.10 Oct  5 2016
 -- Compiling module ReadWriteLogic
