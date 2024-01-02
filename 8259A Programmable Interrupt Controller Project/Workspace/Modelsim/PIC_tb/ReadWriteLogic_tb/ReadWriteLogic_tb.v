@@ -19,12 +19,12 @@ module ReadWriteLogic_tb;
     wire read_cmd_to_ctrl_logic;
     wire read_cmd_imr_to_ctrl_logic;
     wire read_flag;
-    wire OCW3_change;
+    wire OCW2_change;
     
 
     ReadWriteLogic readWriteLogic(.Read(Read),.write(write),.A0(A0),.CS(CS),.dataBuffer(dataBuffer),
     .write_flag(write_flag),.ICW1(ICW1),.ICW2(ICW2),.ICW3(ICW3),.ICW4(ICW4),.OCW1(OCW1),.OCW2(OCW2),.OCW3(OCW3),
-    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),.OCW3_change(OCW3_change),.read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic),
+    .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),.OCW2_change(OCW2_change),.read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic),
     .read_flag(read_flag));
     
 
