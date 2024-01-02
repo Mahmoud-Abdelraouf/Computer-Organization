@@ -128,7 +128,7 @@ module PIC_TopModule
     .ISR_reg(isrRegValue),  // from isr 
     .OCW2(OCW2),  ////done comes from read write logic
     .resetedISR_index(resetedIndex), // from isr
-    .INT_requestAck(INT_requestAck), /// TODO: .(INT_request_ACK) Ya Abdelraof
+    .INT_requestAck(INT_request_ACK), /// TODO: .(INT_request_ACK) Ya Abdelraof
     .serviced_interrupt_index(serviced_interrupt_index), // goes to irr and isr
     .zeroLevelPriorityBit(zeroLevelPriorityBit), // to isr
     .INT_request(INT_request) // to control logic
