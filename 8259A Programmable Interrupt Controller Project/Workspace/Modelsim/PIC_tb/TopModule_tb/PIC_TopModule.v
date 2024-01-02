@@ -35,7 +35,7 @@ module PIC_TopModule
   input wire WR, // Read / Write Logic
   input wire A0, // input to Read / Write Logic
   input wire CS, // 8 bit data input to read / write logic
-  inout wire [3:0] CAS, // cascade controller
+  inout wire [2:0] CAS, // cascade controller
   input wire SP,  // enable and decide cascade mode
   input wire [7:0] IR0_to_IR7
   );
@@ -87,6 +87,7 @@ module PIC_TopModule
     .OCW2_change_ACK(OCW2_change_ACK) //from isr
     );
     
+    wire [2:0] desired_slave;
   // Instantiation of the CascadeController module for master
   CascadeController cascadeController (
     .CAS(CAS), //done
@@ -100,7 +101,8 @@ module PIC_TopModule
     .SP_to_control(SP_to_control), // to control logic
     .EOI(EOI_to_cascade) // from control logic
   );
-
+  
+  wire[7:0] IMR_reg;
   // Instantiate Interrupt Mask Register 
   InterruptMaskRegister IMR_inst(
     .OCW1(OCW1),    // OCW1 commands to know which bits are masked, connected to the R/D logic.
@@ -109,6 +111,8 @@ module PIC_TopModule
     .dataBuffer(internalDATABus)  // Internal data bus that is connected to the data buffer.
   );
   
+  wire[2:0] serviced_interrupt_index;
+  wire[7:0] risedBits;
   // Instantiate the InterruptRequestRegister module
   InterruptRequestRegister irr_inst (
     .IR0_to_IR7(IR0_to_IR7),  //done comes from outside the module
@@ -122,6 +126,9 @@ module PIC_TopModule
     .readPriorityAck(read_priority_ACK) // done  // come from control logic
   );
     
+    wire[7:0] isrRegValue;
+    wire[2:0] resetedIndex;
+    wire[2:0] zeroLevelPriorityBit;
   // Instantiate the InterruptRequestRegister module
   PriorityResolver pr_inst(
     .freezing(freezing),   ////done comes from read write logic
@@ -135,6 +142,7 @@ module PIC_TopModule
     .INT_request(INT_request) // to control logic
   );
   
+  wire[2:0] INTIndex;
    // Instantiate the module
   InServiceRegister isr_inst (
     .toSet(serviced_interrupt_index), // from priority resolver and goes to irr as well
@@ -165,7 +173,7 @@ module PIC_TopModule
     .send_vector_ISR_ACK(sendVectorAck), // from ISR
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // from read write
     .OCW3(OCW3),  // done from read write logic 
-    .write_flag(write_flag), //TODO: CHECK IF CANCELED
+    .write_flag(wr), //TODO: CHECK IF CANCELED
     .ICW3(ICW3),  // done from read write logic 
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), //from read write logic
     .ICW1(ICW1),  // done from read write logic   

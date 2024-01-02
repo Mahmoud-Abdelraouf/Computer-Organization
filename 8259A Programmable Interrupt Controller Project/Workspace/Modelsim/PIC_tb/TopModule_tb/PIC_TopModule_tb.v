@@ -6,7 +6,7 @@ reg RD;
 reg WR; 
 reg A0; 
 reg CS; 
-wire [3:0] CAS; 
+wire [2:0] CAS; 
 reg SP;
 reg [7:0] IR0_to_IR7;
 
@@ -37,7 +37,7 @@ initial begin
     RD = 1;
     WR = 1;
     A0 = 0;
-    CS = 1;
+    CS = 0;
     SP = 1;
     IR0_to_IR7 = 8'b00000000;
     sys = 8'b00000000;
@@ -47,76 +47,58 @@ initial begin
     
   // Single Mode -NO ICW4- Edge Triggered
     // ICW1 
-    RD = 1;
-    WR = 1;
-    A0 = 0;
-    CS = 1;
-    SP = 1;
-    IR0_to_IR7 = 8'b00000000;
     sys = 8'b00110110;
-    #10
-
-    // ICW1
-    RD = 1;
+    #10 RD = 1;
     WR = 0;
     A0 = 0;
-    CS = 1;
     SP = 1;
     IR0_to_IR7 = 8'b00000000;
-    sys = 8'b00110110;
     #10
 
-    // ICW2
-    RD = 1;
+    // end ICW1
     WR = 1;
-    A0 = 0;
-    CS = 0;
-    SP = 1;
-    IR0_to_IR7 = 8'b00000000;
-    sys = 8'b11111111;
     #10
 
     // ICW2
     RD = 1;
     WR = 0;
-    A0 = 0;
-    CS = 0;
+    A0 = 1;
     SP = 1;
     IR0_to_IR7 = 8'b00000000;
     sys = 8'b11111111;
     #10
 
-    // Receive first interrupt IR0
+    // end ICW2
+    WR = 1;
+    #10
+
+    // Receive first interrupt IR3
     RD = 1;
     WR = 1;
     A0 = 0;
-    CS = 0;
     SP = 1;
-    IR0_to_IR7 = 8'b10000000;
+    IR0_to_IR7 = 8'b00001000;
     sys = 8'bzzzzzzzz;
     #10
-
-
+    //1st pulse
     INTA = 0;
     #1
-
     INTA = 1;
     #10
-
+    //end 1st pulse
+    
+    //2nd pulse
     
     INTA = 0;
-    #1
-
-    INTA = 1;
+    #1 RD = 0;
+    #1 INTA = 1;
+    //end 1st pulse
     #10
+    RD = 1;
 
     
-    INTA = 0;
-    RD = 0;
-    #1
+    
 
-    INTA = 1;
-    #10
 
     $stop; // End Simulation
 end

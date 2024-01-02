@@ -52,14 +52,14 @@ module ReadWriteLogic(
     input [7:0]dataBuffer,					// Input : the internal data bus 
     input OCW2_change_ACK,					// Input : used to ack that the flag arrived to reset it again
 
-    output reg write_flag=1'b0, 			// Output : used to enable data buffer to take data from data bus cpu to release it on the internal bus
+    output reg write_flag = 1'b0, 			// Output : used to enable data buffer to take data from data bus cpu to release it on the internal bus
     output reg [7:0]ICW1,					// Output : Initialization Command Word 1 (8 bits).				
     output reg [7:0]ICW2,					// Output : Initialization Command Word 2 (8 bits).
     output reg [7:0]ICW3,					// Output : Initialization Command Word 3 (8 bits).
     output reg [7:0]ICW4,					// Output : Initialization Command Word 4 (8 bits).
-    output reg [7:0]OCW1,					// Output : Operation Command Word 1 (8 bits).
-    output reg [7:0]OCW2,					// Output : Operation Command Word 2 (8 bits).
-    output reg [7:0]OCW3,					// Output : Operation Command Word 3 (8 bits).
+    output reg [7:0]OCW1 = 8'b0,					// Output : Operation Command Word 1 (8 bits).
+    output reg [7:0]OCW2 = 8'b00100000,					// Output : Operation Command Word 2 (8 bits).
+    output reg [7:0]OCW3 = 8'b0,					// Output : Operation Command Word 3 (8 bits).
     output reg read_cmd_to_ctrl_logic,		// Output : read cmd to ctrl logic to read ISR or IRR
     output reg read_cmd_imr_to_ctrl_logic, 	// Output : read cmd to ctrl logic to read IMR
     output reg OCW2_change,					// Output : flag to indicate that OCW2 changed
@@ -69,6 +69,9 @@ module ReadWriteLogic(
 reg flag = 0;
 reg [2:0]counter = 1;
 reg temp=0;
+reg writeTemp = 0;
+reg readTemp = 0;
+
 
 /*
     ICW1 -> A0 -> 0 $ D0 -> 1
@@ -79,14 +82,25 @@ reg temp=0;
     OSW2 -> A0 -> 0    D4 -> 0 $ D3 -> 0
     OSW3 -> A0 -> 0    D4 -> 0 $ D3 -> 1
 */
-// Block used to extract command words from CPU
-always @(negedge write) begin
 
+
+always @(negedge write) begin
+    write_flag = 1'b1;
+    writeTemp = ~writeTemp;
+end
+
+always @(negedge Read) begin
+    read_flag = 1'b1;
+    readTemp = ~readTemp;
+end
+
+// Block used to extract command words from CPU
+always @(writeTemp) begin
+#1
     if(CS == 1'b0)
     begin
-	    write_flag = 1'b1;
 		// ICW1
-        if(flag == 0 && A0 == 0 && counter == 1&&temp==0)
+        if(flag == 0 && A0 == 0 && counter == 1 && dataBuffer[4] == 1 &&temp==0)
         begin
             ICW1 = dataBuffer;
             counter= counter +1;
@@ -157,11 +171,10 @@ always @(negedge write) begin
 end
 // RD -> 0 && A0 -> 1 // read imr
 // block to handle reading operation
-always @(negedge Read)
+always @(readTemp)
 begin
     if(CS == 0)
     begin
-		read_flag = 1'b1;
         if(A0 == 1'b0)
         begin
             read_cmd_to_ctrl_logic <= 1'b1;
@@ -206,3 +219,4 @@ end
 
 
 endmodule
+

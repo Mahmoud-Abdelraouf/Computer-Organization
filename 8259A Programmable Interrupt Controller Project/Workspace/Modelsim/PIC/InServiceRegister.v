@@ -11,14 +11,14 @@ module InServiceRegister (
   input wire [7:0] OCW2,                  // Input: Operation Command Word 2
   
   output reg [2:0] INTIndex,              // Output: Signals indicating which interrupts to service (IR0-IR7)
-  output reg [7:0] dataBuffer,            // Output: Value of isrReg to the dataBuffer
+  output reg [7:0] dataBuffer = 8'bz,            // Output: Value of isrReg to the dataBuffer
   output reg [7:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
   output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
 
   output reg sendVectorAck = 1'b0,        // Output: Signal to acknowledge sendVector
   output reg readPriorityAck = 1'b0,      // Output: Signal to acknowledge readPriority
-  output reg changeInOCW2Ack = 1'b0       // Output:  Signal to acknowledge changeInOCW2
-  output reg EOI = 1'b0,                  // Output: End of Interrupt signal
+  output reg changeInOCW2Ack = 1'b0,      // Output:  Signal to acknowledge changeInOCW2
+  output reg EOI = 1'b0                   // Output: End of Interrupt signal
 );
 
   reg [7:0] isrReg = 8'h00;               // Register to store interrupts to be serviced
@@ -51,11 +51,13 @@ module InServiceRegister (
       // Output vector address to dataBuffer
       dataBuffer = vectorAddress;
       sendVectorAck = ~ sendVectorAck;
-    end if ((sendVector) && (isrReg == 0)) begin
+    end else if ((sendVector) && (isrReg == 0)) begin
       // Output vector address of the 7 (least priority) to dataBuffer in case there any seted value in the isrReg
       dataBuffer = {ICW2[7:3], 3'b111};
       sendVectorAck = ~ sendVectorAck;
-    end
+    end else begin
+      dataBuffer = 8'bz;
+    end 
   end
   
   // Logic to output isrReg value if readIsr is set
