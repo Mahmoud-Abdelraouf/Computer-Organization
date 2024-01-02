@@ -1,9 +1,9 @@
-/*
+/**
  * @file PIC_TopModule.v
  * @brief contains the 8259 PIC top module implementation
  */
 
- /*
+ /**
   * @inputs: 
   *     - INTA: Connected to the control logic from the CPU, indicating interrupt acknowledge.
   *     - RD, WR, A0, CS: Inputs to the read/write logic.
