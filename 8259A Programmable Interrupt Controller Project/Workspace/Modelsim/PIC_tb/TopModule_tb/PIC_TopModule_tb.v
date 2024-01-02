@@ -13,6 +13,7 @@ reg [7:0] IR0_to_IR7;
 // Outputs
 wire INT;
 wire [7:0] sys_DataLine;
+reg [7:0] sys;
 
 integer i, j, k, l, m, n, o, p;
 
@@ -29,48 +30,96 @@ PIC_TopModule topModuleInstance(
     .IR0_to_IR7(IR0_to_IR7)
 );
 
-
+assign sys_DataLine = sys;
 
 initial begin
     // initialize inputs
-    INTA = 1;
+    INTA = 1; 
     RD = 1;
     WR = 1;
     A0 = 0;
     CS = 1;
-    SP = 0;
+    SP = 1;
     IR0_to_IR7 = 8'b00000000;
-    #10000
+    sys = 8'b00000000;
+    #10
 
     // Apply Stimulus
-
-
-   // Exhaustive simulation
-
-  
-    // Loop through all possible combinations
     
-    for (i = 0; i <= 1; i = i + 1) // INTA
-      for (j = 0; j <= 1; j = j + 1) // RD
-        for (k = 0; k <= 1; k = k + 1) // WR
-          for (l = 0; l <= 1; l = l + 1) // A0
-              for (n = 0; n <= 1; n = n + 1) // SP_EN
-                for (o = 0; o <= 15; o = o + 1) // CAS
-                  for (p = 0; p <= 255; p = p + 1) begin // IR0_to_IR7
-                    INTA = i;
-                    RD = j;
-                    WR = k;
-                    A0 = l;
-                    SP = n;
-                    IR0_to_IR7 = p;
+  // Single Mode -NO ICW4- Edge Triggered
+    // ICW1 
+    RD = 1;
+    WR = 1;
+    A0 = 0;
+    CS = 1;
+    SP = 1;
+    IR0_to_IR7 = 8'b00000000;
+    sys = 8'b00110110;
+    #10
 
-                    // Add a delay for observation
-                    #10;
-                end
-                
+    // ICW1
+    RD = 1;
+    WR = 0;
+    A0 = 0;
+    CS = 1;
+    SP = 1;
+    IR0_to_IR7 = 8'b00000000;
+    sys = 8'b00110110;
+    #10
+
+    // ICW2
+    RD = 1;
+    WR = 1;
+    A0 = 0;
+    CS = 0;
+    SP = 1;
+    IR0_to_IR7 = 8'b00000000;
+    sys = 8'b11111111;
+    #10
+
+    // ICW2
+    RD = 1;
+    WR = 0;
+    A0 = 0;
+    CS = 0;
+    SP = 1;
+    IR0_to_IR7 = 8'b00000000;
+    sys = 8'b11111111;
+    #10
+
+    // Receive first interrupt IR0
+    RD = 1;
+    WR = 1;
+    A0 = 0;
+    CS = 0;
+    SP = 1;
+    IR0_to_IR7 = 8'b10000000;
+    sys = 8'bzzzzzzzz;
+    #10
 
 
-    $finish; // End Simulation
+    INTA = 0;
+    #1
+
+    INTA = 1;
+    #10
+
+    
+    INTA = 0;
+    #1
+
+    INTA = 1;
+    #10
+
+    
+    INTA = 0;
+    RD = 0;
+    #1
+
+    INTA = 1;
+    #10
+
+    $stop; // End Simulation
 end
 
 endmodule //PIC_TopModule_tb
