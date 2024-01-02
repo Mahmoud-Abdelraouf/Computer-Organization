@@ -83,7 +83,7 @@ module PIC_TopModule
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // to control logic
     .OCW3_change(OCW2_change), // to isr
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), // to control logic
-    .read_flag(rd) // to data bus buffer
+    .read_flag(rd), // to data bus buffer
     .OCW2_change_ACK(OCW2_change_ACK) //from isr
     );
     
