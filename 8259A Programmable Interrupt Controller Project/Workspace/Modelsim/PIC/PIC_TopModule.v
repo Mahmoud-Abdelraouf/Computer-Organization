@@ -81,9 +81,10 @@ module PIC_TopModule
     .OCW2(OCW2), // to the ocw icw 24 bit bus 
     .OCW3(OCW3), // to the ocw icw 24 bit bus 
     .read_cmd_to_ctrl_logic(read_cmd_to_ctrl_logic),  // to control logic
-    .OCW3_change(OCW3_change), // to isr
+    .OCW3_change(OCW2_change), // to isr
     .read_cmd_imr_to_ctrl_logic(read_cmd_imr_to_ctrl_logic), // to control logic
     .read_flag(rd) // to data bus buffer
+    .OCW2_change_ACK(OCW2_change_ACK) //from isr
     );
     
   // Instantiation of the CascadeController module for master
@@ -144,14 +145,15 @@ module PIC_TopModule
     .ICW2(ICW2), // done from read write logic
     .ICW4(ICW4),  // done from read write logic
     .secondACK(second_ACK), //from control
-    .changeInOCW2(OCW3_change), //from read write logic //TODO: PLEASE CHECK OCW AND OCW3
+    .changeInOCW2(OCW2_change), //from read write logic //TODO: PLEASE CHECK OCW AND OCW3
     .OCW2(OCW2),  // done from read write logic
     .INTIndex(INTIndex), // TO CONTROL LOGIC
     .dataBuffer(internalDATABus), //Done
     .isrRegValue(isrRegValue),  //done
     .resetedIndex(resetedIndex),  // done 
     .sendVectorAck(sendVectorAck), // to control logic
-    .EOI(EOI) // done to conctol logic
+    .EOI(EOI), // done to conctol logic
+    .changeInOCW2Ack(OCW2_change_ACK) // from read write
     );
       
   // Instantiate the ControlLogic module
