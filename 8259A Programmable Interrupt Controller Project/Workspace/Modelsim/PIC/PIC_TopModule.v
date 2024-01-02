@@ -7,7 +7,7 @@
   * @inputs: 
   *     - INTA: Connected to the control logic from the CPU, indicating interrupt acknowledge.
   *     - RD, WR, A0, CS: Inputs to the read/write logic.
-  *     - CAS, SP_EN: Inputs for cascade control.
+  *     - CAS, SP: Inputs for cascade control.
   *     - IR0_to_IR7: Inputs representing interrupt request lines from external devices.
   *
   * @outputs:
@@ -36,7 +36,7 @@ module PIC_TopModule
   input wire A0, // input to Read / Write Logic
   input wire CS, // 8 bit data input to read / write logic
   inout wire [3:0] CAS, // cascade controller
-  input wire SP_EN,  // enable and decide cascade mode
+  input wire SP,  // enable and decide cascade mode
   input wire [7:0] IR0_to_IR7
   );
   
@@ -87,7 +87,7 @@ module PIC_TopModule
     );
     
   // Instantiation of the CascadeController module for master
-  CascadeController master (
+  CascadeController cascadeController (
     .CAS(CAS), //done
     .SP(SP), //done 
     .ICW3(ICW3), // done
@@ -128,7 +128,7 @@ module PIC_TopModule
     .ISR_reg(isrRegValue),  // from isr 
     .OCW2(OCW2),  ////done comes from read write logic
     .resetedISR_index(resetedIndex), // from isr
-    .INT_requestAck(INT_request_ACK), /// TODO: .(INT_request_ACK) Ya Abdelraof
+    .INT_requestAck(INT_request_ACK), // Done from control logic
     .serviced_interrupt_index(serviced_interrupt_index), // goes to irr and isr
     .zeroLevelPriorityBit(zeroLevelPriorityBit), // to isr
     .INT_request(INT_request) // to control logic

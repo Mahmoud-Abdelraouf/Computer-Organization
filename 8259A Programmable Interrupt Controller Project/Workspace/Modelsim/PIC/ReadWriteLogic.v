@@ -50,7 +50,7 @@ module ReadWriteLogic(
     input A0,								// Input : Address bit 0 used in determinding the type of input cmd(ICW1,ICW2,ICW3,ICW4,OCW1,OCW2,OCW3) 
     input CS,								// Input : Used to enable the pic to write or read	
     input [7:0]dataBuffer,					// Input : the internal data bus 
-    input OCW3_change_ACK,					// Input : used to ack that the flag arrived to reset it again
+    input OCW2_change_ACK,					// Input : used to ack that the flag arrived to reset it again
 
     output reg write_flag=1'b0, 			// Output : used to enable data buffer to take data from data bus cpu to release it on the internal bus
     output reg [7:0]ICW1,					// Output : Initialization Command Word 1 (8 bits).				
@@ -62,7 +62,7 @@ module ReadWriteLogic(
     output reg [7:0]OCW3,					// Output : Operation Command Word 3 (8 bits).
     output reg read_cmd_to_ctrl_logic,		// Output : read cmd to ctrl logic to read ISR or IRR
     output reg read_cmd_imr_to_ctrl_logic, 	// Output : read cmd to ctrl logic to read IMR
-    output reg OCW3_change,					// Output : flag to indicate that OCW3 changed
+    output reg OCW2_change,					// Output : flag to indicate that OCW2 changed
 	output reg read_flag=1'b0				// Output : used to enable data buffer to take data from  the internal bus  to release it on data bus cpu 
     
 );
@@ -195,13 +195,13 @@ begin
     write_flag <= 1'b0;
 end
 */
-// block to handle OCW3_Change flag
-always @(OCW3) begin
-    OCW3_change <=1'b1;
+// block to handle OCW2_Change flag
+always @(OCW2) begin
+    OCW2_change <=1'b1;
 end
-// block to reset the OCW3_change flag 
-always@(OCW3_change_ACK)begin
-    OCW3_change <= 1'b0;
+// block to reset the OCW2_change flag 
+always@(OCW2_change_ACK)begin
+    OCW2_change <= 1'b0;
 end
 
 
