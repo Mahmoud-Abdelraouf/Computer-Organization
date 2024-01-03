@@ -11,7 +11,7 @@ module InServiceRegister (
   input wire [7:0] OCW2,                  // Input: Operation Command Word 2
   
   output reg [2:0] INTIndex,              // Output: Signals indicating which interrupts to service (IR0-IR7)
-  output reg [7:0] dataBuffer = 8'bz,            // Output: Value of isrReg to the dataBuffer
+  output reg [7:0] dataBuffer = 8'bz,     // Output: Value of isrReg to the dataBuffer
   output reg [7:0] isrRegValue,           // Output: Value of isrReg to the PriorityResolver
   output reg [2:0] resetedIndex,          // Output: Signal indicating end of interrupt mode
 
