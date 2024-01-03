@@ -7,8 +7,8 @@ module InterruptRequestRegister (
     input [7:0] ICW1,                  // Input: Initialization Command Word 1 with LTIM bit.
 
     output reg [7:0] risedBits = 8'b0, // Output: Rised bits indicating valid interrupts.
-    output reg [7:0] dataBuffer = 8'bz,       // Output: Buffer for interrupts reset by resetIRR.
-    output reg readPriorityAck = 1'b0  // Output: Acknowledge signal for readPriority.
+    output reg [7:0] dataBuffer,       // Output: Buffer for interrupts reset by resetIRR.
+    output reg readPriorityAck = 1'b0 // Output: Acknowledge signal for readPriority.
 );
 
     // Internal register to hold the current state of interrupts
@@ -19,25 +19,13 @@ module InterruptRequestRegister (
     
     // Logic to handle valid interrupts and reset based on readPriority and resetIRR signals
     // For edge-triggered interrupts
-    always @(
-        posedge IR0_to_IR7[0],
-        posedge IR0_to_IR7[1],
-        posedge IR0_to_IR7[2], 
-        posedge IR0_to_IR7[3],
-        posedge IR0_to_IR7[4],
-        posedge IR0_to_IR7[5],
-        posedge IR0_to_IR7[6],
-        posedge IR0_to_IR7[7],
-        bitToMask
-        ) begin
-
-	    levelTriggered = ICW1[3];
+    always @(posedge IR0_to_IR7, bitToMask) begin
+	levelTriggered = ICW1[3];
         if (!levelTriggered) begin
             // Combine interrupt requests with mask bits to find valid interrupts
             // Valid interrupts have a '0' in bitToMask corresponding to '1' in IR signals
             interruptState = IR0_to_IR7 & ~bitToMask;
         end
-        
     end
 
     // For level-triggered interrupts
