@@ -12,7 +12,7 @@ This repository contains resources and materials for the "Computer Architecture"
 
 ## Course Description
 
-The course delves into the foundational principles of computer hardware description languages, with a focus on computer organization and architecture. It covers topics such as instruction sets, basic data types, addressing modes, memory hierarchy, and various architectural paradigms including pipelined processors, superscalar processors, and more.
+The course delves into  the foundational principles of computer hardware description languages, with a focus on computer organization and architecture. It covers topics such as instruction sets, basic data types, addressing modes, memory hierarchy, and various architectural paradigms including pipelined processors, superscalar processors, and more.
 
 ## Objectives
 
