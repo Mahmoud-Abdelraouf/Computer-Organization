@@ -27,7 +27,3 @@ The course delves into  the foundational principles of computer hardware descrip
 
 - [Computer Organization and Design: The Hardware/Software Interface](https://www.elsevier.com/books/computer-organization-and-design/patterson/978-0-12-407726-3) by D. A. Patterson and J. L. Hennessy, Elsevier, 2013, Fifth Edition.
 - [Computer Organization and Architecture (9th Edition)](https://www.amazon.com/Computer-Organization-Architecture-William-Stallings/dp/013293633X) (William Stallings Books on Computer and Data Communications) 2016, 9th Edition.
-
----
-
-Feel free to explore the provided resources and materials. If you have any questions or suggestions, please don't hesitate to reach out.
