@@ -68,7 +68,7 @@ htmlcov/
 *.tmp
 
 ###############################################################################
-# For 'build' or 'output' folder
+# Build and Synthesis Tool Directories and Files
 ###############################################################################
 build/
 output/
