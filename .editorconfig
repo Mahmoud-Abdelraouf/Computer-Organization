@@ -1,0 +1,30 @@
+# EditorConfig helps developers define and maintain consistent
+# coding styles between different editors and IDEs.
+
+# root = true means this is the top-most EditorConfig file
+root = true
+
+# Global settings (apply to all files unless overridden)
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+
+# Verilog/SystemVerilog: Indent with 4 spaces
+[*.v]
+indent_style = space
+indent_size = 4
+
+[*.sv]
+indent_style = space
+indent_size = 4
+
+# For Markdown/Readme files, allow trailing whitespace for better formatting
+[*.md]
+trim_trailing_whitespace = false
+
+# For text files, same approach
+[*.txt]
+trim_trailing_whitespace = false
+
