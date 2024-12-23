@@ -1,0 +1,80 @@
+###############################################################################
+# OS-specific files
+###############################################################################
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+desktop.ini
+
+###############################################################################
+# Editor-specific folders
+###############################################################################
+# VSCode settings folder
+.vscode/
+
+###############################################################################
+# Build / Simulation Artifacts
+###############################################################################
+# ModelSim generated directories/files
+# (Adjust names as your project might differ)
+work/
+transcript
+*.wlf
+*.ini
+*.db
+*.log
+*.ucdb
+*.jlog
+*.crvsdump
+*.syn
+*.map
+
+# Synopsys or other simulators
+csrc/
+simv*
+vc_hdrs.h
+*.daidir/
+*.vpd
+*.key
+nova*
+
+# Waveform dumps
+*.vcd
+*.fst
+
+# Coverage or other temp data
+coverage/
+htmlcov/
+*.covdb
+*.ucdb
+
+# Temporary netlists or intermediate files
+*.edf
+*.edif
+*.sdf
+*.log
+*.backup
+*.bak
+
+###############################################################################
+# Other Common Ignored Files
+###############################################################################
+# Backup/temporary files
+*.swp
+*.swo
+*~
+*.tmp
+
+###############################################################################
+# For 'build' or 'output' folder
+###############################################################################
+build/
+output/
+release/
+debug/
+
+###############################################################################
+# End of .gitignore
+###############################################################################
